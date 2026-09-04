@@ -1,104 +1,77 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* ========================= FONTS ========================= */
+@font-face { font-family: "Space Grotesk"; src: url("../fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf") format("truetype"); font-weight: 300 700; font-style: normal; }
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/Instrument_Serif/InstrumentSerif-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/Instrument_Serif/InstrumentSerif-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; }
+
+:root {
+    /* ========================= COLOUR PALETTE ========================= */
+
+     --palladian: #EEE9DF;   /* palladian */
+    --oatmeal: #C9C1B1;
+    --blue-fantastic: #2C3B4D;
+    --burning-flame: #FFB162;
+    --truffle-trouble: #A35139;
+    --abyssal-blue: #1B2632;
+    /* Status colours */
+    --red: #C65A46;
+    --green: #5F7D62;
+
+
+    /* ========================= DARK THEME - DEFAULT ========================= */
+
+    --background: var(--abyssal-blue);
+
+    --surface: var(--blue-fantastic);
+    --surface-muted: #243241;
+
+    --text-primary: var(--palladian);
+    --text-secondary: var(--oatmeal);
+
+    --primary: var(--burning-flame);
+    --primary-dark: var(--truffle-trouble);
+
+    --accent: var(--burning-flame);
+    --accent-dark: var(--truffle-trouble);
+
+    --border: #435166;
+
+    --success: var(--green);
+    --danger: var(--red);
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f5f5;
-    color: #222;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Space Grotesk", sans-serif; background-color: var(--background); color: var(--text-primary); }
+.container { width: 90%; max-width: 1200px; margin: 0 auto; }
+.movie-card { background-color: var(--surface); color: var(--text-primary); border: 1px solid var(--border); }
+
+/* ========================= NAVIGATION ========================= */
+.navbar { height: 64px; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; background-color: var(--surface); border-bottom: 1px solid #ddd; }
+.nav-links { display: flex; gap: 30px; }
+.navbar a { color: var(--text-primary); text-decoration: none; }
+.logo { font-weight: bold; }
+
+/* ========================= HOME ========================= */
+.hero { min-height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
+
+/* ========================= MOVIES ========================= */
+.movie-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.poster-placeholder { width: 100%; aspect-ratio: 2 / 3; display: flex; align-items: center; justify-content: center; background-color: #ddd; }
+.movie-card h3 { margin-top: 10px; }
+.movie-card p { margin: 5px 0 10px; }
 
 
-/* ---------- Layout ---------- */
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+/* ========================= MOVIE DETAILS ========================= */
 
 
-/* ---------- Navigation ---------- */
-
-.navbar {
-    height: 64px;
-    padding: 0 5%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.navbar a {
-    color: #222;
-    text-decoration: none;
-}
-
-.logo {
-    font-weight: bold;
-}
+/* ========================= BOOKING ========================= */
 
 
-/* ---------- Hero ---------- */
-
-.hero {
-    min-height: 350px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
+/* ========================= LOGIN ========================= */
 
 
-/* ---------- Movies ---------- */
-
-.movie-grid {
-    margin-top: 20px;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-}
-
-.poster-placeholder {
-    width: 100%;
-    aspect-ratio: 2 / 3;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: #ddd;
-}
-
-.movie-card h3 {
-    margin-top: 10px;
-}
-
-.movie-card p {
-    margin: 5px 0 10px;
-}
+/* ========================= ACCOUNT ========================= */
 
 
-/* ---------- Responsive ---------- */
-
-@media (max-width: 768px) {
-
-    .movie-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
+/* =========================RESPONSIVE ========================= */
+   @media (max-width: 768px) { .movie-grid { grid-template-columns: repeat(2, 1fr); } }
