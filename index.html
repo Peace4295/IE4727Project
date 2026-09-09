@@ -25,26 +25,24 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>MOVIES ON CAMPUS</h1>
-            <p>Discover and book film screenings across NTU.</p>
-        </section>
-        <section class="container">
-            <h2>NOW SHOWING</h2>
-            <div class="movie-grid">
-                <article class="movie-card">
-                    <div class="poster-placeholder">
-                        Movie Poster
-                    </div>
-                    <h3>Interstellar</h3>
-                    <p>12 September</p>
-                    <a href="movie-detail.html">
-                        View Showtimes
-                    </a>
-                </article>
+    <main class="container">
+        <!-- hero carousel -->
+        <section class="hero-carousel">
+            <button calss="carousel-btn prev-btn" aria-label="Previous Slide">&lt;</button>
+            <div class="carousel-content">
+                <h1>Welcome to NTU Filmsmovies on campus</h1>
+                <p>Discover and book outdoor film screenings across NTU.</p>
             </div>
+            <button calss="carousel-btn next btn" aria-label="Next Slide">&gt; </button>
         </section>
+
+        <!-- Horizontal search bar -->
+         <section class="filter-bar">
+            <form action="movies.html" method ="get" class="search-form">
+                <input type="text" name="search" placeholder="Search for movies..." required>
+                <button type="submit">Search</button>
+         </section>
+        
     </main>
 
     <script src="js/script.js"></script>
