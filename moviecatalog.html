@@ -15,17 +15,34 @@
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="moviecatalog.html" class="active">Movies</a>
-                <a href="locations.html">Locations</a>
+                <a href="submit.html">Submit a Film</a>
             </div>
             <a href="account.html">My Account</a>
         </nav>
     </header>
 
     <!-- Main Container -->
-    <main class="container film-detail-container">
-        <!-- We will put the 2-column layout (poster + synopsis) and the schedule table here -->
+    <main class="container catalog-container">
+        <!-- 1. MOVIES -->
+            <section class="catalog-section">
+                <h2 class="section-title">Movies</h2>
+                <div class="movie-grid-5" id="movies-list"></div>
+            </section>
+
+            <!-- 2. NTU STUDENT ORIGINALS -->
+            <section class="catalog-section">
+                <h2 class="section-title">NTU Student Originals</h2>
+                <div class="movie-grid-5" id="student-originals-list"></div>
+            </section>
+
+            <!-- 3. COMING SOON -->
+            <section class="catalog-section">
+                <h2 class="section-title">Coming Soon</h2>
+                <div class="movie-grid-5" id="coming-soon-list"></div>
+            </section>
     </main>
 
-    <script src="js/script.js"></script>
+    <script src="js/movie-data.js"></script>
+    <script src="js/moviecatalog.js"></script>
 </body>
 </html>

@@ -90,10 +90,31 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 .announcement-content strong {color:var(--primary)}
 
 /* ========================= MOVIE CATALOG========================= */
+.catalog-container{padding: 40px 0 60px;}
+.catalog-section{margin-bottom: 50px;}
+.movie-grid-5{display:grid; grid-template-columns: repeat(5,1fr); gap:20px; align-items:start;}
 
+.movie-poster-link {display:block;}
+.movie-title-link {color:var(--text-primary); text-decoration: none;}
+.movie-title-link:hover {color:var(--primary);}
+.movie-poster-link img {transition:transform 0.25s ease;}
+.movie-poster-link img:hover {transform:scale(1.05);}
+
+.movie-meta{padding: 12px}
+.movie-title{font-size:0.95rem; font-weight: 600; color:var(--text-primary);white-space:hidden;text-overflow:ellipsis}
+.movie-info{font-size:0.8rem; color:var(--text-secondary); margin:6px 0 12px; display:flex; align-items:centre ;gap: 8px;}
+.badge {background-color:var(--surface-muted); border:1px; color:var(--primary);padding: 1px 6px; border-radius:3px;font-size:0.72rem;font-weight:bold}
+
+.btn-primary {background-color:var(--primary); color: var(--abyssal-blue); }
+.btn-primary:hover {background-color:var(--palladian); transform:translateY(-1px);}
+.btn-secondary {background-color:transparent; border-color: var(--primary) ;color: var(--primary);}
+.btn-secondary:hover {background-color:var(--primary); color: var(--abyssal-blue); transform:translateY(-1px);}
+.btn-block{width:100%}
+.nav-links a.active {color: var(--primary);border-bottom: 2px solid var(--primary); padding: bottom 4px;}
 
 
 /* ========================= MOVIE DETAILS ========================= */
+
 
 
 /* ========================= BOOKING ========================= */
