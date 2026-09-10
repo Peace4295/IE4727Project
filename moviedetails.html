@@ -25,8 +25,79 @@
     <!-- js inserts the selected movie poster info here -->
 
     <main class="container movie-details-container">
-        <div id="movie-details"> </div>
-    </main>
+
+    <!--
+        JavaScript inserts the selected movie information here:
+        poster, title, synopsis, director and cast.
+    -->
+    <div id="movie-details"></div>
+
+    <!--
+        The showtimes section appears below the movie information.
+        The user chooses a location, date and time here.
+    -->
+    <section class="showtimes-section" id="showtimes">
+        <h2>Showtimes</h2>
+
+        <!-- Location selection -->
+        <div class="showtime-field">
+            <label for="location-select">Location</label>
+
+            <select id="location-select">
+                <option value="north-spine">
+                    North Spine Cinema
+                </option>
+
+                <option value="south-spine">
+                    South Spine Cinema
+                </option>
+            </select>
+        </div>
+
+        <!-- Available dates -->
+        <div class="showtime-group">
+            <h3>Select a date</h3>
+
+            <div class="date-options">
+                <button
+                    type="button"
+                    class="date-option active"
+                    data-date="2026-09-10"
+                >
+                    Today, 10 Sep
+                </button>
+
+                <button
+                    type="button"
+                    class="date-option"
+                    data-date="2026-09-11"
+                >
+                    Fri, 11 Sep
+                </button>
+
+                <button
+                    type="button"
+                    class="date-option"
+                    data-date="2026-09-12"
+                >
+                    Sat, 12 Sep
+                </button>
+            </div>
+        </div>
+
+        <!-- Available screening times -->
+        <div class="showtime-group">
+            <h3>Select a time</h3>
+
+            <div class="time-options">
+                <button type="button" class="time-option" data-time="13:30" > 1:30 PM </button>
+                <button type="button" class="time-option" data-time="16:15" > 4:15 PM </button>
+                <button type="button" class="time-option" data-time="19:30" > 7:30 PM </button>
+            </div>
+        </div>
+    </section>
+
+</main>
 
     <!-- js loads the movie array first. moviedetails.js needs this data to find the selected movie -->
     <script src="js/movie-data.js"></script>

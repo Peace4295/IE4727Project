@@ -62,10 +62,7 @@ if (selectedMovie) {
                                 </button>
                             `
                             : `
-                                <a
-                                    href="booking.html?id=${selectedMovie.id}"
-                                    class="btn btn-primary"
-                                >
+                                <a href="#showtimes" class="btn btn-primary">
                                     Buy Tickets
                                 </a>
                             `
@@ -85,3 +82,72 @@ if (selectedMovie) {
         </div>
     `;
 }
+
+/* ========================= SHOWTIME SELECTION ========================= */
+
+/*
+    These variables store the user's current selections.
+    The first location and first date are selected by default.
+*/
+let selectedLocation =
+    document.getElementById("location-select").value;
+
+let selectedDate =
+    document.querySelector(".date-option.active").dataset.date;
+
+/* Finds all date and time buttons on the page */
+const dateButtons = document.querySelectorAll(".date-option");
+const timeButtons = document.querySelectorAll(".time-option");
+
+/*
+    Updates selectedLocation whenever the user chooses
+    a different cinema from the dropdown.
+*/
+document
+    .getElementById("location-select")
+    .addEventListener("change", function (event) {
+        selectedLocation = event.target.value;
+    });
+
+/*
+    Adds a click event to every date button.
+*/
+dateButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        /* Removes the active appearance from every date */
+        dateButtons.forEach(function (dateButton) {
+            dateButton.classList.remove("active");
+        });
+
+        /* Highlights the date that the user selected */
+        button.classList.add("active");
+
+        /* Saves the selected date from its data-date attribute */
+        selectedDate = button.dataset.date;
+    });
+});
+
+/*
+    When the user selects a time, all booking information
+    is placed into the booking-page URL.
+*/
+timeButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        const selectedTime = button.dataset.time;
+
+        /*
+            URLSearchParams safely formats the selected values
+            as a query string.
+        */
+        const bookingParameters = new URLSearchParams({
+            movie: selectedMovie.id,
+            location: selectedLocation,
+            date: selectedDate,
+            time: selectedTime
+        });
+
+        /* Opens the booking page with the completed selection */
+        window.location.href =
+            `booking.html?${bookingParameters.toString()}`;
+    });
+});
