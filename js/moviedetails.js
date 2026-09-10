@@ -85,69 +85,113 @@ if (selectedMovie) {
 
 /* ========================= SHOWTIME SELECTION ========================= */
 
+/* Finds the location dropdown */
+const locationSelect = document.getElementById("location-select");
+
+/* Finds every showtime button across all displayed dates */
+const showtimeButtons = document.querySelectorAll(".showtime-option");
+
+/* Finds the area used to display the selected session */
+const selectedSessionBox = document.getElementById("selected-session");
+const selectedSessionText = document.getElementById(
+    "selected-session-text"
+);
+
+/* Finds the button that continues to seat selection */
+const continueBookingButton = document.getElementById(
+    "continue-booking"
+);
+
 /*
-    These variables store the user's current selections.
-    The first location and first date are selected by default.
+    Stores the selected screening.
+    It starts as null because the user has not selected anything yet.
 */
-let selectedLocation =
-    document.getElementById("location-select").value;
-
-let selectedDate =
-    document.querySelector(".date-option.active").dataset.date;
-
-/* Finds all date and time buttons on the page */
-const dateButtons = document.querySelectorAll(".date-option");
-const timeButtons = document.querySelectorAll(".time-option");
+let selectedSession = null;
 
 /*
-    Updates selectedLocation whenever the user chooses
-    a different cinema from the dropdown.
+    Clears the selected showtime.
+    This is used when the user changes location.
 */
-document
-    .getElementById("location-select")
-    .addEventListener("change", function (event) {
-        selectedLocation = event.target.value;
+function clearSelectedSession() {
+    /* Remove the selected style from every showtime button */
+    showtimeButtons.forEach(function (button) {
+        button.classList.remove("selected");
     });
 
+    /* Remove the previously stored session */
+    selectedSession = null;
+
+    /* Hide the selected-session summary */
+    selectedSessionBox.hidden = true;
+
+    /* Prevent the user from continuing without a session */
+    continueBookingButton.disabled = true;
+}
+
 /*
-    Adds a click event to every date button.
+    Adds click behaviour to every showtime button.
 */
-dateButtons.forEach(function (button) {
+showtimeButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-        /* Removes the active appearance from every date */
-        dateButtons.forEach(function (dateButton) {
-            dateButton.classList.remove("active");
+        /* Remove the selected style from all time buttons */
+        showtimeButtons.forEach(function (otherButton) {
+            otherButton.classList.remove("selected");
         });
 
-        /* Highlights the date that the user selected */
-        button.classList.add("active");
+        /* Highlight the showtime that was clicked */
+        button.classList.add("selected");
 
-        /* Saves the selected date from its data-date attribute */
-        selectedDate = button.dataset.date;
+        /*
+            Store the complete screening preference:
+            location, date and time.
+        */
+        selectedSession = {
+            location: locationSelect.value,
+            date: button.dataset.date,
+            time: button.dataset.time
+        };
+
+        /* Display the selected session to the user */
+        selectedSessionText.textContent =
+            `${locationSelect.options[locationSelect.selectedIndex].text} · ` +
+            `${selectedSession.date} · ${button.textContent.trim()}`;
+
+        /* Reveal the summary */
+        selectedSessionBox.hidden = false;
+
+        /* Allow the user to continue */
+        continueBookingButton.disabled = false;
     });
 });
 
 /*
-    When the user selects a time, all booking information
-    is placed into the booking-page URL.
+    Changing location clears the selected session because
+    the chosen time may not exist at the new location.
 */
-timeButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-        const selectedTime = button.dataset.time;
+locationSelect.addEventListener("change", function () {
+    clearSelectedSession();
+});
 
-        /*
-            URLSearchParams safely formats the selected values
-            as a query string.
-        */
-        const bookingParameters = new URLSearchParams({
-            movie: selectedMovie.id,
-            location: selectedLocation,
-            date: selectedDate,
-            time: selectedTime
-        });
+/*
+    Sends the complete selection to booking.html.
+*/
+continueBookingButton.addEventListener("click", function () {
+    /* Safety check in case no session has been selected */
+    if (!selectedSession) {
+        return;
+    }
 
-        /* Opens the booking page with the completed selection */
-        window.location.href =
-            `booking.html?${bookingParameters.toString()}`;
+    /*
+        Creates URL parameters containing the movie and session details.
+    */
+    const bookingParameters = new URLSearchParams({
+        movieId: selectedMovie.id,
+        location: selectedSession.location,
+        date: selectedSession.date,
+        time: selectedSession.time
     });
+
+    /* Opens the seat-selection page */
+    window.location.href =
+        `booking.html?${bookingParameters.toString()}`;
 });
