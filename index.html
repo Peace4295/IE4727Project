@@ -38,11 +38,80 @@
 
         <!-- Horizontal search bar -->
          <section class="filter-bar">
-            <form action="movies.html" method ="get" class="search-form">
-                <input type="text" name="search" placeholder="Search for movies..." required>
-                <button type="submit">Search</button>
+            <form action="movies.html" method ="get" class="filter-form-horizontal">
+                <div class="filter-field">
+                    <label for="movie-select"> Select a movie:</label>
+                    <select id="movie-select" name="movie">
+                        <option value=""> Choose movie...</option>
+                        <option value="interstellar">Interstellar</option>
+                        <option value="inception">Inception</option>
+                    </select>
+                </div>
+                <div class="filter-field">
+                    <label for="loacation-select"> Select A Location</label>
+                    <select id="location-select" name="location">
+                        <option value="the hive"> The Hive Rooftop</option>
+                        <option value="LT23"> LT23</option>
+                    </select>
+                </div>
+                <div class="filter-field">
+                    <label for="datetime-select"> Select A Date and Time</label>
+                    <input type="date" id="datetime-select" name="date">
+                </div>
+                <div class="filter-btn-wrapper">
+                    <button type="submit" class="btn btn-search">Filter</button>
+                </div>
+            </form>
          </section>
-        
+
+         <div class="bottom-layout">
+            <div class="movies-column">
+                <!-- now showing -->
+                 <section class="movie-section">
+                    <h2 class ="section-title">Now Showing</h2>
+                    <div class="movie-grid-3">
+                        <article class="movie-card">
+                            <div class ="poster-placeholder">Poster 1</div>
+                        </article>
+                        <article class="movie-card">
+                            <div class ="poster-placeholder">Poster 2</div>
+                        </article>
+                        <article class="movie-card">
+                            <div class ="poster-placeholder">Poster 3</div>
+                        </article>
+                    </div>
+                 </section>
+                 
+                 <!-- coming soon -->
+                  <section class="movie-section">
+                    <h2 class ="section-title">Coming Soon</h2>
+                    <div class="movie-grid-3">
+                        <article class="movie-card">
+                            <div class ="poster-placeholder">Poster 1</div>
+                        </article>
+                        <article class="movie-card">
+                            <div class ="poster-placeholder">Poster 2</div>
+                        </article>
+                        <article class="movie-card">
+                            <div class ="poster-placeholder">Poster 3</div>
+                        </article>
+                    </div>
+                 </section>
+                 <!--right col: campus annoucements-->
+                 <aside class="announcement-card">
+                    <h2 class="section-title">Campus Announcements</h2>
+                    <div class="announcement-content">
+                        <p><strong>Wet Weather Notice:</strong>In the event of heavy rain, outdoor screenings at the Hive will be relocated to Lecture Theatre 1A.</p>
+                        <br>
+                        <p><strong>Seat Reservation:</strong>PLease bring your matric card for ticket validation at the enterance</p>
+                        
+                    </div>
+                 </aside>
+
+            </div>
+
+         </div>
+
     </main>
 
     <script src="js/script.js"></script>
