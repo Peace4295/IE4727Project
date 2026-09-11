@@ -151,7 +151,7 @@ function createSeatMap() {
             //disable the booked seats
             if (unavailableSeats.includes(seatName)) {
                 seatButton.classList.add("unavailable");
-                seatButton.disabled = true;
+                seatButton.disabled = true; //prevents button from being clicked
             } else {
 
             //only avail seats can be clickable

@@ -40,7 +40,7 @@
             </p>
         </section>
         <!-- SEAT SELECTION -->
-         <section>
+         <section class="seat-selection" id="seat-selection">
             <h2>Select Your Seats</h2>
             <p>Select up to six seats.</p>
 
@@ -50,52 +50,81 @@
              <!-- js generate the seat buttons -->
               <div class="seat-map" id="seat-map"></div>
              <!-- seat legend -->
-               <div>
-                <span>Available</span>
-                <span>Selected</span>
-                <span>Unavailable</span>
+               <div class="seat-legend">
+                <div class="legend-item">
+                    <span class="legend-seat available"></span>
+                    <span>Available</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-seat selected"></span>
+                    <span>Selected</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-seat unavailable"></span>
+                    <span>Unavailable</span>
+                </div>
+                
                </div>
                <!-- display the total and selected seats -->
                 <div class="seat-order-summary">
-                    <p>Selected Seats:
+                    <div>
+                        <span>Selected Seats</span>
                         <strong id="selected-seats">None</strong>
-                    </p>
-                    <p>Tickets:
-                        <strong id=ticket-count>0</strong>
-                    </p>
-                    <p>Total: $
+                    </div>
+                    <div>
+                        <span>Tickets</span>
+                        <strong id="ticket-count">0</strong>
+                    </div>
+                    <div>
+                        <span>Total: $</span>
                         <strong id="booking-total">0.00</strong>
-                    </p>
+                    </div>
                 </div>
 
                 <!-- keep disabled until user selects ATLEAST one seat -->
-                <button
-                    type="button"
-                    class="btn btn=primary"
-                    id="continue-payment"
-                    disabled>
-                    Continue to payment
-                </button>
+                <div class="booking-actions">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="continue-payment"
+                        disabled>
+                        Continue to payment
+                    </button>
+                </div>
+                </section>
          </section>
          <!-- PAYMENT -->
-         <section>
+         <section
+            class="payment-section"
+            id="payment-section"
+            hidden
+         >
             <h2>Payment</h2>
             <p>Review your booking before paying.</p>
 
             <!-- booking summary display -->
              <div class="payment-summary">
-                <p>Movie:
+                <div>
+                    <span>Movie:</span>
                     <strong id="payment-movie"></strong>
-                </p>
-                <p>Session:
+                </div>
+                <div>
+                    <span>Session:</span>
                     <strong id="payment-session"></strong>
-                </p>
-                <p>Seats:
+                </div>
+                
+                <div>
+                    <span>Seats:</span>
                     <strong id="payment-seats"></strong>
-                </p>
-                <p>Total:
+                </div>
+                
+                <div>
+                    <span>Total:</span>
                     <strong id="payment-total">0.00</strong>
-                </p>
+                </div>
+                
              </div>
              <!-- prototype payment form -->
              <form id="payment-form">
@@ -107,14 +136,20 @@
                     <label for="card-number"> Card number </label>
                     <input type="text" id="card-number" inputmode="numeric" maxlength="19" required >
                 </div>
-                <div class="form-field">
-                    <label for="card-expiry">Expiry</label>
+                <div class="payment-form-row">
+                    <div class="form-field">
+                      <label for="card-expiry">Expiry</label>
                     <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
-                </div>
-                <div class="form-field">
-                    <label for="card-cvv">CVV</label>
+                      
+                    </div>
+                    <div class="form-field">
+                      <label for="card-cvv">CVV</label>
                     <input type="password" id="card-cvv" inputmode="numeric" maxlength="3" required>
+                  
+                    </div>
+                    
                 </div>
+                
 
                 <div class="booking-actions">
                     <button
