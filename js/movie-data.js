@@ -200,9 +200,9 @@ const comingSoon =[
     },
     {
         id: 13,
-        title: "Future Release 1",
-        rating : "PG",
-        genre: "Action",
+        title: "Transformers: Rise of the Beasts",
+        rating : "PG13",
+        genre: "Action, Adventure, Sci-Fi",
         language: "English",
         subtitles: "English",
         duration: "2h 30m",
@@ -210,9 +210,8 @@ const comingSoon =[
         status: "coming-soon",
         
         synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Renee Ong",
-        cast: "Zi Yang, Priscilla, Arden",
-        releaseDate: "15 March 2025"
+        director: "Steven Caple Jr.",
+        cast: "Anthony Ramos, Dominique Fishback, Luna Lauren Velez",
     },
     {
         id: 14,
