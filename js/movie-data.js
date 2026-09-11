@@ -147,7 +147,7 @@ const studentOriginals =[
 
 const comingSoon =[
     {
-        id: 5,
+        id: 11,
         title: "Future Release 1",
         rating : "PG",
         genre: "Action",
@@ -159,5 +159,61 @@ const comingSoon =[
         director: "Renee Ong",
         cast: "Zi Yang, Priscilla, Arden",
         releaseDate: "15 March 2025"
-    }
+    },
+    {
+        id: 12,
+        title: "Future Release 1",
+        rating : "PG",
+        genre: "Action",
+        duration: "2h 30m",
+        poster: "images/minionposter.jpg",
+        status: "coming-soon",
+        
+        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
+        director: "Renee Ong",
+        cast: "Zi Yang, Priscilla, Arden",
+        releaseDate: "15 March 2025"
+    },
+    {
+        id: 13,
+        title: "Future Release 1",
+        rating : "PG",
+        genre: "Action",
+        duration: "2h 30m",
+        poster: "images/minionposter.jpg",
+        status: "coming-soon",
+        
+        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
+        director: "Renee Ong",
+        cast: "Zi Yang, Priscilla, Arden",
+        releaseDate: "15 March 2025"
+    },
+    {
+        id: 14,
+        title: "Future Release 1",
+        rating : "PG",
+        genre: "Action",
+        duration: "2h 30m",
+        poster: "images/minionposter.jpg",
+        status: "coming-soon",
+        
+        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
+        director: "Renee Ong",
+        cast: "Zi Yang, Priscilla, Arden",
+        releaseDate: "15 March 2025"
+    },
+    {
+        id: 15,
+        title: "Future Release 1",
+        rating : "PG",
+        genre: "Action",
+        duration: "2h 30m",
+        poster: "images/minionposter.jpg",
+        status: "coming-soon",
+        
+        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
+        director: "Renee Ong",
+        cast: "Zi Yang, Priscilla, Arden",
+        releaseDate: "15 March 2025"
+    },
 ]

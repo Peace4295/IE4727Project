@@ -159,7 +159,7 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 
 
 /* ========================= BOOKING ========================= */
-
+.booking-container{ max-width: 1000px; padding: 48px 0 px;}
 
 /* ========================= LOGIN ========================= */
 

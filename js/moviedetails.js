@@ -193,5 +193,5 @@ continueBookingButton.addEventListener("click", function () {
 
     /* Opens the seat-selection page */
     window.location.href =
-        `booking.html?${bookingParameters.toString()}`;
+        `bookingandpayment.html?${bookingParameters.toString()}`;
 });
