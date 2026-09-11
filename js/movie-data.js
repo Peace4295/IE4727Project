@@ -168,13 +168,13 @@ const studentOriginals =[
 const comingSoon =[
     {
         id: 11,
-        title: "Future Release 1",
+        title: "The Dark Knight Rises",
         rating : "PG",
         genre: "Action",
         language: "English",
         subtitles: "English",
         duration: "2h 30m",
-        poster: "images/minionposter.jpg",
+        poster: "images/coming soon/batman.png",
         status: "coming-soon",
         
         synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
@@ -184,13 +184,13 @@ const comingSoon =[
     },
     {
         id: 12,
-        title: "Future Release 1",
+        title: "The Greatest Showman",
         rating : "PG",
         genre: "Action",
         language: "English",
         subtitles: "English",
         duration: "2h 30m",
-        poster: "images/minionposter.jpg",
+        poster: "images/coming soon/greatestshowman.png",
         status: "coming-soon",
         
         synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
@@ -200,13 +200,13 @@ const comingSoon =[
     },
     {
         id: 13,
-        title: "Transformers: Rise of the Beasts",
+        title: "Frozen",
         rating : "PG13",
         genre: "Action, Adventure, Sci-Fi",
         language: "English",
         subtitles: "English",
         duration: "2h 30m",
-        poster: "images/minionposter.jpg",
+        poster: "images/coming soon/frozen.png",
         status: "coming-soon",
         
         synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
@@ -215,13 +215,13 @@ const comingSoon =[
     },
     {
         id: 14,
-        title: "Future Release 1",
+        title: "Transformers: Rise of the Beasts",
         rating : "PG",
         genre: "Action",
         language: "English",
         subtitles: "English",
         duration: "2h 30m",
-        poster: "images/minionposter.jpg",
+        poster: "images/coming soon/transformers.png",
         status: "coming-soon",
         
         synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
@@ -231,13 +231,13 @@ const comingSoon =[
     },
     {
         id: 15,
-        title: "Future Release 1",
+        title: "Spider-Man: Brand New Day",
         rating : "PG",
         genre: "Action",
         language: "English",
         subtitles: "English",
         duration: "2h 30m",
-        poster: "images/minionposter.jpg",
+        poster: "images/coming soon/spiderman.png",
         status: "coming-soon",
         
         synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
