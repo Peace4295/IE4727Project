@@ -284,10 +284,74 @@ backToSeatsButton.addEventListener(
 );
 
 //sucessful form submission visual
+/* ========================= BOOKING CONFIRMATION ========================= */
+
+/* Finds the confirmation modal */
+const confirmationModal =
+    document.getElementById("confirmation-modal");
+
+/* Finds the areas that will display confirmed booking details */
+const confirmationMovie =
+    document.getElementById("confirmation-movie");
+
+const confirmationSession =
+    document.getElementById("confirmation-session");
+
+const confirmationSeats =
+    document.getElementById("confirmation-seats");
+
+const confirmationTotal =
+    document.getElementById("confirmation-total");
+
+const confirmationReference =
+    document.getElementById("confirmation-ref");
+
+/*
+    Creates a simple prototype booking reference.
+
+    Date.now() returns the current timestamp.
+    Converting it to base 36 produces a shorter combination
+    of numbers and letters.
+*/
+function createBookingReference() {
+    const uniquePart = Date.now()
+        .toString(36)
+        .toUpperCase();
+
+    return `NTF-${uniquePart}`;
+}
+
+/*
+    Runs when the payment form passes HTML validation
+    and the user clicks Pay Now.
+*/
 paymentForm.addEventListener("submit", function (event) {
+    /* Prevents the form from refreshing the page */
     event.preventDefault();
 
-    alert(
-        "Demo payment successful. Your booking is confirmed."
-    );
+    /* Calculates the final amount */
+    const finalTotal =
+        selectedSeats.length * seatPrice;
+
+    /* Inserts the completed booking into the modal */
+    confirmationMovie.textContent =
+        bookingMovie.title;
+
+    confirmationSession.textContent =
+        displayedSession;
+
+    confirmationSeats.textContent =
+        selectedSeats.join(", ");
+
+    confirmationTotal.textContent =
+        finalTotal.toFixed(2);
+
+    confirmationReference.textContent =
+        createBookingReference();
+
+    /*
+        Opens the dialog as a modal.
+        The rest of the page becomes temporarily inactive.
+    */
+    confirmationModal.showModal();
 });
