@@ -169,11 +169,11 @@ const comingSoon =[
     {
         id: 11,
         title: "The Dark Knight Rises",
-        rating : "PG",
-        genre: "Action",
+        rating : "PG13",
+        genre: "Action, Thriller",
         language: "English",
         subtitles: "English",
-        duration: "2h 30m",
+        duration: "2h 44m",
         poster: "images/coming soon/batman.png",
         status: "coming-soon",
         
@@ -186,10 +186,10 @@ const comingSoon =[
         id: 12,
         title: "The Greatest Showman",
         rating : "PG",
-        genre: "Action",
+        genre: "Musical, Drama",
         language: "English",
         subtitles: "English",
-        duration: "2h 30m",
+        duration: "1h 45m",
         poster: "images/coming soon/greatestshowman.png",
         status: "coming-soon",
         
@@ -201,11 +201,11 @@ const comingSoon =[
     {
         id: 13,
         title: "Frozen",
-        rating : "PG13",
-        genre: "Action, Adventure, Sci-Fi",
+        rating : "G",
+        genre: "Kids & Family, Musical",
         language: "English",
         subtitles: "English",
-        duration: "2h 30m",
+        duration: "1h 42m",
         poster: "images/coming soon/frozen.png",
         status: "coming-soon",
         
@@ -216,11 +216,11 @@ const comingSoon =[
     {
         id: 14,
         title: "Transformers: Rise of the Beasts",
-        rating : "PG",
-        genre: "Action",
+        rating : "PG13",
+        genre: "Action, Adventure, Sci-Fi",
         language: "English",
         subtitles: "English",
-        duration: "2h 30m",
+        duration: "2h 7m",
         poster: "images/coming soon/transformers.png",
         status: "coming-soon",
         
@@ -232,8 +232,8 @@ const comingSoon =[
     {
         id: 15,
         title: "Spider-Man: Brand New Day",
-        rating : "PG",
-        genre: "Action",
+        rating : "PG13",
+        genre: "Action, Adventure",
         language: "English",
         subtitles: "English",
         duration: "2h 30m",
