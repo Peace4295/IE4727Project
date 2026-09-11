@@ -159,7 +159,7 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 .continue-booking-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
 
-/* ========================= BOOKING ========================= */
+/* ========================= BOOKING AND PAYMENT ========================= */
 .booking-container{ width:90%; max-width:1000px; padding: 48px 0 80px;}
 .seat-selection[hidden], .payment-section[hidden] {display:none}
 
@@ -219,6 +219,24 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 
 .payment-notice { padding: 12px 14px; background-color: rgba(255, 177, 98, 0.08); color: var(--text-secondary); border-left: 3px solid var(--primary); border-radius: 4px; font-size: 0.8rem; line-height: 1.5; }
 .payment-actions { justify-content: space-between; }
+
+/* ========================= CONFIRMATION MODAL ========================= */
+.confirmation-modal {position:fixed; inset:0; margin:auto;width:min(80%, 520px); padding:0; background-color: var(--surface); color: var(--text-primary); border:1px solid var(--border); border-radius:12px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0,45);}
+.confirmation-modal::backdrop {background-color: rgba(10,17,25,0.78); backdrop-filter: blue(3px);}
+.confirmation-content { padding: 40px; text-align: center;}
+.confirmation-icon {display: flex; align-items: center;justify-content: center;width:64px;height:64px; margin: 0 auto 20px; background-color: var(--primary); color: var(--abyssal-blue); border-radius: 50%;font-size: 2rem;font-weight: 700;}
+.confirmation-label {margin-bottom:8px; color:var(--primary); color:var(--primary);font-size:0.75rem;font-weight:600; letter-spacing: 0.1rem;text-transform: uppercase; text-align: center;}
+.confirmation-content h2 { margin-bottom: 12px; font-family: "Instrument Serif", serif; font-size:2.4rem; font-weight:400; text-align: center;}
+.confirmation-message {max-width: 430px; margin: 0 auto 28px; color: var(--text-secondary);line-height:1.6;}
+
+.confirmation-details{display:grid; gap:16px;padding:22px; background-color: var(--surface-muted); border: 1px solid var(--border); border-radius: 8px; text-align:left}
+.confirmation-details >div{display:flex; flex-direction:column; gap:4px}
+.confirmaiton-details span {color:var(--text-secondary); font-size: 0.72rem; letter-spacing: 0.06em;text-transform: uppercase;}
+.confirmation-details strong {color: var(--text-primary)}
+#confirmation-ref {color: var(--primary); letter-spacing:0.05em;}
+.confirmation-actions {display:flex; justify-content: center; gap:12px; margin-top:28px}
+
+
 
 
 

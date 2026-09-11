@@ -291,17 +291,17 @@ const confirmationModal =
     document.getElementById("confirmation-modal");
 
 /* Finds the areas that will display confirmed booking details */
-const confirmationMovie =
-    document.getElementById("confirmation-movie");
+// const confirmationMovie =
+//     document.getElementById("confirmation-movie");
 
-const confirmationSession =
-    document.getElementById("confirmation-session");
+// const confirmationSession =
+//     document.getElementById("confirmation-session");
 
-const confirmationSeats =
-    document.getElementById("confirmation-seats");
+// const confirmationSeats =
+//     document.getElementById("confirmation-seats");
 
-const confirmationTotal =
-    document.getElementById("confirmation-total");
+// const confirmationTotal =
+//     document.getElementById("confirmation-total");
 
 const confirmationReference =
     document.getElementById("confirmation-ref");
@@ -334,17 +334,17 @@ paymentForm.addEventListener("submit", function (event) {
         selectedSeats.length * seatPrice;
 
     /* Inserts the completed booking into the modal */
-    confirmationMovie.textContent =
-        bookingMovie.title;
+    // confirmationMovie.textContent =
+    //     bookingMovie.title;
 
-    confirmationSession.textContent =
-        displayedSession;
+    // confirmationSession.textContent =
+    //     displayedSession;
 
-    confirmationSeats.textContent =
-        selectedSeats.join(", ");
+    // confirmationSeats.textContent =
+    //     selectedSeats.join(", ");
 
-    confirmationTotal.textContent =
-        finalTotal.toFixed(2);
+    // confirmationTotal.textContent =
+    //     finalTotal.toFixed(2);
 
     confirmationReference.textContent =
         createBookingReference();
