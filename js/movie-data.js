@@ -18,8 +18,8 @@ const movies = [
     {
         id: 2,
         title: "Joker",
-        rating : "PG",
-        genre: "Crime, Action",
+        rating : "NC16",
+        genre: "Crime, Action, Thriller",
         language: "English",
         subtitles: "English",
         duration: "2h 2m",
@@ -34,7 +34,7 @@ const movies = [
      {
         id: 3,
         title: "Minions",
-        rating : "PG",
+        rating : "G",
         genre: "Kids & Family, Animation, Comedy",
         language: "English",
         subtitles: "English",
@@ -86,81 +86,81 @@ const studentOriginals =[
         id: 6,
         title: "EXIT 19",
         rating : "PG",
-        genre: "MellowDrama",
-        language: "English",
-        subtitles: "English",
-        duration: "15m",
+        genre: "Drama",
+        language: "English, Chinese",
+        subtitles: "English, Chinese",
+        duration: "47m",
         poster: "images/film/exit19.png",
         status: "showing",
 
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Jennifer",
-        cast: "Priscilla ",
-        releaseDate: "15 March 2024"
+        synopsis: "On the eve of entering university, a reserved teenager finds themselves trapped in the passenger seat during a long, nocturnal drive. As the highway lights blur outside, the confined car becomes a crucible for unspoken tension. The film explores the heavy realization that growing up means inheriting the silent conflicts, messy compromises, and hidden griefs of the adults around them.",
+        director: "Jennifer Heng",
+        cast: "Priscilla Chong, Adrian Toh, Zelda Tatiana Ng, Christina Choy",
+        releaseDate: "23 June 2024"
     },
     {
         id: 7,
         title: "When Petals Fall",
         rating : "PG",
-        genre: "Heart-felt",
+        genre: "Drama, Dance",
         language: "English",
         subtitles: "English",
-        duration: "11m",
+        duration: "24m",
         poster: "images/film/wpf.png",
         status: "showing",
 
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Macson Y.",
+        synopsis: "One spotlight. A breaking point. A dancer's search for herself. Driven by physical intensity and raw vulnerability, When Petals Fall pulls back the curtain on the sacrifices, isolation, and mental strain behind the pursuit of artistic perfection.",
+        director: "Yap Macson",
         cast: "Genelle Law",
-        releaseDate: "15 March 2024"
+        releaseDate: "15 September 2024"
     },
      {
         id: 8,
         title: "Requiem",
-        rating : "PG",
-        genre: "Dance-film",
+        rating : "PG13",
+        genre: "Mystery, Drama",
         language: "English",
         subtitles: "English",
-        duration: "9m",
+        duration: "16m",
         poster: "images/film/requiem.png",
         status: "showing",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Macson Y.",
+        synopsis: "When reality splits between an upside-down horizon and an empty field of chairs, a grieving man confronts the hidden void carried on his back.",
+        director: "Yap Macson",
         cast: "Low Ying Han",
-        releaseDate: "15 March 2024"
+        releaseDate: "12 April 2025"
     },
     {
         id: 9,
         title: "Would You Still Love Me If",
         rating : "PG",
-        genre: "Heart-Felt",
+        genre: "Comedy, Drama",
         language: "English",
         subtitles: "English",
-        duration: "11m",
+        duration: "16m",
         poster: "images/film/wyslmi.png",
         status: "showing",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Renee Ong",
-        cast: "Actor A, Actor B, Actor C",
-        releaseDate: "15 March 2024"
+        synopsis: "An earnest partner goes above and beyond in the kitchen, determined to prove that everyday devotion can outlast relationship anxieties and burning questions.",
+        director: "Cheyenne Raine Lim",
+        cast: "Benjamin Eio, Faye Loy, Ava Chu",
+        releaseDate: "27 March 2024"
     },
     {
         id: 10,
         title: "Temperance",
         rating : "PG",
-        genre: "Dance Film",
+        genre: "Dance",
         language: "English",
         subtitles: "English",
-        duration: "9m",
+        duration: "12m",
         poster: "images/film/temp.png",
         status: "showing",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
+        synopsis: "Pinned under a solitary spotlight and encircled by accusing fingers, a dancer battles against judgment, restraint, and societal scrutiny.",
         director: "Renee Ong",
         cast: "Zi Yang, Priscilla, Arden",
-        releaseDate: "15 March 2025"
+        releaseDate: "19 February 2025"
     }
 
 ]
