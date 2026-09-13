@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film Details - NTU Films</title>
+    <title>My Account - NTU Films</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,16 +14,89 @@
             <a href="index.html" class="logo">NTU Films</a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="moviecatalog.html" class="active">Movies</a>
+                <a href="moviecatalog.html">Movies</a>
                 <a href="submitfilm.html">Submit a Film</a>
             </div>
-            <a href="account.html">My Account</a>
+            <a href="account.html" class="account-link active">My Account</a>
         </nav>
     </header>
 
-    <!-- Main Container -->
-    
+    <main class="container account-page">
+        <!-- profile -->
+        <section class="account-profile">
+            <div class="profile-avatar" id="profile-avatar">PC</div>
+            <div class="profile-information">
+                <p class="account-eyebrow">MY ACCOUNT</p>
+                <h1 class="profile-name">Priscilla Chong</h1>
+                <p id="profile-email">pris0038@e.ntu.edu.sg</p>
+            </div>
+            <button type="button" class="btn btn-secondary" id="edit-profile-button">Edit Profile</button>
+         </section>
+         <!-- account -->
+         <section class="account-statistics" aria-label="Account overview">
+            <div class="account-stats">
+                <p>Films</p>
 
-    <script src="js/script.js"></script>
+            </div>
+            
+         </section>
+         <!-- my bookings -->
+          <section class="account-section booking-history-section">
+            <div class="account-section-heading">
+                <div>
+                    <h2>My Bookings</h2>
+                    <p>View and manage your cinema bookings.</p>
+                </div>
+            </div>
+            <div class="booking-tabs" role="tablist" aria-label="Filter bookings">
+                <button type="button" class="booking-tab active" id="upcoming-tab" data-status="upcoming" role="tab" aria-selected="true">
+                    Up Coming
+                </button>
+                <button type="button" class="booking-tab" id="past-tab" data-status="past" role="tab" aria-selected="false">
+                    Past Bookings
+                </button>
+                <button type="button" class="booking-tab " id="cancelled-tab" data-status="cancelled" role="tab" aria-selected="false">
+                    Cancelled
+                </button>
+                <div class="list" id="account-booking-list" aria-live="polite"></div>
+            </div>
+          </section>
+          <div class="account-lower-layer">
+            <section class="account-selection">
+                <div class="account-section-heading">
+                    <div>
+                        <h2>Film Submissions</h2>
+                        <p>Track your submitted student films.</p>
+                    </div>
+                </div>
+                <div class="film-submission-list" id="film-submission-list"></div>
+            </section>
+            <section>
+                <div class="sign-out-section">
+                    <h2>Sign Out</h2>
+                    <p>You will need to sign in again to view and manage your bookings.</p>
+                </div>
+                <button type="button" class="btn sign-out-button" id="sign-out-button">Sign Out</button>
+            </section>
+          </div>
+    </main>
+    <!-- cancellation modal -->
+     <dialog class="account-modal">
+        <div class="account-modal-content">
+            <p class="account-modal-label">CANCEL BOOKING</p>
+            <h2>Are you sure?</h2>
+            <p class="account-modal-message">This booking will be moved to your cancelled bookings.<br>This action cannot be undone</p>
+            <div class="cancel-booking-summary">
+                <strong id="cancel-movie-title"></strong>
+                <span class="cancel-session-details"></span>
+            </div>
+            <div class="account-modal-actions">
+                <button type="button" class="btn btn-secondary" id="keep-booking-button">Keep Booking</button>
+                <button type="button" class="btn cancel-confirm-button" id="confirm-cancellation-button">Confirm Cancellation</button>
+            </div>
+        </div>
+
+     </dialog>
+    <script src="js/account.js"></script>
 </body>
 </html>

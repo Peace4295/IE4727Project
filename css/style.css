@@ -295,11 +295,75 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .login-error{padding: 12px 14px; background-color: rgba(198,90,70,0.12); color: var(--danger); border: 1px solid var(--border); border-radius:6px; font-size:0.82rem;line-height:1.5;}
 .login-error [hidden] {display:none}
 
-
-
-
 /* ========================= ACCOUNT ========================= */
+.account-page {padding: 52px 0 70px 0}
 
+.account-profile {display: flex; align-items: center; gap: 22px; margin-bottom: 34px;}
+.profile-avatar {display:flex; align-items: center;justify-content:center; width:82px;height:82px;flex-shrink: 0; background-color: var(--primary);color:var(--abyssal-blue); border-radius:50%; font-size:1.35rem;font-weight:600}
+.profile-information{flex:1}
+.account-eyebrow{margin-bottom:5px; color:var(--primary); font-size:0.72rem;font-weight:600;letter-spacing:0.12em}
+.profile-information h1 {margin: bottom 5px;color: var(--text-primary);font-family: "Instrument Serif",serif;font-size: clamp(2.2rem,5vw, 3.4rem);font-weight: 400;line-height:1;}
+.profile-information > p:last-child {color:var(--text-secondary)}
+
+.account-statastics{display:grid; grid-template-columns: repeat(3.1fr);margin-bottom:54px;padding:24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid(--border);}
+.account-stats {padding:4px 20px; text-align:center}
+.account-stats + .account-stats {border-left: 1px solid var(--border);} /*add divider before 2nd and 3rd column*/
+.account-stats p {margin-bottom:8px; color:var(--text-secondary);font-size:0.82rem; font-weight:500;text-transform:uppercase;letter-spacing:0.06em}
+.account-stats strong {color: var(--primary);font-family:"Istrument Serif",serif; font-size:2.2rem; font-weight:400;}
+
+.account-section {margin-bottom: 42px;}
+.account-section-heading {display:flex; align-items:flex-end; justify-content: space-between;gap:20px;margin-bottom:20px}
+.account-section-heading h2 {margin-bottom: 5px; color: var(--text-primary); font-size:1.5rem;}
+.account-section-heading p {color:var(--text-secondary); font-size:0.9rem}
+
+.booking-tabs { display: flex; gap: 8px; margin-bottom: 8px; border-bottom: 1px solid var(--border); }
+.booking-tab { position: relative; padding: 12px 18px; background-color: transparent; color: var(--text-secondary); border: none; font: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+.booking-tab:hover { color: var(--text-primary); }
+.booking-tab.active { color: var(--primary); }
+.booking-tab.active::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background-color: var(--primary); }
+.booking-tab:focus-visible { outline: 3px solid rgba(255, 177, 98, 0.25); outline-offset: 2px; }
+
+.account-booking-list { min-height: 150px; }
+.account-booking-card { display: grid; grid-template-columns: 86px 1fr auto; align-items: center; gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+.account-booking-poster { display: block; width: 86px; aspect-ratio: 2 / 3; object-fit: cover; background-color: var(--surface-muted); border: 1px solid var(--border); border-radius: 6px; }
+.account-booking-information h3 { margin-bottom: 7px; color: var(--text-primary); font-size: 1.15rem; }
+.account-booking-poster { display: block; width: 86px; aspect-ratio: 2 / 3; object-fit: cover; background-color: var(--surface-muted); border: 1px solid var(--border); border-radius: 6px; }
+.account-booking-information h3 { margin-bottom: 7px; color: var(--text-primary); font-size: 1.15rem; }
+.account-booking-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; }
+.account-booking-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; }
+
+.booking-status.upcoming { color: var(--primary); }
+.booking-status.past { color: var(--text-secondary); }
+.booking-status.cancelled { color: var(--danger); }
+.account-booking-actions .btn { min-height: 36px; padding: 0 15px; font-size: 0.78rem; }
+.booking-status.upcoming { color: var(--primary); }
+.empty-account-message { padding: 42px 20px; color: var(--text-secondary); border-bottom: 1px solid var(--border); text-align: center; }
+
+.account-lower-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; margin-top: 48px; }
+
+.account-film-submission { padding: 18px 0; border-bottom: 1px solid var(--border); }
+.account-film-submission h3 { margin-bottom: 6px; color: var(--text-primary); }
+.account-film-submission p { margin-bottom: 10px; color: var(--text-secondary); font-size: 0.84rem; }
+.submission-status { display: inline-block; padding: 5px 10px; background-color: var(--surface-muted); color: var(--primary); border-radius: 20px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; }
+
+
+.sign-out-section { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; padding-top: 28px; border-top: 1px solid var(--border); }
+.sign-out-section h2 { margin-bottom: 5px; color: var(--text-primary); font-size: 1rem; }
+.sign-out-section p { color: var(--text-secondary); font-size: 0.84rem; }
+.sign-out-button { min-height: 42px; padding: 0 22px; background-color: transparent; color: var(--danger); border: 1px solid var(--danger); border-radius: 6px; font-family: inherit; font-weight: 600; cursor: pointer; }
+.sign-out-button:hover { background-color: var(--danger); color: var(--text-primary); }
+
+.account-modal { width: min(90%, 500px); margin: auto; padding: 0; background-color: var(--surface); color: var(--text-primary); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4); }
+
+.account-modal::backdrop { background-color: rgba(10, 17, 25, 0.8); }
+.account-modal-content { padding: 34px; }
+.account-modal-label { margin-bottom: 8px; color: var(--danger); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; }
+.account-modal-content h2 { margin-bottom: 10px; font-family: "Instrument Serif", serif; font-size: 2.2rem; font-weight: 400; }
+.account-modal-message { color: var(--text-secondary); line-height: 1.6; }
+.cancel-booking-summary { display: flex; flex-direction: column; gap: 5px; margin-top: 22px; padding: 16px; background-color: var(--surface-muted); border-left: 3px solid var(--danger); border-radius: 4px; }
+.cancel-booking-summary span { color: var(--text-secondary); font-size: 0.84rem; }
+.account-modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 26px; }
+.cancel-confirm-button { background-color: var(--danger); color: var(--text-primary); }
 
 /* =========================RESPONSIVE ========================= */
    @media (max-width: 768px) { .movie-grid { grid-template-columns: repeat(2, 1fr); } }
