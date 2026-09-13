@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Submit a Film - NTU Films</title>
+        <link rel="sytlesheet" href="css/style.css">
+    </head>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+            <!-- <img src="images/logo/logo-dark.png" alt="Nanyang Film House"> -->
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="moviecatalog.html">Movies</a>
+                <a href="submit.html" class="active">Submit a Film</a>
+            </div>
+            <a href="account.html">
+                My Account
+            </a>
+        </nav>
+    </header>
+    
+    <main class="container submission-page">
+        <section class="submission-eyebrow">
+            <p>NTU STUDENT FILMS</p>
+            <h1>Submit a Film</h1>
+            <p>
+                Share your film with the NTU community. Complete the form below and our team will contact you after reviewing your submission.
+            </p>
+        </section>
+        <form class="film-submission-form" id="film-submission-form" enctype="multipart/form-data">
+            <fieldset class="submission-section">
+                <legend>
+                    <span>01</span>
+                    Film Details
+                </legend>
+                <div class="form-field">
+                    <label for="film-title">Film Title*</label>
+                    <input input="text" id="film-title" name="filmTitle" placeholder="Enter the title of your film" maxlength="100" required>
+
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="genre">Genre*</label>
+                        <select id="genre" name="genre" required>
+                            <option value="">Select a genre</option>
+                            <option value="action">Action</option>
+                            <option value="Animation">Animation</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="documentary">Documentary</option>
+                            <option value="drama">Drama</option>
+                            <option value="experimental">Experimental</option>
+                            <option value="horror">Horror</option>
+                            <option value="romance">Romance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="runtime">Running time (minutes)*</label>
+                        <input type="number" id="runtime" name="runtime" placeholder="Example: 15" min="1" max="300" required>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="synopsis">Synopsis*</label>
+                    <textarea id="synopsis" name="synopsis" rows="6" maxlength="1000" placeholder="Give us a short description of your film" required></textarea>
+                    <small>Maximum 1,000 characters.</small>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="language">Primary Language</label>
+                        <input type="text" id="language" name="language" placeholder="Example: English" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="subtitiles">Subtitle language</label>
+                        <input type="text" id="subtitles" name="subtitles" placeholder="Example: English or None">
+
+                    </div>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="completion-year">Year Completed</label>
+                        <input type="number" id="completion-year" name="completionYear" min="1900" max="2100" placeholder="2026" required>
+                    </div>
+                    <div class="submission-form-row">
+                        <div class="form-field">
+                            <label for="consent-rating">Proposed rating</label>
+                            <select id="content-rating" name="contentRating">
+                                <option value="">Select a rating</option>
+                                <option value="G">G</option>
+                                <option value="PG">PG</option>
+                                <option value="PG13">PG13</option>
+                                <option value="NC16">NC16</option>
+                                <option value="M18">M18</option>
+                                <option value="R21">R21</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- credits -->
+            <fieldset class="submission-section">
+                <legend>
+                    <span>02</span>
+                    Credits
+                </legend>
+                <div class="form-field">
+                    <label>Director*</label>
+                    <input type="text" id="director" name="director" placeholder="Enter the director's name" required>
+                </div>
+                <div class="form-field">
+                    <label for="cast">Cast</label>
+                    <textarea id="cast" name="cast" rows="3" placeholder="Enter names seperated by commas"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- media -->
+            <fieldset class="submission-section">
+                <legend>
+                    <span>03</span>
+                    Film & Media
+                </legend>
+                <div class="form-field">
+                    <label for="film-link">Private film link*</label>
+                    <input type="url" id="film-link" name="filmLink" placeholder="Youtube, Vimeo, Google Drive or OneDrive Link" required>
+                    <small>Make sure the review team has permission to access the link</small>
+                </div>
+                <div class="submisison-form-row">
+                    <div class="form-field">
+                        <label for="film-password">Video password</label>
+                        <input type="text" id="filmpassword" name="filmPassword" placeholder="Only if the video is protected">
+                    </div>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label>Trailer Link</label>
+                        <input type="url" id="trailer-link" name="trailerLink" placeholder="Optional">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="film-poster">Film Poster*</label>
+                    <div class="file-upload">
+                        <input type="file" id="film-poster" name="filmPoster" accept=".jpg,.jpeg,.png" required >
+                        <p>Upload your film poster</p>
+                        <small>Accepted formats: JPG or PNG</small>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- submitter details -->
+        </form>
+
+    </main>
+
+</html>
