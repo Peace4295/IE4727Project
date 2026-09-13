@@ -7,56 +7,65 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
+
+
 <body>
-
-    <header>
-       <a href="index.html" class="login">
-        <img src="images/logo-2.png">
-    </a>
-    </header>
-
-
     <main class="login-page">
+    <div class="login-overlay"></div>
         <section class="login-card">
 
-            <!-- Small page label -->
-            <p class="login-eyebrow">
-                NTU Films
-            </p>
+        <a href="index.html" class="login-logo">
+            <img src="images/logo/logo-dark.png" alt="Nanyang Film House" >
+        </a>
 
-            <h1>Welcome back</h1>
+        <h1>Welcome Back</h1>
 
-            <p class="login-description">
-                Sign in with your NTU Microsoft account to book
-                tickets, view your bookings and submit films.
-            </p>
+        <!-- <p class="login-description">
+            Sign in with your NTU account to book tickets,
+            view your bookings and submit student films.
+        </p> -->
 
-            
-            <button
-                type="button"
-                class="microsoft-login-btn"
-                id="microsoft-login"
-            >
-                <span class="microsoft-icon" aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
+        <form class="login-form">
+            <div class="login-field">
+                <label for="login-email">
+                    NTU Email
+                </label>
+                <input type="email" id="login-email" name="email" placeholder="username@e.ntu.edu.sg" autocomplete="username" required >
+            </div>
+            <div class="login-field">
+                <label for="login-password">
+                    Password
+                </label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="login-password" name="password" placeholder="Enter your password" autocomplete="current-password" minlength="8" required>
+                    <button type="button" class="password-toggle" id="password-toggle" aria-label="Show password">
+                            Show
+                    </button>
+                </div>
+                
+            </div>
+                <div class="login-options">
+                    <!-- <label class="remember-option">
+                        <input type="checkbox" id="remember-me">
+                        <span>Remember me</span>
+                    </label> -->
+                    <a href="#" class="forget-pw-link">Forget Password?</a>
+                </div>
 
-                Continue with Microsoft
+            <p class="login-error" id="login-error" hidden></p>
+            <button type="submit" class="btn btn-primary login-submit-btn">
+                Sign In
             </button>
+        </form>
 
-            <p class="login-help">
-                Use your registered NTU Outlook account.
-            </p>
+        <p class="login-help">
+            Use your registered NTU Outlook account.
+        </p>
 
-            <a href="moviecatalog.html" class="login-back-link">
-                Continue browsing without signing in
-            </a>
+        
 
-        </section>
-    </main>
+    </section>
+</main>
 
     <script src="js/login.js"></script>
 </body>
