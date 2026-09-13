@@ -237,9 +237,33 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .confirmation-actions {display:flex; justify-content: center; gap:12px; margin-top:28px}
 
 /* ========================= SUBMIT A FILM ========================= */
+.submission-page{max-width: 920px; padding-top: 64px;padding-bottom: 80px;}
+.submission-eyebrow{margin-bottom: 10px;color: var(--primary);font-size:0.78rem; font-weight:600;letter-spacing: 0.14em;}
+.submission-eyebrow h1 {color: var(--text-primary);margin-top:8px;margin-bottom: 12px; font-family: "Instrument Serif", serif; font-size: clamp(3.5rem,8vw,5.5rem);font-weight:400; line-height:1;}
+.submission-eyebrow-text {color:var(--text-primary); margin-bottom: 8px;}
+.submission-header >p:last-child{ color: var(--text-secondary);line-height:1.7;}
+.submission-section {margin-bottom:28px; padding:30px; background-color: var(--surface);border:1px solid var(--border);border-radius:10px;}
+.submission-section legend {display:flex; align-items: center; gap:12px; padding: 0 10px;color:var(--text-primary);font-size:1.15rem; font-weight:600;}
+.submission-section span {display:inline-flex;align-items:center; justify-content:center;width:30px; height:30px; background-color: var(--primary);color: var(--abyssal-blue);border-radius: 50%;font-size: 0.92rem;}
+.submission-form-row {display:grid; grid-template-columns: repeat(2,minmax(0,1fr));gap:20px;}
+.fllm-submission-form .form-field {display:flex; flex-direction: column; gap:8px; margin-bottom:22px}
+.film-submission-form .form-field:last-child {margin-bottom:0}
+.film-submission-form .form-field label {color:var(--text-primary); font-size:0.86rem; font-weight:600;}
+.film-submission-form input, .film-submission-form select, .film-submission-form textarea {width:100%; padding:12px 14px; background-color:var(--surface-muted);color: var(--text-primary);border: 1px solid var(--border);border-radius:6px;font-family:inherit;font-size:0.95rem} 
+.film-submission-form input, .film-submission-form select {min-height:46px}
+.film-submission-form textarea {resize: vertical;line-height: 1.6;}
+.film-submission-form input::placeholder, .film-submission-form textarea::placeholder { color: var(--text-secondary); opacity: 0.65; }
+.film-submission-form option { background-color: var(--surface-muted); color: var(--text-primary); }
+.film-submission-form input:focus, .film-submission-form select:focus, .film-submission-form textarea:focus { border-color: var(--primary); outline: 3px solid rgba(255, 177, 98, 0.18); }
+.film-submission-form small { color: var(--text-secondary); font-size: 0.76rem; line-height: 1.5; }
+.file-upload { padding: 24px; background-color: var(--surface-muted); border: 1px dashed var(--border); border-radius: 8px; text-align: center; }
+.file-upload input { margin-bottom: 14px; padding: 8px; }
+.file-upload p { margin-bottom: 4px; color: var(--text-primary); font-weight: 600; }
 
-
-
+.declaration-section { display: flex; flex-direction: column; gap: 18px; border:none;}
+.checkbox-field { display: flex; align-items: flex-start; gap: 12px; color: var(--text-secondary); line-height: 1.6; cursor: pointer; }
+.film-submission-form .checkbox-field input { flex-shrink: 0; width: 18px; min-height: 18px; margin-top: 3px; accent-color: var(--primary); }
+.submission-actions { display: flex; justify-content: flex-end; gap: 12px; }
 
 
 /* ========================= LOGIN ========================= */
