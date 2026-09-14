@@ -302,11 +302,11 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .profile-avatar {display:flex; align-items: center;justify-content:center; width:82px;height:82px;flex-shrink: 0; background-color: var(--primary);color:var(--abyssal-blue); border-radius:50%; font-size:1.35rem;font-weight:600}
 .profile-information{flex:1}
 .account-eyebrow{margin-bottom:5px; color:var(--primary); font-size:0.72rem;font-weight:600;letter-spacing:0.12em}
-.profile-information h1 {margin: bottom 5px;color: var(--text-primary);font-family: "Instrument Serif",serif;font-size: clamp(2.2rem,5vw, 3.4rem);font-weight: 400;line-height:1;}
+.profile-information h1 {margin-bottom: 5px;color: var(--text-primary);font-family: "Instrument Serif",serif;font-size: clamp(2.2rem,5vw, 3.4rem);font-weight: 400;line-height:1;}
 .profile-information > p:last-child {color:var(--text-secondary)}
 
-.account-statastics{display:grid; grid-template-columns: repeat(3.1fr);margin-bottom:54px;padding:24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid(--border);}
-.account-stats {padding:4px 20px; text-align:center}
+.account-statistics {display:grid; grid-template-columns: repeat(3,1fr);margin-bottom:54px; padding:24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);}
+.account-stats { padding:4px 20px; text-align:center}
 .account-stats + .account-stats {border-left: 1px solid var(--border);} /*add divider before 2nd and 3rd column*/
 .account-stats p {margin-bottom:8px; color:var(--text-secondary);font-size:0.82rem; font-weight:500;text-transform:uppercase;letter-spacing:0.06em}
 .account-stats strong {color: var(--primary);font-family:"Istrument Serif",serif; font-size:2.2rem; font-weight:400;}

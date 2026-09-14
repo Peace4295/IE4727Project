@@ -27,7 +27,7 @@
             <div class="profile-avatar" id="profile-avatar">PC</div>
             <div class="profile-information">
                 <p class="account-eyebrow">MY ACCOUNT</p>
-                <h1 class="profile-name">Priscilla Chong</h1>
+                <h1 id="profile-name">Priscilla Chong</h1>
                 <p id="profile-email">pris0038@e.ntu.edu.sg</p>
             </div>
             <button type="button" class="btn btn-secondary" id="edit-profile-button">Edit Profile</button>
@@ -35,8 +35,18 @@
          <!-- account -->
          <section class="account-statistics" aria-label="Account overview">
             <div class="account-stats">
-                <p>Films</p>
+                <p>Upcoming Bookings</p>
+                <strong id="upcoming-booking-count">0</strong>
+            </div>
 
+            <div class="account-stats">
+                <p>Films Submitted</p>
+                <strong id="film-submission-count">0</strong>
+            </div>
+
+            <div class="account-stats">
+                <p>Pending Review</p>
+                <strong id="pending-review-count">0</strong>
             </div>
             
          </section>
@@ -58,10 +68,11 @@
                 <button type="button" class="booking-tab " id="cancelled-tab" data-status="cancelled" role="tab" aria-selected="false">
                     Cancelled
                 </button>
+                </div>
                 <div class="list" id="account-booking-list" aria-live="polite"></div>
-            </div>
+            
           </section>
-          <div class="account-lower-layer">
+          <div class="account-lower-layout">
             <section class="account-selection">
                 <div class="account-section-heading">
                     <div>
@@ -81,14 +92,14 @@
           </div>
     </main>
     <!-- cancellation modal -->
-     <dialog class="account-modal">
+     <dialog class="account-modal" id="cancel-booking-modal">
         <div class="account-modal-content">
             <p class="account-modal-label">CANCEL BOOKING</p>
             <h2>Are you sure?</h2>
             <p class="account-modal-message">This booking will be moved to your cancelled bookings.<br>This action cannot be undone</p>
             <div class="cancel-booking-summary">
                 <strong id="cancel-movie-title"></strong>
-                <span class="cancel-session-details"></span>
+                <span id="cancel-session-details"></span>
             </div>
             <div class="account-modal-actions">
                 <button type="button" class="btn btn-secondary" id="keep-booking-button">Keep Booking</button>
