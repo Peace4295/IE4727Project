@@ -26,7 +26,7 @@ const accountBookings = [
     {
         id: 1,
         movieTitle: "Requiem",
-        poster: "images/posters/requiem.jpg",
+        poster: "images/film/requiem.png",
         location: "North Spine Cinema",
         date: "18 September 2026",
         time: "9:00 PM",
@@ -77,27 +77,17 @@ const filmSubmissions = [
         submittedDate: "13 September 2026",
         reference: "NFH-F1042",
         status: "Pending Review"
+    },
+     {
+        id: 2,
+        title: "A Walk Through NTU",
+        submittedDate: "13 September 2026",
+        reference: "NFH-F1042",
+        status: "Pending Review"
     }
 ];
 
-/*
-    let is used because new activity can be added
-    after a booking is cancelled.
-*/
-let accountActivities = [
-    {
-        description: 'Submitted "A Walk Through NTU"',
-        date: "13 September 2026"
-    },
-    {
-        description: 'Booked "Requiem"',
-        date: "12 September 2026"
-    },
-    {
-        description: 'Cancelled "Blue Hour"',
-        date: "3 September 2026"
-    }
-];
+
 
 /* The page initially displays upcoming bookings */
 let selectedBookingStatus = "upcoming";

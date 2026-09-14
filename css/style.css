@@ -338,6 +338,9 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .account-booking-actions .btn { min-height: 36px; padding: 0 15px; font-size: 0.78rem; }
 .booking-status.upcoming { color: var(--primary); }
 .empty-account-message { padding: 42px 20px; color: var(--text-secondary); border-bottom: 1px solid var(--border); text-align: center; }
+.cancel-booking-button { min-height: 36px; padding: 0 15px; background-color: transparent; color: var(--danger); border: 1px solid var(--danger); border-radius: 6px; font-family: inherit; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+.cancel-booking-button:hover { background-color: var(--danger); color: var(--text-primary); transform: translateY(-1px); }
+.cancel-booking-button:focus-visible { outline: 3px solid rgba(198, 90, 70, 0.25); outline-offset: 2px; }
 
 .account-lower-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; margin-top: 48px; }
 
@@ -347,7 +350,7 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .submission-status { display: inline-block; padding: 5px 10px; background-color: var(--surface-muted); color: var(--primary); border-radius: 20px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; }
 
 
-.sign-out-section { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; padding-top: 28px; border-top: 1px solid var(--border); }
+.sign-out-section { display: flex;align-items:center; justify-content: space-between;  gap: 24px; margin-top: 24px; padding-top: 28px; border-top: 1px solid var(--border); }
 .sign-out-section h2 { margin-bottom: 5px; color: var(--text-primary); font-size: 1rem; }
 .sign-out-section p { color: var(--text-secondary); font-size: 0.84rem; }
 .sign-out-button { min-height: 42px; padding: 0 22px; background-color: transparent; color: var(--danger); border: 1px solid var(--danger); border-radius: 6px; font-family: inherit; font-weight: 600; cursor: pointer; }
