@@ -6,6 +6,7 @@
         <title>Submit a Film - NTU Films</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
+    <body>
     <header>
         <nav class="navbar">
             <a href="index.html" class="logo">
@@ -106,7 +107,7 @@
                     Credits
                 </legend>
                 <div class="form-field">
-                    <label>Director*</label>
+                    <label for="director">Director*</label>
                     <input type="text" id="director" name="director" placeholder="Enter the director's name" required>
                 </div>
                 <div class="form-field">
@@ -126,7 +127,7 @@
                     <input type="url" id="film-link" name="filmLink" placeholder="Youtube, Vimeo, Google Drive or OneDrive Link" required>
                     <small>Make sure the review team has permission to access the link</small>
                 </div>
-                <div class="submisison-form-row">
+                <div class="submission-form-row">
                     <div class="form-field">
                         <label for="film-password">Video password</label>
                         <input type="text" id="filmpassword" name="filmPassword" placeholder="Only if the video is protected">
@@ -134,7 +135,7 @@
                 </div>
                 <div class="submission-form-row">
                     <div class="form-field">
-                        <label>Trailer Link</label>
+                        <label for="trailer-link">Trailer Link</label>
                         <input type="url" id="trailer-link" name="trailerLink" placeholder="Optional">
                     </div>
                 </div>
@@ -167,7 +168,7 @@
                 <div class="submission-form-row">
                     <div class="form-field">
                         <label for="school">School or faculty*</label>
-                        <input type="text" id="school" placeholder="Example: School or Art, Design and Media" required>
+                        <input type="text" id="school" name="school" placeholder="Example: School or Art, Design and Media" required>
                     </div>
                     <div class="form-field">
                         <label for="student-id">Matriculation number*</label>
@@ -202,5 +203,5 @@
         </form>
 
     </main>
-
+    </body>
 </html>

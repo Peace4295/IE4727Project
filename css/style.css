@@ -49,7 +49,7 @@ body { font-family: "Space Grotesk", sans-serif; background-color: var(--backgro
 .navbar { height: 64px; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; background-color: var(--surface); border-bottom: 1px solid #ddd; }
 .nav-links { display: flex; gap: 30px; }
 .navbar a { color: var(--text-primary); text-decoration: none; }
-.logo { direction: block; justify-content: left; height:auto}
+.logo { direction: block; height:auto}
 
 /* ========================= HOME ========================= */
 .hero { min-height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
@@ -59,14 +59,14 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 .hero-carousel { width: 100%; height: 360px; margin:24px auto; background-color: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between;padding: 0 28px;text-align:center; }
 .carousel-content h1 { font-size: 3.2rem;color: var(--primary);letter-spacing: 1px;}
 .carousel-content p { font-size: 1.2rem; color: var(--text-secondary); margin-top: 10px; }
-.craousel-btn { background: transparent; border: none; color: var(--text-primary);font-size: 2.8rem; cursor: pointer; padding:10px; font-family:monospace; transition: color 0.2s; }
+.carousel-btn { background: transparent; border: none; color: var(--text-primary);font-size: 2.8rem; cursor: pointer; padding:10px; font-family:monospace; transition: color 0.2s; }
 .carousel-btn:hover { color: var(--primary); }
 
 /* filter bar */
 .filter-bar{ width:100%; background-color:var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 24px; margin-bottom:36px }
 .filter-form-horizontal { display:flex; align-items: flex-end; gap: 20px;}
 .filter-field{flex:1; } /*displays the three input evenly*/
-.filter-field label{ display:block; font-size:0.82rem; color: var(--text-secondary); margin-bottom: 6px; font-weight:500px}
+.filter-field label{ display:block; font-size:0.82rem; color: var(--text-secondary); margin-bottom: 6px; font-weight:500}
 .filter-field select, .filter-field input { width:100%; height: 38px; padding: 0 12px; background-color: var(--surface-muted); border:1px solid var(--border); border-radius:4px; color: var(--text-primary); font-size:0.9rem; }
 .filter-btn-wrapper {display: flex; align-items:flex-end}
 .btn-search {height:38px; padding: 0 24px; background-color:var(--primary);color: var(--abyssal-blue); border:none; border-radius:4px; cursor:pointer;transition: opacity 0.2s;}
@@ -87,7 +87,7 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 
 /* campus announcement box */
 .announcement-card {background-color: var(--surface); border:1px solid var(--border); border-radius: 8px; padding: 12px 12px 24px 12px; min-height:520px; margin-top: calc(1.25rem + 14px);}
-.announcement-content p{font-size:0.95rem; line-height:1.6; color:var (--text-secondary);}
+.announcement-content p{font-size:0.95rem; line-height:1.6; color:var(--text-secondary);}
 .announcement-content strong {color:var(--primary)}
 
 /* ========================= MOVIE CATALOG========================= */
@@ -102,7 +102,7 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 .movie-poster-link img:hover {transform:scale(1.05);}
 
 .movie-meta{padding: 12px}
-.movie-title{font-size:0.95rem; font-weight: 600; color:var(--text-primary);white-space:hidden;text-overflow:ellipsis}
+.movie-title{font-size:0.95rem; font-weight: 600; color:var(--text-primary);white-space: nowrap;overflow:hidden;text-overflow:ellipsis}
 .movie-info{font-size:0.8rem; color:var(--text-secondary); margin:6px 0 12px; display:flex; align-items:center ;gap: 8px;}
 .badge {background-color:var(--surface-muted); border:1px; color:var(--primary);padding: 1px 6px; border-radius:3px;font-size:0.72rem;font-weight:bold}
 
@@ -114,7 +114,7 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 .btn-secondary {background-color:transparent; border-color: var(--primary) ;color: var(--primary);}
 .btn-secondary:hover {background-color:var(--primary); color: var(--abyssal-blue); transform:translateY(-1px);}
 .btn-block{width:100%}
-.nav-links a.active {color: var(--primary);border-bottom: 2px solid var(--primary); padding: bottom 4px;}
+.nav-links a.active {color: var(--primary);border-bottom: 2px solid var(--primary); padding-bottom: 4px;}
 .details-actions { display:flex; margin-top:28px}
 
 
@@ -139,11 +139,11 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 
 /* showtimes */
 .showtimes-section {width:100%; margin-top:34px; min-height:calc(100vh - 62px); padding: 40px 80px 0 80px ; background-color:var(--surface); border:1px solid var(--border);border-radius:10px; scroll-margin-top: 32px;}
-.showtiime-section[hidden] {display:none}
+.showtimes-section[hidden] {display:none}
 .show-section > h2 {margin-bottom: 28px; color:var(--text-primary); font-size: 3.2rem; font-weight:500;}
 .showtime-field label { display:block; margin-bottom:10px; color:var(--text-secondary);font-size:0.8rem; font-weight:600; letter-spacing:0.6em; text-transform:uppercase;}
 .showtime-field select{ width: 100%; height:44px; padding: 0 14px; background-color:var(--surface-muted);color:var(--text-primary); border: 1px solid var(--border); border-radius:6px; font: inherit; cursor: pointer;}
-.showtime-date-group {padding:24px; border-top:1 px solid var(--border);border-bottom: 1px solid var(--border)}
+.showtime-date-group {padding:24px; border-top:1px solid var(--border);border-bottom: 1px solid var(--border)}
 .showtime-date-group:first-child{padding-top:0; border-top:none;}
 .showtime-date-group:last-child{border-bottom:none;}
 .showtime-date-heading{display:flex; align-items:baseline; gap:8px; margin-bottom:16px;}
@@ -171,7 +171,7 @@ h1, .hero-title, .featured-title { font-family: "Instrument Serif", serif; }
 #booking-session-details{color:var(--text-secondary);font-size: 1rem;}
 
 .seat-selection, .payment-section {padding:36px; background-color: var(--surface); border:1px solid var(--border); border-radius: 10px;}
-.seat-selection h2, .payment-section h2{ margin-bottom:6px; color:(var(--text-primary)); font-family:"Instrument Serif",serif; font-size: 2rem; font-weight:400;}
+.seat-selection h2, .payment-section h2{ margin-bottom:6px; color:var(--text-primary); font-family:"Instrument Serif",serif; font-size: 2rem; font-weight:400;}
 .seat-selection > p, .payment-section > p {color:var(--text-secondary)}
 
 .cinema-screen {width: min(80%, 620px); margin:56px auto 44px;padding:10px; background:linear-gradient(to bottom, var(--palladian),var(--oatmeal));
@@ -221,8 +221,8 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .payment-actions { justify-content: space-between; }
 
 /* ========================= CONFIRMATION MODAL ========================= */
-.confirmation-modal {position:fixed; inset:0; margin:auto;width:min(80%, 520px); padding:0; background-color: var(--surface); color: var(--text-primary); border:1px solid var(--border); border-radius:12px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0,45);}
-.confirmation-modal::backdrop {background-color: rgba(10,17,25,0.78); backdrop-filter: blue(3px);}
+.confirmation-modal {position:fixed; inset:0; margin:auto;width:min(80%, 520px); padding:0; background-color: var(--surface); color: var(--text-primary); border:1px solid var(--border); border-radius:12px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);}
+.confirmation-modal::backdrop {background-color: rgba(10,17,25,0.78); backdrop-filter: blur(3px);}
 .confirmation-content { padding: 40px; text-align: center;}
 .confirmation-icon {display: flex; align-items: center;justify-content: center;width:64px;height:64px; margin: 0 auto 20px; background-color: var(--primary); color: var(--abyssal-blue); border-radius: 50%;font-size: 2rem;font-weight: 700;}
 .confirmation-label {margin-bottom:8px; color:var(--primary); color:var(--primary);font-size:0.75rem;font-weight:600; letter-spacing: 0.1rem;text-transform: uppercase; text-align: center;}
@@ -231,7 +231,7 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 
 .confirmation-details{display:grid; gap:16px;padding:22px; background-color: var(--surface-muted); border: 1px solid var(--border); border-radius: 8px; text-align:left}
 .confirmation-details >div{display:flex; flex-direction:column; gap:4px}
-.confirmaiton-details span {color:var(--text-secondary); font-size: 0.72rem; letter-spacing: 0.06em;text-transform: uppercase;}
+.confirmaton-details span {color:var(--text-secondary); font-size: 0.72rem; letter-spacing: 0.06em;text-transform: uppercase;}
 .confirmation-details strong {color: var(--text-primary)}
 #confirmation-ref {color: var(--primary); letter-spacing:0.05em;}
 .confirmation-actions {display:flex; justify-content: center; gap:12px; margin-top:28px}
@@ -246,7 +246,7 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .submission-section legend {display:flex; align-items: center; gap:12px; padding: 0 10px;color:var(--text-primary);font-size:1.15rem; font-weight:600;}
 .submission-section span {display:inline-flex;align-items:center; justify-content:center;width:30px; height:30px; background-color: var(--primary);color: var(--abyssal-blue);border-radius: 50%;font-size: 0.92rem;}
 .submission-form-row {display:grid; grid-template-columns: repeat(2,minmax(0,1fr));gap:20px;}
-.fllm-submission-form .form-field {display:flex; flex-direction: column; gap:8px; margin-bottom:22px}
+.film-submission-form .form-field {display:flex; flex-direction: column; gap:8px; margin-bottom:22px}
 .film-submission-form .form-field:last-child {margin-bottom:0}
 .film-submission-form .form-field label {color:var(--text-primary); font-size:0.86rem; font-weight:600;}
 .film-submission-form input, .film-submission-form select, .film-submission-form textarea {width:100%; padding:12px 14px; background-color:var(--surface-muted);color: var(--text-primary);border: 1px solid var(--border);border-radius:6px;font-family:inherit;font-size:0.95rem} 

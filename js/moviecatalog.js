@@ -13,7 +13,7 @@ function createMovieCard(movie) {
             </button>
         `
         : `
-            <a href="#" class="btn btn-primary btn-block">
+            <a href="${detailsUrl}#showtimes" class="btn btn-primary btn-block">
                 Buy Tickets
             </a>
         `;

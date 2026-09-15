@@ -10,6 +10,18 @@ const allBookingMovies = [
 const bookingUrlParameters = new URLSearchParams(
     window.location.search
 );
+/*
+    Prevents the booking page from continuing
+    when required session information is missing.
+*/
+if (
+    !bookingMovieId ||
+    !bookingLocation ||
+    !bookingDate ||
+    !bookingTime
+) {
+    window.location.href = "moviecatalog.html";
+}
 
 const bookingMovieId = Number(
     bookingUrlParameters.get("movieId")
@@ -332,19 +344,6 @@ paymentForm.addEventListener("submit", function (event) {
     /* Calculates the final amount */
     const finalTotal =
         selectedSeats.length * seatPrice;
-
-    /* Inserts the completed booking into the modal */
-    // confirmationMovie.textContent =
-    //     bookingMovie.title;
-
-    // confirmationSession.textContent =
-    //     displayedSession;
-
-    // confirmationSeats.textContent =
-    //     selectedSeats.join(", ");
-
-    // confirmationTotal.textContent =
-    //     finalTotal.toFixed(2);
 
     confirmationReference.textContent =
         createBookingReference();
