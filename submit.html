@@ -201,7 +201,24 @@
                 </button>
             </div>
         </form>
-
     </main>
-    </body>
+    <div class="modal-overlay" id="submission-sucess-modal" role="dialog" aria-modal="true" hidden>
+        <div class="submission-modal">
+            <div class="sucess-icon" aria-hidden="true"></div>
+            <p class="modal-label">FILM SUBMITTED</p>
+            <h2 id="submission-sucess-title">Submission Received!</h2>
+            <p class="modal-message">Your film has been submitted for review.</p>
+
+            <div class="submission-ref">
+                <span>Submission reference</span>
+                <strong id="submission-ref">NFH-0000</strong>
+            </div>
+            <div class="modal-action">
+                <a href="account.html#submissions" class="btn btn-primary">View My Submission</a>
+                <a href="moviecatalog.html" class="btn btn-seconary">Back to Movies</a>
+            </div>
+        </div>
+    </div>
+    <script src="submit.js"></script>
+ </body>
 </html>

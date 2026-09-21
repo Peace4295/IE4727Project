@@ -265,7 +265,17 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .film-submission-form .checkbox-field input { flex-shrink: 0; width: 18px; min-height: 18px; margin-top: 3px; accent-color: var(--primary); }
 .submission-actions { display: flex; justify-content: flex-end; gap: 12px; }
 
-
+.modal-overlay{position:fixed; inset:0; z-index: 1000; display:flex; justify-content:center; align-items:center; padding:24px;background-color:rgba(0,0,0,0.7) ;}
+/* .modal-overlay[hidden]{display:none} */
+.submission-modal{width:min(100%,520px); padding:40px; text-align:center; background-color: var(--surface);border: 1px solid var(--border); border-radius: 14px;box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);}
+.sucess-icon{display:grid; place-items:center; width: 72px; height:72px; margin: 0 auto 20px; color: var(--background);background-color: var(--primary);border-radius: 50%; font-size:2rem; font-weight: 700;}
+.modal-label{margin-bottom: 10px; color: var(--primary); font-size: 0.8rem; font-weight:700; letter-spacing: 0.16em;}
+.submission-modal h2{margin-bottom: 10px; color:var(--text-primary);}
+.submission-ref{display:flex; justify-content: space-between; gap:16px; margin-bottom:38px; padding:16px 18px; background-color: var(--surface-muted); border:1px solid var(--border);border-radius: 8px;text-align:left;}
+.submission-ref span {color: var(--text-secondary);}
+.submission-ref strong {color: var(--primary);}
+.modal-action{display:grid; grid-template-columns: 1fr 1fr;gap:12px;}
+.modal-message{margin: 0 auto 24px; color: var(--text-secondary); line-height: 1.6;}
 /* ========================= LOGIN ========================= */
 .login-page {position:relative; isolation:isolate; min-height:100vh; padding: 40px 20px; display:flex; align-items:center; justify-content: center;}
 .login-overlay {position:absolute; inset:0; z-index:-1; background-color:rgba(27,38,50, 0.72)}
