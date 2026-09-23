@@ -39,7 +39,7 @@
                 </legend>
                 <div class="form-field">
                     <label for="film-title">Film Title*</label>
-                    <input input="text" id="film-title" name="filmTitle" placeholder="Enter the title of your film" maxlength="100" required>
+                    <input type="text" id="film-title" name="filmTitle" placeholder="Enter the title of your film" maxlength="100" required>
 
                 </div>
                 <div class="submission-form-row">
@@ -86,7 +86,7 @@
                     </div>
                     <div class="submission-form-row">
                         <div class="form-field">
-                            <label for="consent-rating">Proposed rating</label>
+                            <label for="content-rating">Proposed rating</label>
                             <select id="content-rating" name="contentRating">
                                 <option value="">Select a rating</option>
                                 <option value="G">G</option>
@@ -202,11 +202,13 @@
             </div>
         </form>
     </main>
-    <div class="modal-overlay" id="submission-sucess-modal" role="dialog" aria-modal="true" hidden>
+
+    <!-- hidden modal -->
+    <div class="modal-overlay" id="submission-success-modal" role="dialog" aria-modal="true" hidden>
         <div class="submission-modal">
-            <div class="sucess-icon" aria-hidden="true"></div>
+            <div class="success-icon" aria-hidden="true"></div>
             <p class="modal-label">FILM SUBMITTED</p>
-            <h2 id="submission-sucess-title">Submission Received!</h2>
+            <h2 id="submission-success-title">Submission Received!</h2>
             <p class="modal-message">Your film has been submitted for review.</p>
 
             <div class="submission-ref">
@@ -215,10 +217,10 @@
             </div>
             <div class="modal-action">
                 <a href="account.html#submissions" class="btn btn-primary">View My Submission</a>
-                <a href="moviecatalog.html" class="btn btn-seconary">Back to Movies</a>
+                <a href="moviecatalog.html" class="btn btn-secondary">Back to Movies</a>
             </div>
         </div>
     </div>
-    <script src="submit.js"></script>
+    <script src="java/submit.js"></script>
  </body>
 </html>
