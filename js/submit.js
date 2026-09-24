@@ -1,6 +1,6 @@
 //find the form, modal and ref number element.
 const submissionForm = document.getElementById("film-submission-form");
-const successModal = document.getElementById("submission-sucess-modal");
+const successModal = document.getElementById("submission-success-modal");
 const referenceText = document.getElementById("submission-ref");
 
 //check that javascript successfully found all 3 html elemeents
