@@ -101,7 +101,7 @@ $posterExtension = "";
 if (
     $posterFile === null || $posterFile["error"] === UPLOAD_ERR_NO_FILE
 ){
-    $errors[] = "A film poster if required.";
+    $errors[] = "A film poster is required.";
 }elseif ($posterFile["error"] !== UPLOAD_ERR_OK) {
     $errors[] = "The film poster could not be uploaded.";
 } else {
@@ -236,15 +236,15 @@ $statement->bind_param(
 );
 
 //execute the sql statement
-if ($statement->execute()) {
-    echo "<h1>Film Submission Sucessful</h1>";
-    echo "<p>Your submission has been saved.</p>";
+if($statement->execute()){
+    $statement->close();
+    $db->close();
 
-    echo "<p>Your reference number is: <strong>" . htmlspecialchars($referenceNumber) ."</strong></p>";
-   
-    echo "<p>Your submission status is Pending Review.</p>";
-    echo '<p><a href="submit.html">Return to submit a Film</a></p>';}
-    else{
+    header(
+        "Location: submit.html?success=1&reference=" .urlencode($referenceNumber)
+    );
+    exit;
+} else {
         echo "<h1>Submission Failed</h1>";
         echo "<p>Your submission could not be saved.</p>";
 
@@ -256,7 +256,32 @@ if ($statement->execute()) {
         }
 
         echo '<p><a href="submit.html"> Return to the form</a></p>';
-    }
+    } 
+
+
+
+
+// if ($statement->execute()) {
+    // echo "<h1>Film Submission Sucessful</h1>";
+    // echo "<p>Your submission has been saved.</p>";
+
+    // echo "<p>Your reference number is: <strong>" . htmlspecialchars($referenceNumber) ."</strong></p>";
+   
+    // echo "<p>Your submission status is Pending Review.</p>";
+    // echo '<p><a href="submit.html">Return to submit a Film</a></p>';}
+    // else{
+    //     echo "<h1>Submission Failed</h1>";
+    //     echo "<p>Your submission could not be saved.</p>";
+
+    //     echo "<p>Error: ". htmlspecialchars($statement->error) . "</p>";
+
+    //     //remove psoter because database insert failed.
+    //     if(file_exists($posterDestination)) {
+    //         unlink($posterDestination);
+    //     }
+
+    //     echo '<p><a href="submit.html"> Return to the form</a></p>';
+    // }
     
 //close the statemnet and databsae connection
 $statement->close();
