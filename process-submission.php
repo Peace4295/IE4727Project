@@ -94,6 +94,44 @@ if($studentId === ""){
     $errors[] = "Student ID is required.";
 }
 
+//poster validation
+$posterFile = $_FILES["filmPoster"] ?? null;
+$posterExtension = "";
+
+if (
+    $posterFile === null || $posterFile["error"] === UPLOAD_ERR_NO_FILE
+){
+    $errors[] = "A film poster if required.";
+}elseif ($posterFile["error"] !== UPLOAD_ERR_OK) {
+    $errors[] = "The film poster could not be uploaded.";
+} else {
+    $maximumPosterSize = 5 * 1024 * 1024; //5MB
+
+    if ($posterFile["size"]> $maximumPosterSize) {
+        $errors[] = "The film poster must not exceed 5 MB.";
+    }
+
+    $fileInformation = new finfo(FILEINFO_MIME_TYPE);
+
+    $posterMimeType = $fileInformation->file(
+        $posterFile["tmp_name"]
+    );
+
+    $permittedPosterTypes = array(
+        "image/jpeg" => "jpg",
+        "image/png" => "png",
+        "image/webp" => "webp"
+    );
+
+    if (!isset($permittedPosterTypes[$posterMimeType])) {
+        $errors[] = "The poster must be a JPG, PNG, or WebP image.";
+    } else {
+        $posterExtension = $permittedPosterTypes[$posterMimeType];
+    }
+}
+
+
+
 //stop if validation failed
 if (count($errors)> 0){
     echo "<h1>Submission could not be processed</h1>";
@@ -103,7 +141,7 @@ if (count($errors)> 0){
         echo "<li>" . htmlspecialchars($error). "</li>";
     }
     echo "</ul>";
-    echo '<p><a href="submit.html">Return to the form</a><p>';
+    echo '<p><a href="submit.html">Return to the form</a></p>';
 
     $db->close();
     exit;
@@ -114,6 +152,24 @@ $referenceNumber = "NFH-"
 . date("Ymd")
 . "-"
 . rand(1000,9999);
+
+//save poster into uploads/posters
+$posterFileName = $referenceNumber . "." . $posterExtension;
+//phy location used by PHP to save the file.
+$posterDestination = __DIR__ . "/uploads/posters/" . $posterFileName;
+//relative path stored inside mySQL
+$posterPath = "uploads/posters/" .$posterFileName;
+
+if(
+    !move_uploaded_file( $posterFile["tmp_name"], $posterDestination) //posterdestination tells php whr is the physical folder
+ ){
+    echo "<h1>Submission Failed</h1>";
+    echo "<p>The poster could not be saved.</p>";
+    echo '<p><a href="submit.html">Return to the form</a></p>';
+
+    $db->close();
+    exit;
+ }
 
 //create the sql insert statement
 
@@ -133,12 +189,13 @@ $query = "
         film_link,
         film_password,
         trailer_link,
+        poster_path,
         submitter_name,
         submitter_email,
         school,
         student_id
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
                 ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
         ";
@@ -156,7 +213,7 @@ if(!$statement) {
 
 //bind the php values to the placeholders
 $statement->bind_param(
-    "sssisssissssssssss",
+    "sssisssisssssssssss",
     $referenceNumber,
     $filmTitle,
     $genre,
@@ -171,6 +228,7 @@ $statement->bind_param(
     $filmLink,
     $filmPassword,
     $trailerLink,
+    $posterPath,
     $submitterName,
     $submitterEmail,
     $school,
@@ -181,14 +239,21 @@ $statement->bind_param(
 if ($statement->execute()) {
     echo "<h1>Film Submission Sucessful</h1>";
     echo "<p>Your submission has been saved.</p>";
+
     echo "<p>Your reference number is: <strong>" . htmlspecialchars($referenceNumber) ."</strong></p>";
+   
     echo "<p>Your submission status is Pending Review.</p>";
     echo '<p><a href="submit.html">Return to submit a Film</a></p>';}
     else{
         echo "<h1>Submission Failed</h1>";
-        echo "<p> Your submission could not be saved.</p>";
+        echo "<p>Your submission could not be saved.</p>";
 
-        //echo "<p>Error: ". htmlspecialchars($statement->error) . "</p>";
+        echo "<p>Error: ". htmlspecialchars($statement->error) . "</p>";
+
+        //remove psoter because database insert failed.
+        if(file_exists($posterDestination)) {
+            unlink($posterDestination);
+        }
 
         echo '<p><a href="submit.html"> Return to the form</a></p>';
     }
