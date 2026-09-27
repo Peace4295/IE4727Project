@@ -104,7 +104,7 @@ $query = "
 $statement = $db->prepare($query);
 
 //stop if my sql could not prepare the statement
-if($statment) {
+if(!$seatStatement) {
    echo "<h1>Booking Failed</h1>";
    echo "<p>The booking statement could not be prepared.</p>";
 
@@ -136,14 +136,26 @@ if ($statement->execute()) {
     */
     $bookingId = $db->insert_id;
 
-    echo "<h1>Booking Saved</h1>";
-    echo "<p><strong>Booking ID:</strong> " . htmlspecialchars($bookingId) . "</p>";
-    echo "<p><strong>Reference:</strong> " . htmlspecialchars($referenceNumber) . "</p>";
-    echo "<p><strong>Movie:</strong> " . htmlspecialchars($movieTitle) . "</p>";
-    echo "<p><strong>Seats:</strong> " . htmlspecialchars( implode(", ", $selectedSeats) ) . "</p>";
-    echo "<p><strong>Total:</strong> $" . htmlspecialchars( number_format($totalAmount, 2) ) . "</p>";
-} else { echo "<h1>Booking Failed</h1>"; echo "<p>" . htmlspecialchars($statement->error) . "</p>"; }
+    $seatQuery = " INSERT INTO booking_seats (booking_id, seat_number) VALUES (?,?)";
+    $seatStatement = $db->prepare($seatQuery);
 
+    if(!$seatStatement) {
+      echo "<h1>Booking Failed</h1>";
+      echo "<p>The seat statement could not be prepared.</p>";
+
+      $statement->close();
+      $db->close();
+      exit;
+    }
+
+    foreach ($selectedSeats as $seatNumber) {
+      $seatStatement ->bind_param(
+         "is",
+         $bookingId, $seatNumber
+      );
+      $seatStatement->execute();
+    }
 
 // Close the prepared statement
 $statement->close();
+};
