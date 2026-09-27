@@ -69,23 +69,7 @@ const accountBookings = [
     }
 ];
 
-/* Temporary film-submission records */
-const filmSubmissions = [
-    {
-        id: 1,
-        title: "A Walk Through NTU",
-        submittedDate: "13 September 2026",
-        reference: "NFH-F1042",
-        status: "Pending Review"
-    },
-     {
-        id: 2,
-        title: "A Walk Through NTU",
-        submittedDate: "13 September 2026",
-        reference: "NFH-F1042",
-        status: "Pending Review"
-    }
-];
+
 
 
 
@@ -176,19 +160,7 @@ function renderAccountStatistics() {
         return booking.status === "upcoming";
     });
 
-    /*
-        filter() also identifies submissions that are
-        currently pending review.
-    */
-    const pendingSubmissions = filmSubmissions.filter(
-        function (submission) {
-            return submission.status === "Pending Review";
-        }
-    );
-
     upcomingBookingCount.textContent = upcomingBookings.length;
-    filmSubmissionCount.textContent = filmSubmissions.length;
-    pendingReviewCount.textContent = pendingSubmissions.length;
 }
 
 
@@ -325,42 +297,7 @@ function renderBookings() {
 }
 
 
-/* ========================= RENDER FILM SUBMISSIONS ========================= */
 
-function renderFilmSubmissions() {
-    filmSubmissionList.innerHTML = "";
-
-    if (filmSubmissions.length === 0) {
-        filmSubmissionList.innerHTML = `
-            <p class="empty-account-message">
-                You have not submitted any films.
-            </p>
-        `;
-
-        return;
-    }
-
-    filmSubmissions.forEach(function (submission) {
-        const submissionElement = document.createElement("article");
-
-        submissionElement.className = "account-film-submission";
-
-        submissionElement.innerHTML = `
-            <h3>${submission.title}</h3>
-
-            <p>
-                Submitted ${submission.submittedDate} ·
-                ${submission.reference}
-            </p>
-
-            <span class="submission-status">
-                ${submission.status}
-            </span>
-        `;
-
-        filmSubmissionList.appendChild(submissionElement);
-    });
-}
 
 
 /* ========================= RENDER RECENT ACTIVITY ========================= */
@@ -576,4 +513,4 @@ renderAccountStatistics();
 renderBookingTabs();
 renderBookings();
 renderFilmSubmissions();
-renderActivities();
+// renderActivities();

@@ -1,3 +1,41 @@
+<?php
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
+
+require_once __DIR__. "/includes/database.php";
+
+$query = "
+SELECT
+film_title,
+reference_number,
+status,
+submitted_at
+FROM film_submissions
+ORDER BY submitted_at DESC";
+
+$result=$db->query($query);
+
+if(!$result) {
+    die("The film submissions could not be loaded.");
+}
+
+$submissionCount = $result->num_rows;
+
+//store the retrieved database rows in a php array
+$filmSubmissions = array();
+//count subms that are still pending review
+$pendingReviewCount = 0;
+
+while ($submission = $result->fetch_assoc()){
+    $filmSubmissions[] = $submission;
+
+    if ($submission["status"]==="pending review"){
+        $pendingReviewCount++;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +55,7 @@
                 <a href="moviecatalog.html">Movies</a>
                 <a href="submit.html">Submit a Film</a>
             </div>
-            <a href="account.html" class="account-link active">My Account</a>
+            <a href="account.php" class="account-link active">My Account</a>
         </nav>
     </header>
 
@@ -41,12 +79,12 @@
 
             <div class="account-stats">
                 <p>Films Submitted</p>
-                <strong id="film-submission-count">0</strong>
+                <strong id="film-submission-count"><?php echo $submissionCount;?></strong>
             </div>
 
             <div class="account-stats">
                 <p>Pending Review</p>
-                <strong id="pending-review-count">0</strong>
+                <strong id="pending-review-count"><?php echo $pendingReviewCount?></strong>
             </div>
             
          </section>
@@ -73,14 +111,35 @@
             
           </section>
           <div class="account-lower-layout">
-            <section class="account-selection">
+            <section class="account-selection" id="submissions">
                 <div class="account-section-heading">
                     <div>
                         <h2>Film Submissions</h2>
                         <p>Track your submitted student films.</p>
                     </div>
                 </div>
-                <div class="film-submission-list" id="film-submission-list"></div>
+                <div class="film-submission-list" id="film-submission-list">
+                    <?php if (count($filmSubmissions) === 0): ?>
+                        <p class="empty-account-message">
+                            You have not submitted any films.</p>
+                    <?php else: ?>
+                        <?php foreach($filmSubmissions as $submission): ?>
+                        <article class="account-film-submission">
+                            <h3>
+                                <?php echo htmlspecialchars($submission["film_title"]);
+                                ?></h3>
+                                <p> Submitted
+                                    <?php echo date ("j F Y", strtotime($submission["submitted_at"]));
+                                    ?>
+                                    .
+                                    <?php echo htmlspecialchars($submission["reference_number"]); ?>
+                        </p>
+                        <span class="submission-status">
+                            <?php echo htmlspecialchars($submission["status"]); ?> </span>
+                        </article>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                </div>
             </section>
             
           </div>
