@@ -33,7 +33,7 @@
 document.addEventListener("DOMContentLoaded", function(){
     const parameters = new URLSearchParams(window.location.search);
 
-    const submissionSucseeded = parameters.get("success");
+    const submissionSucceeded = parameters.get("success");
     const referenceNumber = parameters.get("reference");
 
     if(submissionSucceeded === "1") {
