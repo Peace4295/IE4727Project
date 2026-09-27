@@ -17,7 +17,7 @@
                 <a href="moviecatalog.html" >Movies</a>
                 <a href="submit.html">Submit a Film</a>
             </div>
-            <a href="account.html">My Account</a>
+            <a href="account.php">My Account</a>
         </nav>
     </header>
     
@@ -127,8 +127,18 @@
                 
              </div>
              <!-- prototype payment form -->
-             <form id="payment-form">
+             <form id="payment-form" action="process-booking.php" method="post">
+                <!-- Booking information filled by JavaScript before submission -->
+                    <input type="hidden" id="form-movie-id" name="movieId">
+                    <input type="hidden" id="form-movie-title" name="movieTitle">
+                    <input type="hidden" id="form-location" name="location">
+                    <input type="hidden" id="form-date" name="screeningDate">
+                    <input type="hidden" id="form-time" name="screeningTime">
+                    <input type="hidden" id="form-seats" name="selectedSeats">
+                    <input type="hidden" id="form-total" name="totalAmount">
                 <div class="form-field">
+                    <label for="booker-email">NTU Email</label>
+                    <input type="email" id="booker-email" name="bookerEmail" placeholder="username@e.ntu.edu.sg" required>
                     <label for="cardholder-name"> Name on card </label>
                     <input type="text" id="cardholder-name" required>
                 </div>
@@ -206,7 +216,7 @@
                 
             </div>
          <div class="confirmation-actions">
-             <a href="account.html" class="btn btn-primary">
+             <a href="account.php" class="btn btn-primary">
                  View My Bookings
              </a>
 

@@ -14,14 +14,7 @@ const bookingUrlParameters = new URLSearchParams(
     Prevents the booking page from continuing
     when required session information is missing.
 */
-if (
-    !bookingMovieId ||
-    !bookingLocation ||
-    !bookingDate ||
-    !bookingTime
-) {
-    window.location.href = "moviecatalog.html";
-}
+
 
 const bookingMovieId = Number(
     bookingUrlParameters.get("movieId")
@@ -35,6 +28,15 @@ const bookingDate =
 
 const bookingTime =
     bookingUrlParameters.get("time");
+
+if (
+    !bookingMovieId ||
+    !bookingLocation ||
+    !bookingDate ||
+    !bookingTime
+) {
+    window.location.href = "moviecatalog.html";
+}
 
 //which movie ID matches the URL movieID
 const bookingMovie = allBookingMovies.find(function (movie) {
@@ -256,6 +258,17 @@ const backToSeatsButton =
 const paymentForm =
     document.getElementById("payment-form");
 
+
+const formMovieId = document.getElementById("form-movie-id");
+const formMovieTitle = document.getElementById("form-movie-title");
+const formLocation = document.getElementById("form-location");
+const formDate = document.getElementById("form-date");
+const formTime = document.getElementById("form-time");
+const formSeats = document.getElementById("form-seats");
+const formTotal = document.getElementById("form-total");
+
+
+
 //hide the seat selection section
 continuePaymentButton.addEventListener(
     "click",
@@ -325,32 +338,53 @@ const confirmationReference =
     Converting it to base 36 produces a shorter combination
     of numbers and letters.
 */
-function createBookingReference() {
-    const uniquePart = Date.now()
-        .toString(36)
-        .toUpperCase();
+// function createBookingReference() {
+//     const uniquePart = Date.now()
+//         .toString(36)
+//         .toUpperCase();
 
-    return `NTF-${uniquePart}`;
-}
+//     return `NTF-${uniquePart}`;
+// }
 
 /*
     Runs when the payment form passes HTML validation
     and the user clicks Pay Now.
 */
-paymentForm.addEventListener("submit", function (event) {
-    /* Prevents the form from refreshing the page */
-    event.preventDefault();
+// paymentForm.addEventListener("submit", function (event) {
+//     /* Prevents the form from refreshing the page */
+//     event.preventDefault();
 
-    /* Calculates the final amount */
-    const finalTotal =
-        selectedSeats.length * seatPrice;
+//     /* Calculates the final amount */
+//     const finalTotal =
+//         selectedSeats.length * seatPrice;
 
-    confirmationReference.textContent =
-        createBookingReference();
+//     confirmationReference.textContent =
+//         createBookingReference();
 
-    /*
-        Opens the dialog as a modal.
-        The rest of the page becomes temporarily inactive.
-    */
-    confirmationModal.showModal();
+//     /*
+//         Opens the dialog as a modal.
+//         The rest of the page becomes temporarily inactive.
+//     */
+//     confirmationModal.showModal();
+// });
+
+paymentForm.addEventListener("submit", function (event){
+    //prevent submission if no seat was selected
+    if (selectedSeats.length === 0) {
+        event.preventDefault();
+        alert ("Please select at least one seat.");
+        return;
+    }
+    const finalTotal = selectedSeats.length * seatPrice;
+
+    //copy the current booking info into hidden inputs
+    formMovieId.value = bookingMovieId;
+    formMovieTitle.value = bookingMovie.title;
+    formLocation.value = bookingLocation;
+    formDate.value = bookingDate;
+    formTime.value = bookingTime;
+
+    formSeats.value = selectedSeats.join(",");      //convert ("C4","C5" into "c4,c5")
+    formTotal.value = finalTotal.toFixed(2);
+
 });
