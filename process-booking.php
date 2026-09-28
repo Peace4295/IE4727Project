@@ -81,6 +81,64 @@ foreach ($selectedSeats as $seatNumber) {
     exit;
  }
 
+//check seat availability
+
+$seatCheckQuery = "SELECT booking_seats.booking_seat_id
+FROM booking_seats
+
+INNER JOIN bookings
+ON booking_seats.booking_id = bookings.booking_id 
+
+WHERE bookings.movie_id = ?
+AND bookings.cinema_location = ?
+AND bookings.screening_date = ?
+AND bookings.screening_time = ?
+AND booking_seats.seat_number = ?      #this condition checks the seat
+AND bookings.status = 'Confirmed'
+LIMIT 1";
+
+$seatCheckStatement = $db->prepare($seatCheckQuery);
+if (!$seatCheckStatement) {
+   echo "<h1>Booking failed</h1>";
+   echo "<p>The seat availability could nto be checked.</p>";
+   $db->close();
+   exit;
+}
+
+//rmb any unavail seats found
+$unavailableSeats = array();
+
+foreach ($selectedSeats as $seatNumber) {
+   $seatCheckStatement->bind_param(
+      "issss",
+      $movieId,
+      $location,
+      $screeningDate,
+      $screeningTime,
+      $seatNumber
+   );
+   $seatCheckStatement->execute();
+   //store_result() stores the SELECT result so that num_rows can be checked
+   $seatCheckStatement->store_result();
+   if ($seatCheckStatement->num_rows>0) {
+      $unavailableSeats[] = $seatNumber;
+   }
+   //clear the prev result before checking the next selected seat.
+   $seatCheckStatement->free_result();
+}
+$seatCheckStatement->close();
+
+if(count($unavailableSeats)>0){
+   echo "<h1>Seats No Longer Available</h1>";
+   echo "<p>The following seat or seats have already been booked:</p>";
+   echo "<p><strong>" . htmlspecialchars(implode(",", $unavailableSeats))."</strong></p>";
+   echo "<p>Please choose another seat</p>";
+   echo '<p><a href="moviecatalog.html">Return to movies</a></p>';
+   $db->close();
+   exit;
+}
+
+
 //this one is main booking
 
 $referenceNumber = "NTF-". date("Ymd"). "-" . random_int(1000,9999);
@@ -104,7 +162,7 @@ $query = "
 $statement = $db->prepare($query);
 
 //stop if my sql could not prepare the statement
-if(!$seatStatement) {
+if(!$statement) {
    echo "<h1>Booking Failed</h1>";
    echo "<p>The booking statement could not be prepared.</p>";
 
