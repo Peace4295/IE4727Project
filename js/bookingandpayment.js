@@ -388,3 +388,10 @@ paymentForm.addEventListener("submit", function (event){
     formTotal.value = finalTotal.toFixed(2);
 
 });
+
+//check whether php redirected back after a sucessful booking
+if(bookingUrlParameters.get("success")==="1"){
+    const referenceFromUrl = bookingUrlParameters.get("reference");
+    confirmationReference.textContent = referenceFromUrl || "Reference unavailable";
+    confirmationModal.showModal();
+}
