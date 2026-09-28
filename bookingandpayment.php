@@ -1,3 +1,55 @@
+<?php
+ ini_set("display_errors",1);
+ error_reporting(E_ALL);
+
+ require_once __DIR__ . '/includes/database.php';
+
+ $movieId = (int) ($_GET["movieId"]?? 0);
+ $location = trim($_GET["location"]?? "");
+ $screeningDate = trim($_GET["date"] ?? "");
+ $screeningTime = trim($_GET["time"]?? "");
+
+ //store unavailable seat names
+ $databaseUnavailableSeats = array();
+
+ //only query the database when the req session info exists
+ if( $movieId > 0 && $location !== "" && $screeningDate !== "" && $screeningTime !== ""){
+    $query = "
+        SELECT booking_seats.seat_number
+        FROM booking_seats
+        INNER JOIN bookings
+            ON booking_seats.booking_id = bookings.booking_id
+        WHERE bookings.movie_id = ?
+            AND bookings.cinema_location = ?
+            AND bookings.screening_date = ?
+            AND bookings.screening_time = ?
+            AND bookings.status = 'Confirmed'
+            ";
+    $statement = $db->prepare($query);
+
+    if($statement) {
+        $statement->bind_param(
+            "isss",
+            $movieId,
+            $location,
+            $screeningDate,
+            $screeningTime
+        );
+        $statement->execute();
+
+        //connection the selected seat_number to this PHP variable
+        $statement->bind_result($seatNumber);
+        //fetch one booked seat at a time
+        while($statement->fetch()){
+            $databaseUnavailableSeats[] = $seatNumber;
+        }
+        $statement->close();
+    }
+ }
+ $db->close();
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -228,9 +280,18 @@
         </div>
      </dialog>
 
+      <script>
+        //php creates this javascript array using seats retrieved from mysql
+        const unavailableSeats = [
+            <?php foreach ($databaseUnavailableSeats as $seat): ?>
+                "<?php echo htmlspecialchars($seat, ENT_QUOTES, "UTF-8"); ?>",
+                <?php endforeach; ?>
+        ];
+        </script>
   
         <!-- load movie data bfr the page logic -->
     <script src="js/movie-data.js"></script>
+   
         <!-- controls this booking page -->
     <script src="js/bookingandpayment.js"></script>
 </body>

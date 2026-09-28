@@ -105,7 +105,7 @@ if (bookingMovie) {
 //SEAT SELECTION//
 const seatPrice = 5     //$5 per seat selected
 const maximumSeats = 6  //max seat to purchase in one booking
-const unavailableSeats = [ "A3", "B5", "C2", "C3", "D6" ];
+//const unavailableSeats = [ "A3", "B5", "C2", "C3", "D6" ];
 
 const selectedSeats = [];   //seats selected by user
 
@@ -230,7 +230,7 @@ function updateSeatSummary() {
         selectedSeats.length === 0;
 }
 
-createSeatMap(); //Generates the seats when bookingandpayment.html opens 
+createSeatMap(); //Generates the seats when bookingandpayment.php opens 
 
 
 //PAYMENT//
