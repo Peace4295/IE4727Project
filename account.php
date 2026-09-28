@@ -207,11 +207,11 @@ $db->close();
                                 $sessionDetails = $displayLocation . " · " . $displayDate . " · " . $displayTime;
                                 ?>
                         <article class="account-booking-card" 
-                        data-booking-status=" <?php echo htmlspecialchars($bookingStatus); ?> 
-                        "data-booking-id="
-                        <?php echo (int) $booking["booking_id"]; ?>"
+                        data-booking-status="<?php echo htmlspecialchars($bookingStatus); ?>"
+                        data-booking-id="<?php echo (int) $booking["booking_id"]; ?>"
                         <?php if ($bookingStatus !== "upcoming"): ?> hidden
-                        <?php endif; ?>>
+                        <?php endif; ?>
+                        >
                         <img 
                         src="<?php echo htmlspecialchars($posterPath); ?>"
                         alt="<?php echo htmlspecialchars($booking["movie_title"]
