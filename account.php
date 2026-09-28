@@ -4,36 +4,119 @@ error_reporting(E_ALL);
 
 require_once __DIR__. "/includes/database.php";
 
-$query = "
-SELECT
-film_title,
-reference_number,
-status,
-submitted_at
-FROM film_submissions
-ORDER BY submitted_at DESC";
+//temp acct email
+$accountEmail = "pris0038@e.ntu.edu.sg";
 
-$result=$db->query($query);
+$moviePosters = array(
+    1 => "images/movie/jumanji.png",
+    2 => "images/movie/joker.png",
+    3 => "images/movie/minionposter.jpg",
+    4 => "images/movie/avengers.png",
+    5 => "images/movie/zootopia.png",
+    6 => "images/film/exit19.png",
+    7 => "images/film/wpf.png",
+    8 => "images/film/requiem.png",
+    9 => "images/film/wyslmi.png",
+    10 => "images/film/temp.png"
+);
 
-if(!$result) {
-    die("The film submissions could not be loaded.");
+$bookingQuery = "
+    SELECT
+        bookings.booking_id,
+        bookings.reference_number,
+        bookings.movie_id,
+        bookings.movie_title,
+        bookings.cinema_location,
+        bookings.screening_date,
+        bookings.screening_time,
+        bookings.ticket_count,
+        bookings.total_amount,
+        bookings.status,
+        GROUP_CONCAT(
+            booking_seats.seat_number
+            ORDER BY booking_seats.seat_number
+            SEPARATOR ', '
+        ) AS seats
+    FROM bookings
+    LEFT JOIN booking_seats         
+        ON bookings.booking_id = booking_seats.booking_id
+    WHERE bookings.booker_email = ?
+    GROUP BY
+        bookings.booking_id,
+        bookings.reference_number,
+        bookings.movie_id,
+        bookings.movie_title,
+        bookings.cinema_location,
+        bookings.screening_date,
+        bookings.screening_time,
+        bookings.ticket_count,
+        bookings.total_amount,
+        bookings.status
+    ORDER BY
+        bookings.screening_date DESC,
+        bookings.screening_time DESC
+";
+
+$bookingStatement = $db->prepare($bookingQuery);
+$bookingStatement->bind_param("s", $accountEmail);
+$bookingStatement->execute();
+
+$bookingResult = $bookingStatement->get_result();
+
+$accountBookings = array();
+$upcomingBookingCount = 0;
+
+while ($booking = $bookingResult->fetch_assoc()){
+    if(strtolower($booking["status"])==="cancelled"){
+        $booking["display_status"] = "cancelled";
+    } else{
+        $screeningTimestamp = strtotime(
+            $booking["screening_date"]. "".
+            $booking["screening_time"]
+            );
+        if($screeningTimestamp<time()){
+            $booking["display_status"] = "past";
+        } else {
+            $booking["display_status"] = "upcoming";
+            $upcomingBookingCount++;
+        }
+    }
+    $accountBookings[]= $booking;
 }
+$bookingStatement ->close();
 
-$submissionCount = $result->num_rows;
+//get film submission
+$submissionQuery = "
+SELECT
+        film_title,
+        reference_number,
+        status,
+        submitted_at
+    FROM film_submissions
+    WHERE submitter_email = ?
+    ORDER BY submitted_at DESC
+";
+$submissionStatement = $db->prepare($submissionQuery);
+$submissionStatement->bind_param("s", $accountEmail);
+$submissionStatement->execute();
 
-//store the retrieved database rows in a php array
+$submissionResult = $submissionStatement->get_result();
+
 $filmSubmissions = array();
-//count subms that are still pending review
 $pendingReviewCount = 0;
 
-while ($submission = $result->fetch_assoc()){
+while ($submission = $submissionResult->fetch_assoc()) {
     $filmSubmissions[] = $submission;
 
-    if ($submission["status"]==="pending review"){
+    if (strtolower($submission["status"]) === "pending review") {
         $pendingReviewCount++;
     }
 }
 
+$submissionCount = count($filmSubmissions);
+
+$submissionStatement->close();
+$db->close();
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +157,7 @@ while ($submission = $result->fetch_assoc()){
          <section class="account-statistics" aria-label="Account overview">
             <div class="account-stats">
                 <p>Upcoming Bookings</p>
-                <strong id="upcoming-booking-count">0</strong>
+                <strong id="upcoming-booking-count"><?php echo $upcomingBookingCount;?></strong>
             </div>
 
             <div class="account-stats">
@@ -107,7 +190,66 @@ while ($submission = $result->fetch_assoc()){
                     Cancelled
                 </button>
                 </div>
-                <div class="list" id="account-booking-list" aria-live="polite"></div>
+                <div class="list" id="account-booking-list" aria-live="polite">
+                    <?php if (count($accountBookings)===0): ?>
+                        <p class="empty-account-message" id="empty-booking-message">No Bookings found. </p>
+                        <?php else: ?>
+                            <?php foreach ($accountBookings as $booking): ?>
+                                <?php
+                                $bookingStatus = $booking["display_status"];
+                                $movieId = (int)$booking["movie_id"];
+                                $posterPath = $moviePosters[$movieId] ?? "images/favicon-2.png";
+                                $displayLocation = $booking["cinema_location"];
+                                if ($displayLocation === "north-spine") {$displayLocation = "North Spine Cinema";}
+                                elseif ($displayLocation ==="southspine") {$displayLocation = "South Spine Cinema";}
+                                $displayDate = date( "j F Y", strtotime($booking["screening_date"]) );
+                                $displayTime = date( "g:i A", strtotime($booking["screening_time"]) );
+                                $sessionDetails = $displayLocation . " · " . $displayDate . " · " . $displayTime;
+                                ?>
+                        <article class="account-booking-card" 
+                        data-booking-status=" <?php echo htmlspecialchars($bookingStatus); ?> 
+                        "data-booking-id="
+                        <?php echo (int) $booking["booking_id"]; ?>"
+                        <?php if ($bookingStatus !== "upcoming"): ?> hidden
+                        <?php endif; ?>>
+                        <img 
+                        src="<?php echo htmlspecialchars($posterPath); ?>"
+                        alt="<?php echo htmlspecialchars($booking["movie_title"]
+                        );
+                        ?> poster" class="account-booking-poster">
+                        <div class="account-booking-info">
+                            <h3><?php echo htmlspecialchars($booking["movie_title"]);
+                            ?></h3>
+                            <p><?php echo htmlspecialchars($sessionDetails);?></p>
+                            <p>Seats: <?php echo htmlspecialchars($booking["seats"]?? "not available"); ?></p>
+                            <p> Reference: <span class="booking-reference"> <?php echo htmlspecialchars( $booking["reference_number"] ); ?> </span> </p>
+                            <p> Total: $ <?php echo number_format( $booking["total_amount"], 2 ); ?> </p>
+                        </div>
+                        <div class="account-booking-actions">
+                            <span class="booking-status <?php echo htmlspecialchars($bookingStatus); ?>"> <?php echo ucfirst( htmlspecialchars($bookingStatus) ); ?> </span>
+                            <button type="button" class="btn btn-secondary view-booking-button" 
+                                data-movie-title="<?php echo htmlspecialchars( $booking["movie_title"] ); ?>"
+                                data-session="<?php echo htmlspecialchars($sessionDetails); ?>"
+                                data-seats="<?php echo htmlspecialchars( $booking["seats"] ?? "" ); ?>"
+                                data-reference="<?php echo htmlspecialchars( $booking["reference_number"] ); ?>">
+                                View Details 
+                            </button>
+                            <?php if ($bookingStatus === "upcoming"): ?>
+                            <button type="button" class="cancel-booking-button" 
+                                data-booking-id="<?php echo (int) $booking["booking_id"]; ?>"
+                                data-movie-title="<?php echo htmlspecialchars( $booking["movie_title"] ); ?>"
+                                data-session="<?php echo htmlspecialchars($sessionDetails); ?>">
+                                Cancel Booking
+                             </button>
+                             <?php endif; ?>
+                            </div>
+                            </article>
+                            <?php endforeach; ?>
+                           <p class="empty-account-message" id="empty-booking-message" hidden > No bookings found. </p>
+
+                        <?php endif; ?>             
+
+                </div>
             
           </section>
           <div class="account-lower-layout">

@@ -1,5 +1,4 @@
-/* ========================= TEMPORARY ACCOUNT DATA ========================= */
-
+//temp account data
 /*
     This information is temporary frontend data.
 
@@ -21,496 +20,122 @@ const accountUser = {
     - Movie information
     - Session information
     - Booking status
+
+
 */
-const accountBookings = [
-    {
-        id: 1,
-        movieTitle: "Requiem",
-        poster: "images/film/requiem.png",
-        location: "North Spine Cinema",
-        date: "18 September 2026",
-        time: "9:00 PM",
-        seats: ["F8"],
-        reference: "NTF-MTWOFKER",
-        status: "upcoming"
-    },
-    {
-        id: 2,
-        movieTitle: "The Last Light",
-        poster: "images/posters/movieposter.jpg",
-        location: "One-North Hall",
-        date: "24 September 2026",
-        time: "7:30 PM",
-        seats: ["C4", "C5"],
-        reference: "NTF-QPLWJ832",
-        status: "upcoming"
-    },
-    {
-        id: 3,
-        movieTitle: "After Rain",
-        poster: "images/posters/minionposter.jpg",
-        location: "South Spine Theatre",
-        date: "26 August 2026",
-        time: "6:30 PM",
-        seats: ["B6"],
-        reference: "NTF-K70H2P9Q",
-        status: "past"
-    },
-    {
-        id: 4,
-        movieTitle: "Blue Hour",
-        poster: "images/posters/movieposter.jpg",
-        location: "North Spine Cinema",
-        date: "5 September 2026",
-        time: "8:00 PM",
-        seats: ["D3"],
-        reference: "NTF-84KMD20Z",
-        status: "cancelled"
-    }
-];
 
 
 
+//get html elements
 
+// const profileName = document.querySelector("#profile-name");
+// const profileEmail = document.querySelector("#profile-email");
+// const profileAvatar = document.querySelector("#profile-avatar");
 
-/* The page initially displays upcoming bookings */
-let selectedBookingStatus = "upcoming";
-
-/*
-    Stores the booking selected for cancellation.
-    null means that no booking is currently selected.
-*/
-let bookingToCancelId = null;
-
-
-/* ========================= GET HTML ELEMENTS ========================= */
-
-const profileName = document.querySelector("#profile-name");
-const profileEmail = document.querySelector("#profile-email");
-const profileAvatar = document.querySelector("#profile-avatar");
-
-const upcomingBookingCount = document.querySelector(
-    "#upcoming-booking-count"
-);
-
-const filmSubmissionCount = document.querySelector(
-    "#film-submission-count"
-);
-
-const pendingReviewCount = document.querySelector(
-    "#pending-review-count"
-);
-
-const bookingList = document.querySelector("#account-booking-list");
 const bookingTabs = document.querySelectorAll(".booking-tab");
-
-const filmSubmissionList = document.querySelector(
-    "#film-submission-list"
-);
-
-const activityList = document.querySelector("#activity-list");
-
-const cancelBookingModal = document.querySelector(
-    "#cancel-booking-modal"
-);
-
-const cancelMovieTitle = document.querySelector(
-    "#cancel-movie-title"
-);
-
-const cancelSessionDetails = document.querySelector(
-    "#cancel-session-details"
-);
-
-const keepBookingButton = document.querySelector(
-    "#keep-booking-button"
-);
-
-const confirmCancellationButton = document.querySelector(
-    "#confirm-cancellation-button"
-);
-
-const editProfileButton = document.querySelector(
-    "#edit-profile-button"
-);
-
+const bookingCards = document.querySelectorAll(".account-booking-card");
+const emptyBookingMessage = document.querySelector("#empty-booking-message");
+const bookingList = document.querySelector("#account-booking-list");
+const cancelBookingModal = document.querySelector("#cancel-booking-modal");
+const cancelMovieTitle = document.querySelector("#cancel-movie-title");
+const cancelSessionDetails = document.querySelector("#cancel-session-details");
+const keepBookingButton = document.querySelector("#keep-booking-button");
+const confirmCancellationButton = document.querySelector("#confirm-cancellation-button");
+const editProfileButton = document.querySelector("#edit-profile-button");
 const signOutButton = document.querySelector("#sign-out-button");
 
 
-/* ========================= RENDER PROFILE ========================= */
+//booking tabs
+let selectedBookingStatus = "upcoming";
 
-/*
-    Displays the temporary user's information in the HTML.
-*/
-function renderProfile() {
-    profileName.textContent = accountUser.name;
-    profileEmail.textContent = accountUser.email;
-    profileAvatar.textContent = accountUser.initials;
-}
+function displaySelectedBookings() {
+    let visibleBookingCount = 0;
 
-
-/* ========================= RENDER STATISTICS ========================= */
-
-function renderAccountStatistics() {
-    /*
-        filter() creates a new array containing only
-        upcoming bookings.
-    */
-    const upcomingBookings = accountBookings.filter(function (booking) {
-        return booking.status === "upcoming";
-    });
-
-    upcomingBookingCount.textContent = upcomingBookings.length;
-}
-
-
-/* ========================= RENDER BOOKING TABS ========================= */
-
-function renderBookingTabs() {
-    bookingTabs.forEach(function (tab) {
-        /*
-            Checks whether the tab represents the currently
-            selected booking status.
-        */
-        const isActive =
-            tab.dataset.status === selectedBookingStatus;
-
-        /*
-            toggle() adds the active class when isActive is true
-            and removes it when isActive is false.
-        */
-        tab.classList.toggle("active", isActive);
-
-        /*
-            aria-selected helps screen readers understand
-            which tab is selected.
-        */
-        tab.setAttribute("aria-selected", isActive);
-    });
-}
-
-
-/* ========================= RENDER BOOKINGS ========================= */
-
-function renderBookings() {
-    /*
-        Finds bookings that match the selected tab.
-    */
-    const filteredBookings = accountBookings.filter(
-        function (booking) {
-            return booking.status === selectedBookingStatus;
+    bookingCards.forEach(function (bookingCard) {
+        const cardStatus = bookingCard.dataset.bookingStatus;
+        const shouldDisplay = cardStatus === selectedBookingStatus;
+        bookingCard.hidden = !shouldDisplay;
+        if (shouldDisplay) {
+            visibleBookingCount++;
         }
-    );
+    });
 
-    /* Clears previously displayed bookings */
-    bookingList.innerHTML = "";
-
-    /* Shows a message when a tab has no bookings */
-    if (filteredBookings.length === 0) {
-        bookingList.innerHTML = `
-            <p class="empty-account-message">
-                No ${selectedBookingStatus} bookings found.
-            </p>
-        `;
-
-        return;
+    if (emptyBookingMessage) {
+        emptyBookingMessage.hidden = visibleBookingCount !== 0;
+        emptyBookingMessage.textContent = `No ${selectedBookingStatus} bookings found.`;
     }
-
-    /*
-        Creates one HTML article for every filtered booking.
-    */
-    filteredBookings.forEach(function (booking) {
-        const bookingCard = document.createElement("article");
-
-        bookingCard.className = "account-booking-card";
-
-        /*
-            join(", ") converts a seat array such as
-            ["C4", "C5"] into "C4, C5".
-        */
-        const formattedSeats = booking.seats.join(", ");
-
-        /*
-            Cancel Booking is shown only for upcoming bookings.
-        */
-        const cancellationButton =
-            booking.status === "upcoming"
-                ? `
-                    <button
-                        type="button"
-                        class="cancel-booking-button"
-                        data-booking-id="${booking.id}"
-                    >
-                        Cancel Booking
-                    </button>
-                `
-                : "";
-
-        bookingCard.innerHTML = `
-            <img
-                src="${booking.poster}"
-                alt="${booking.movieTitle} poster"
-                class="account-booking-poster"
-            >
-
-            <div class="account-booking-information">
-                <h3>${booking.movieTitle}</h3>
-
-                <p>
-                    ${booking.location} ·
-                    ${booking.date} ·
-                    ${booking.time}
-                </p>
-
-                <p>
-                    Seat${booking.seats.length > 1 ? "s" : ""}:
-                    ${formattedSeats}
-                </p>
-
-                <p>
-                    Reference:
-                    <span class="booking-reference">
-                        ${booking.reference}
-                    </span>
-                </p>
-            </div>
-
-            <div class="account-booking-actions">
-                <span class="booking-status ${booking.status}">
-                    ${booking.status}
-                </span>
-
-                <button
-                    type="button"
-                    class="btn btn-secondary view-booking-button"
-                    data-booking-id="${booking.id}"
-                >
-                    View Details
-                </button>
-
-                ${cancellationButton}
-            </div>
-        `;
-
-        bookingList.appendChild(bookingCard);
-    });
 }
-
-
-
-
-
-/* ========================= RENDER RECENT ACTIVITY ========================= */
-
-function renderActivities() {
-    activityList.innerHTML = "";
-
-    /*
-        slice(0, 5) ensures that only the first five
-        activity records are shown.
-    */
-    const recentActivities = accountActivities.slice(0, 5);
-
-    recentActivities.forEach(function (activity) {
-        const activityElement = document.createElement("article");
-
-        activityElement.className = "account-activity";
-
-        activityElement.innerHTML = `
-            <p>${activity.description}</p>
-            <time>${activity.date}</time>
-        `;
-
-        activityList.appendChild(activityElement);
-    });
-}
-
-
-/* ========================= CHANGE BOOKING TAB ========================= */
-
 bookingTabs.forEach(function (tab) {
     tab.addEventListener("click", function () {
-        /*
-            data-status in the HTML determines which
-            bookings should be displayed.
-        */
         selectedBookingStatus = tab.dataset.status;
 
-        renderBookingTabs();
-        renderBookings();
+        bookingTabs.forEach(function (currentTab) {
+            const isActive = currentTab === tab;
+
+            currentTab.classList.toggle( "active", isActive );
+            currentTab.setAttribute( "aria-selected", isActive );
+        });
+        displaySelectedBookings();
     });
 });
 
+//booking buttons
 
-/* ========================= BOOKING BUTTONS ========================= */
 
-/*
-    Event delegation allows JavaScript to recognise buttons
-    that were dynamically created inside bookingList.
-*/
+let bookingToCancelId = null;
+
 bookingList.addEventListener("click", function (event) {
-    const cancelButton = event.target.closest(
-        ".cancel-booking-button"
-    );
+    const detailsButton = event.target.closest( ".view-booking-button" );
+    const cancelButton = event.target.closest( ".cancel-booking-button");
 
-    const detailsButton = event.target.closest(
-        ".view-booking-button"
-    );
-
-    /* Opens the cancellation modal */
-    if (cancelButton) {
-        const bookingId = Number(cancelButton.dataset.bookingId);
-
-        openCancellationModal(bookingId);
-    }
-
-    /*
-        Temporary behaviour for View Details.
-        This can later open a proper booking-details page.
-    */
     if (detailsButton) {
-        const bookingId = Number(detailsButton.dataset.bookingId);
-
-        const selectedBooking = accountBookings.find(
-            function (booking) {
-                return booking.id === bookingId;
-            }
+        alert(
+            detailsButton.dataset.movieTitle + "\n" +
+            detailsButton.dataset.session + "\n" +
+            "Seats: " + detailsButton.dataset.seats + "\n" +
+            "Reference: " +
+            detailsButton.dataset.reference
         );
-
-        if (selectedBooking) {
-            alert(
-                `${selectedBooking.movieTitle}\n` +
-                `${selectedBooking.location}\n` +
-                `${selectedBooking.date}, ${selectedBooking.time}\n` +
-                `Seats: ${selectedBooking.seats.join(", ")}`
-            );
-        }
+    }
+    if (cancelButton) {
+        bookingToCancelId = cancelButton.dataset.bookingId;
+        cancelMovieTitle.textContent = cancelButton.dataset.movieTitle;
+        cancelSessionDetails.textContent = cancelButton.dataset.session;
+        cancelBookingModal.showModal();
     }
 });
 
 
-/* ========================= CANCELLATION MODAL ========================= */
+//cancellation modal
 
-function openCancellationModal(bookingId) {
-    /*
-        find() returns the booking with the matching ID.
-    */
-    const selectedBooking = accountBookings.find(
-        function (booking) {
-            return booking.id === bookingId;
-        }
-    );
-
-    if (!selectedBooking) {
-        return;
-    }
-
-    /* Remembers which booking is being cancelled */
-    bookingToCancelId = selectedBooking.id;
-
-    /* Displays the selected booking inside the modal */
-    cancelMovieTitle.textContent = selectedBooking.movieTitle;
-
-    cancelSessionDetails.textContent =
-        `${selectedBooking.location} · ` +
-        `${selectedBooking.date} · ` +
-        `${selectedBooking.time}`;
-
-    /*
-        showModal() displays a native HTML dialog
-        above the rest of the page.
-    */
-    cancelBookingModal.showModal();
-}
-
-
-/* Closes the modal without changing the booking */
-keepBookingButton.addEventListener("click", function () {
+keepBookingButton.addEventListener("click", function(){
     bookingToCancelId = null;
     cancelBookingModal.close();
 });
+confirmCancellationButton.addEventListener("click",function(){
+    //replace this alert with php update later
+    alert("booking id" + bookingToCancelId+"will be cancelled thru php");
+});
+    
 
 
-/* Confirms and performs the temporary cancellation */
-confirmCancellationButton.addEventListener(
-    "click",
-    function () {
-        const selectedBooking = accountBookings.find(
-            function (booking) {
-                return booking.id === bookingToCancelId;
-            }
-        );
 
-        if (!selectedBooking) {
-            return;
-        }
-
-        /*
-            Changes the booking's temporary frontend status.
-            PHP and MySQL will perform this UPDATE later.
-        */
-        selectedBooking.status = "cancelled";
-
-        /*
-            Adds the cancellation to the beginning
-            of the recent activity array.
-        */
-        accountActivities.unshift({
-            description:
-                `Cancelled "${selectedBooking.movieTitle}"`,
-            date: "13 September 2026"
-        });
-
-        bookingToCancelId = null;
-        cancelBookingModal.close();
-
-        /*
-            Re-renders the affected areas so the page
-            immediately shows the change.
-        */
-        renderBookings();
-        renderAccountStatistics();
-        renderActivities();
-    }
-);
-
-
-/* ========================= EDIT PROFILE ========================= */
-
+//edit profile
 editProfileButton.addEventListener("click", function () {
-    /*
-        Temporary prototype behaviour.
-        A proper edit form can be added later.
-    */
+    //Temporary prototype behaviour.A proper edit form can be added later.
     alert("Profile editing will be connected to the backend later.");
 });
 
 
-/* ========================= SIGN OUT ========================= */
-
-signOutButton.addEventListener("click", function () {
-    /*
-        confirm() prevents accidental sign-out.
-        PHP will later destroy the user's login session.
-    */
+//signout button
+signOutButton.addEventListener("click",function(){
     const shouldSignOut = confirm(
-        "Are you sure you want to sign out?"
+        "Are you shure you want to sign out?"
     );
-
-    if (shouldSignOut) {
+    if(shouldSignOut){
         window.location.href = "login.html";
     }
 });
 
-
-/* ========================= INITIAL PAGE LOAD ========================= */
-
-/*
-    These functions run once when account.html opens.
-*/
-renderProfile();
-renderAccountStatistics();
-renderBookingTabs();
-renderBookings();
-renderFilmSubmissions();
-// renderActivities();
+//initial display
+displaySelectedBookings();
