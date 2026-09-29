@@ -132,7 +132,7 @@ signOutButton.addEventListener("click",function(){
         "Are you shure you want to sign out?"
     );
     if(shouldSignOut){
-        window.location.href = "login.html";
+        window.location.href = "login.php";
     }
 });
 

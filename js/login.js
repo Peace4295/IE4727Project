@@ -51,7 +51,7 @@ passwordToggle.addEventListener("click", function () {
 */
 loginForm.addEventListener("submit", function (event) {
     /* Prevents the form from refreshing the page */
-    event.preventDefault();
+    //event.preventDefault();
 
     /* Removes any earlier error */
     loginError.hidden = true;

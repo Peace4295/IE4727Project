@@ -25,17 +25,13 @@
             view your bookings and submit student films.
         </p> -->
 
-        <form class="login-form" id="login-form">
+        <form class="login-form" action="process-login.php" method="post" id="login-form">
             <div class="login-field">
-                <label for="login-email">
-                    NTU Email
-                </label>
+                <label for="email"> NTU Email </label>
                 <input type="email" id="login-email" name="email" placeholder="username@e.ntu.edu.sg" autocomplete="username" required >
             </div>
             <div class="login-field">
-                <label for="login-password">
-                    Password
-                </label>
+                <label for="login-password"> Password </label>
                 <div class="password-input-wrapper">
                     <input type="password" id="login-password" name="password" placeholder="Enter your password" autocomplete="current-password" minlength="8" required>
                     <button type="button" class="password-toggle" id="password-toggle" aria-label="Show password">
@@ -45,11 +41,7 @@
                 
             </div>
                 <div class="login-options">
-                    <!-- <label class="remember-option">
-                        <input type="checkbox" id="remember-me">
-                        <span>Remember me</span>
-                    </label> -->
-                    <a href="#" class="forget-pw-link">Forget Password?</a>
+                    <a href="#" class="forget-pw-link">Forgot Password?</a>
                 </div>
 
             <p class="login-error" id="login-error" hidden></p>
