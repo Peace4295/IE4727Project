@@ -218,12 +218,11 @@ $db->close();
                         );
                         ?> poster" class="account-booking-poster">
                         <div class="account-booking-info">
-                            <h3><?php echo htmlspecialchars($booking["movie_title"]);
-                            ?></h3>
+                            <h3><?php echo htmlspecialchars($booking["movie_title"]);?></h3>
                             <p><?php echo htmlspecialchars($sessionDetails);?></p>
                             <p>Seats: <?php echo htmlspecialchars($booking["seats"]?? "not available"); ?></p>
-                            <p> Reference: <span class="booking-reference"> <?php echo htmlspecialchars( $booking["reference_number"] ); ?> </span> </p>
-                            <p> Total: $ <?php echo number_format( $booking["total_amount"], 2 ); ?> </p>
+                            <p>Reference: <span class="booking-reference"> <?php echo htmlspecialchars( $booking["reference_number"] ); ?> </span> </p>
+                            <p>Total: $ <?php echo number_format( $booking["total_amount"], 2 ); ?> </p>
                         </div>
                         <div class="account-booking-actions">
                             <span class="booking-status <?php echo htmlspecialchars($bookingStatus); ?>"> <?php echo ucfirst( htmlspecialchars($bookingStatus) ); ?> </span>
@@ -303,11 +302,13 @@ $db->close();
                 <strong id="cancel-movie-title"></strong>
                 <span id="cancel-session-details"></span>
             </div>
-            <div class="account-modal-actions">
+
+            <form action="process-cancellation.php" method="post" class="account-modal-actions">
+                <input type="hidden" name="bookingId" id="cancel-booking-id">
                 <button type="button" class="btn btn-secondary" id="keep-booking-button">Keep Booking</button>
-                <button type="button" class="btn cancel-confirm-button" id="confirm-cancellation-button">Confirm Cancellation</button>
-            </div>
-        </div>
+                <button type="submit" class="btn cancel-confirm-button" id="confirm-cancellation-button">Confirm Cancellation</button>
+            </form>
+        
 
      </dialog>
     <script src="js/account.js"></script>

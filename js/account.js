@@ -43,6 +43,7 @@ const keepBookingButton = document.querySelector("#keep-booking-button");
 const confirmCancellationButton = document.querySelector("#confirm-cancellation-button");
 const editProfileButton = document.querySelector("#edit-profile-button");
 const signOutButton = document.querySelector("#sign-out-button");
+const cancelBookingIdInput = document.querySelector("#cancel-booking-id");
 
 
 //booking tabs
@@ -98,6 +99,7 @@ bookingList.addEventListener("click", function (event) {
         );
     }
     if (cancelButton) {
+        cancelBookingIdInput.value = cancelButton.dataset.bookingId;
         bookingToCancelId = cancelButton.dataset.bookingId;
         cancelMovieTitle.textContent = cancelButton.dataset.movieTitle;
         cancelSessionDetails.textContent = cancelButton.dataset.session;
@@ -112,10 +114,7 @@ keepBookingButton.addEventListener("click", function(){
     bookingToCancelId = null;
     cancelBookingModal.close();
 });
-confirmCancellationButton.addEventListener("click",function(){
-    //replace this alert with php update later
-    alert("booking id" + bookingToCancelId+"will be cancelled thru php");
-});
+
     
 
 
