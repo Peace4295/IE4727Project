@@ -308,7 +308,7 @@ $db->close();
                 <button type="button" class="btn btn-secondary" id="keep-booking-button">Keep Booking</button>
                 <button type="submit" class="btn cancel-confirm-button" id="confirm-cancellation-button">Confirm Cancellation</button>
             </form>
-        
+        </div>
 
      </dialog>
     <script src="js/account.js"></script>

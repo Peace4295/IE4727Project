@@ -35,11 +35,13 @@ AND status = 'Confirmed'
 AND TIMESTAMP(screening_date,screening_time) >NOW()";
 
 $statement = $db->prepare($query);
-if ($statement) {
+
+if (!$statement) {
     $db->close();
     header("Location: account.php?cancel_error=database");
     exit;
 }
+
 $statement->bind_param(
     "is",
     $bookingId,
