@@ -2,10 +2,19 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
+session_start();
+
+if(!isset($_SESSION["user_id"], $_SESSION["email"])) {
+    header("Location: login.php");
+    exit;
+}
+
 require_once __DIR__. "/includes/database.php";
 
-//temp acct email
-$accountEmail = "pris0038@e.ntu.edu.sg";
+$accountEmail = $_SESSION["email"];
+$accountName = $_SESSION["full_name"];
+
+
 
 $moviePosters = array(
     1 => "images/movie/jumanji.png",
@@ -136,7 +145,7 @@ $db->close();
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="moviecatalog.html">Movies</a>
-                <a href="submit.html">Submit a Film</a>
+                <a href="submit.php">Submit a Film</a>
             </div>
             <a href="account.php" class="account-link active">My Account</a>
         </nav>
@@ -148,8 +157,8 @@ $db->close();
             <div class="profile-avatar" id="profile-avatar">PC</div>
             <div class="profile-information">
                 <p class="account-eyebrow">MY ACCOUNT</p>
-                <h1 id="profile-name">Priscilla Chong</h1>
-                <p id="profile-email">pris0038@e.ntu.edu.sg</p>
+                <h1 id="profile-name"><?php echo htmlspecialchars($accountName);?></h1>
+                <p id="profile-email"><?php echo htmlspecialchars($accountEmail);?></p>
             </div>
             <button type="button" class="btn btn-secondary" id="edit-profile-button">Edit Profile</button>
          </section>

@@ -2,6 +2,17 @@
  ini_set("display_errors",1);
  error_reporting(E_ALL);
 
+
+ session_start();
+
+ if(!isset($_SESSION["user_id"], $_SESSION["email"])){
+    header("Location: login.php");
+    exit;
+ }
+
+ $accountEmail = $_SESSION["email"];
+ $accountName = $_SESSION["full_name"];
+
  require_once __DIR__ . '/includes/database.php';
 
  $movieId = (int) ($_GET["movieId"]?? 0);
@@ -67,7 +78,7 @@
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="moviecatalog.html" >Movies</a>
-                <a href="submit.html">Submit a Film</a>
+                <a href="submit.php">Submit a Film</a>
             </div>
             <a href="account.php">My Account</a>
         </nav>
@@ -190,7 +201,7 @@
                     <input type="hidden" id="form-total" name="totalAmount">
                 <div class="form-field">
                     <label for="booker-email">NTU Email</label>
-                    <input type="email" id="booker-email" name="bookerEmail" placeholder="username@e.ntu.edu.sg" required>
+                    <input type="email" id="booker-email" name="bookerEmail" value="<?php echo htmlspecialchars($accountEmail); ?>" readonly required>
                     <label for="cardholder-name"> Name on card </label>
                     <input type="text" id="cardholder-name" required>
                 </div>

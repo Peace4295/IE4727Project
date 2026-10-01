@@ -3,6 +3,13 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
+session_start();
+
+if(!isset($_SESSION["user_id"], $_SESSION["email"])){
+    header("Location: login.php");
+    exit;
+}
+
 date_default_timezone_set("Asia/Singapore");
 
 // Only accept data submitted through a POST form
@@ -14,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 require_once __DIR__ . "/includes/database.php";
 
 // Temporary account email until PHP login is completed
-$accountEmail = "pris0038@e.ntu.edu.sg";
+$accountEmail = $_SESSION["email"];
 
 // Retrieve the booking ID from the cancellation form
 $bookingId = (int) ($_POST["bookingId"] ?? 0);

@@ -2,6 +2,13 @@
  ini_set("display_errors",1);
  error_reporting(E_ALL);
 
+ session_start();
+
+ if(!isset($_SESSION["user_id"], $_SESSION["email"])){
+   header("Location: login.php");
+   exit;
+ }
+
  if($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo "Please complete the booking form first.";
     exit;
@@ -15,7 +22,7 @@
  $location = trim($_POST["location"] ?? "");
  $screeningDate = trim($_POST["screeningDate"] ?? "");
  $screeningTime = trim($_POST["screeningTime"] ?? "");
- $bookerEmail = trim($_POST["bookerEmail"] ?? "");
+ $bookerEmail = $_SESSION["email"];
  $selectedSeatsText = trim($_POST["selectedSeats"] ?? "");
 
 
