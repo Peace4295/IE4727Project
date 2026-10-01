@@ -1,19 +1,25 @@
 <?php
 
-// ini_set("display_errors",1 );
-// error_reporting(E_ALL);
+ini_set("display_errors",1 );
+error_reporting(E_ALL);
 
-//only allow page to process submitted form data
+
+session_start();
+
+if(!isset($_SESSION["user_id"], $_SESSION["email"])){
+    header("Location: login.php");
+    exit;
+}
+
+require_once __DIR__ . "/includes/database.php";
+
+
 if ($_SERVER["REQUEST_METHOD"]!= "POST") {
     echo "Please submit the form before opening this page.";
     exit;
 }
 
-//retrieve the film title using the input's name="filmTitle
-//$filmTitle = $_POST["filmTitle"];
 
-//load db connection
-require_once __DIR__ . "/includes/database.php";
 
 //??"" gives an empty string when the value does not exist
 $filmTitle = trim($_POST["filmTitle"] ?? "");
@@ -33,8 +39,8 @@ $filmLink = trim($_POST["filmLink"] ?? "");
 $filmPassword = trim($_POST["filmPassword"] ?? "");
 $trailerLink = trim($_POST["trailerLink"] ?? "");
 
-$submitterName = trim($_POST["submitterName"] ?? "");
-$submitterEmail = trim($_POST["submitterEmail"] ?? "");
+$submitterName = $_SESSION["full_name"];
+$submitterEmail = $_SESSION["email"];
 $school = trim($_POST["school"] ?? "");
 $studentId = trim($_POST["studentId"] ?? "");
 
@@ -103,7 +109,7 @@ if (count($errors)> 0){
         echo "<li>" . htmlspecialchars($error). "</li>";
     }
     echo "</ul>";
-    echo '<p><a href="submit.html">Return to the form</a><p>';
+    echo '<p><a href="submit.php">Return to the form</a><p>';
 
     $db->close();
     exit;
@@ -179,21 +185,14 @@ $statement->bind_param(
 
 //execute the sql statement
 if ($statement->execute()) {
-    echo "<h1>Film Submission Sucessful</h1>";
-    echo "<p>Your submission has been saved.</p>";
-    echo "<p>Your reference number is: <strong>" . htmlspecialchars($referenceNumber) ."</strong></p>";
-    echo "<p>Your submission status is Pending Review.</p>";
-    echo '<p><a href="submit.html">Return to submit a Film</a></p>';}
-    else{
-        echo "<h1>Submission Failed</h1>";
-        echo "<p> Your submission could not be saved.</p>";
+    $statement->close();
+    $db->close();
 
-        //echo "<p>Error: ". htmlspecialchars($statement->error) . "</p>";
-
-        echo '<p><a href="submit.html"> Return to the form</a></p>';
+    header(
+        "Location: submit.php?success=1&reference=" .
+        urlencode($referenceNumber)
+    );
+    exit;
     }
     
-//close the statemnet and databsae connection
-$statement->close();
-$db->close();
 

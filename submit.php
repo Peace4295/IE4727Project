@@ -1,0 +1,243 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION["user_id"], $_SESSION["email"])){
+    header("Location: login.php");
+    exit;
+}
+
+$accountName = $_SESSION["full_name"];
+$accountEmail = $_SESSION["email"];
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Submit a Film - NTU Films</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+            <!-- <img src="images/logo/logo-dark.png" alt="Nanyang Film House"> -->
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="moviecatalog.html">Movies</a>
+                <a href="submit.php" class="active">Submit a Film</a>
+            </div>
+            <a href="account.php">
+                My Account
+            </a>
+        </nav>
+    </header>
+    
+    <main class="container submission-page">
+        <section class="submission-eyebrow">
+            <p>NTU STUDENT FILMS</p>
+            <h1>Submit a Film</h1>
+            <p class="submission-eyebrow-text">
+                Share your film with the NTU community. Complete the form below and our team will contact you after reviewing your submission.
+            </p>
+        </section>
+        <form class="film-submission-form" id="film-submission-form" enctype="multipart/form-data" action="process-submission.php" method="post">
+            <fieldset class="submission-section">
+                <legend>
+                    <span>01</span>
+                    Film Details
+                </legend>
+                <div class="form-field">
+                    <label for="film-title">Film Title*</label>
+                    <input type="text" id="film-title" name="filmTitle" placeholder="Enter the title of your film" maxlength="100" required>
+
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="genre">Genre*</label>
+                        <select id="genre" name="genre" required>
+                            <option value="">Select a genre</option>
+                            <option value="action">Action</option>
+                            <option value="Animation">Animation</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="documentary">Documentary</option>
+                            <option value="drama">Drama</option>
+                            <option value="experimental">Experimental</option>
+                            <option value="horror">Horror</option>
+                            <option value="romance">Romance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="runtime">Running time (minutes)*</label>
+                        <input type="number" id="runtime" name="runtime" placeholder="Example: 15" min="1" max="300" required>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="synopsis">Synopsis*</label>
+                    <textarea id="synopsis" name="synopsis" rows="6" maxlength="1000" placeholder="Give us a short description of your film" required></textarea>
+                    <small>Maximum 1,000 characters.</small>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="language">Primary Language</label>
+                        <input type="text" id="language" name="language" placeholder="Example: English" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="subtitiles">Subtitle language</label>
+                        <input type="text" id="subtitles" name="subtitles" placeholder="Example: English or None">
+
+                    </div>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="completion-year">Year Completed</label>
+                        <input type="number" id="completion-year" name="completionYear" min="1900" max="2100" placeholder="2026" required>
+                    </div>
+                    <div class="submission-form-row">
+                        <div class="form-field">
+                            <label for="content-rating">Proposed rating</label>
+                            <select id="content-rating" name="contentRating">
+                                <option value="">Select a rating</option>
+                                <option value="G">G</option>
+                                <option value="PG">PG</option>
+                                <option value="PG13">PG13</option>
+                                <option value="NC16">NC16</option>
+                                <option value="M18">M18</option>
+                                <option value="R21">R21</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- credits -->
+            <fieldset class="submission-section">
+                <legend>
+                    <span>02</span>
+                    Credits
+                </legend>
+                <div class="form-field">
+                    <label for="director">Director*</label>
+                    <input type="text" id="director" name="director" placeholder="Enter the director's name" required>
+                </div>
+                <div class="form-field">
+                    <label for="cast">Cast</label>
+                    <textarea id="cast" name="cast" rows="3" placeholder="Enter names seperated by commas"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- media -->
+            <fieldset class="submission-section">
+                <legend>
+                    <span>03</span>
+                    Film & Media
+                </legend>
+                <div class="form-field">
+                    <label for="film-link">Private film link*</label>
+                    <input type="url" id="film-link" name="filmLink" placeholder="Youtube, Vimeo, Google Drive or OneDrive Link" required>
+                    <small>Make sure the review team has permission to access the link</small>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="film-password">Video password</label>
+                        <input type="text" id="filmpassword" name="filmPassword" placeholder="Only if the video is protected">
+                    </div>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="trailer-link">Trailer Link</label>
+                        <input type="url" id="trailer-link" name="trailerLink" placeholder="Optional">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="film-poster">Film Poster*</label>
+                    <div class="file-upload">
+                        <input type="file" id="film-poster" name="filmPoster" accept=".jpg,.jpeg,.png, .webp" required >
+                        <p>Upload your film poster</p>
+                        <small>Accepted formats: JPG or PNG</small>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- submitter details -->
+             <fieldset class="submission-section">
+                <legend>
+                    <span>04</span>
+                    Your Details
+                </legend>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="submitter-name">Full name*</label>
+                        <input type="text" id="submitter-name" name="submitterName" value="<?php echo htmlspecialchars($accountName); ?>" readonly required>
+                    </div>
+                    <div class="form-field">
+                        <label for="submitter-email">NTU Email</label>
+                        <input type="email" id="submitter-email" name="submitterEmail" value="<?php echo htmlspecialchars($accountEmail); ?>" readonly required>
+                    </div>
+                </div>
+                <div class="submission-form-row">
+                    <div class="form-field">
+                        <label for="school">School or faculty*</label>
+                        <input type="text" id="school" name="school" placeholder="Example: School or Art, Design and Media" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="student-id">Matriculation number*</label>
+                            <input type="text" id="student-id" name="studentId" placeholder="Enter your matriculation number" required>
+                    </div>
+                </div>
+             </fieldset>
+             <!-- declaration -->
+              <fieldset class="declaration-section">
+                
+                <label class="checkbox-field">
+                    <input type="checkbox" id="rights-confirmation" name="rightsConfirmation" required>
+                    <span>
+                        I confirm that I have permission to submit this film and its media for review and possible screening
+                    </span>
+                </label>
+                <label class="checkbox-field">
+                    <input type="checkbox" id="information-confirmation" name="informationConfirmation" required >
+                    <span>
+                        I confirm that the information provided is accurate.
+                    </span>
+                </label>
+                
+              </fieldset>
+              <div class="submission-actions">
+                <a href="index.html" class="btn btn-secondary"> Cancel </a>
+
+                <button type="submit" class="btn btn-primary">
+                    Submit Film
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- hidden modal -->
+    <div class="modal-overlay" id="submission-success-modal" role="dialog" aria-modal="true" hidden>
+        <div class="submission-modal">
+            <div class="success-icon" aria-hidden="true"></div>
+            <p class="modal-label">FILM SUBMITTED</p>
+            <h2 id="submission-success-title">Submission Received!</h2>
+            <p class="modal-message">Your film has been submitted for review.</p>
+
+            <div class="submission-ref">
+                <span>Submission reference</span>
+                <strong id="submission-ref">NFH-0000</strong>
+            </div>
+            <div class="modal-action">
+                <a href="account.php#submissions" class="btn btn-primary">View My Submission</a>
+                <a href="moviecatalog.html" class="btn btn-secondary">Back to Movies</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/submit.js"></script>
+ </body>
+</html>

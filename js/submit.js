@@ -49,3 +49,13 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 });
+
+const successModal = document.querySelector( "#submission-success-modal" );
+const referenceText = document.querySelector( "#submission-ref" );
+const urlParameters = new URLSearchParams( window.location.search );
+
+if ( urlParameters.get("success") === "1" && successModal && referenceText ) {
+    referenceText.textContent = urlParameters.get("reference");
+
+    successModal.hidden = false;
+}
