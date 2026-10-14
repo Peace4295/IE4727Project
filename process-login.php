@@ -58,8 +58,13 @@ if ($user && password_verify ($password, $user["password_hash"])){
     $statement->close();
     $db->close();
     
-    //when entry is sucessful, direct user to homepage
-    header("Location: index.html");
+    //when entry is sucessful, direct uses based on their role
+    if ($user["role"] === "admin"){
+        header("Location: admin-submission.php");
+    }else{
+       header("Location: index.html"); 
+    }
+    
     exit;
 }
 $statement->close();

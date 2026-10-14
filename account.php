@@ -8,6 +8,11 @@ if(!isset($_SESSION["user_id"], $_SESSION["email"])) {
     header("Location: login.php");
     exit;
 }
+//admin use dashboard only
+if(isset($_SESSION["role"])&& $_SESSION["role"]==="admin"){
+    header("Location: admin-submission.php");
+    exit;
+}
 
 require_once __DIR__. "/includes/database.php";
 
@@ -117,7 +122,7 @@ $pendingReviewCount = 0;
 while ($submission = $submissionResult->fetch_assoc()) {
     $filmSubmissions[] = $submission;
 
-    if (strtolower($submission["status"]) === "pending review") {
+    if (strtolower($submission["status"]) === "pending_review") {
         $pendingReviewCount++;
     }
 }
@@ -284,9 +289,18 @@ $db->close();
                                     .
                                     <?php echo htmlspecialchars($submission["reference_number"]); ?>
                         </p>
-                        <span class="submission-status">
-                            <?php echo htmlspecialchars($submission["status"]); ?> </span>
-                        </article>
+                        <?php
+                                    $status = strtolower($submission["status"]);
+                                    if($status === "approved"){
+                                        $statusClass = " status-approved";
+                                    }elseif ($status === "rejected") {
+                                        $statusClass = "status-rejected";
+                                    }else{
+                                        $statusClass = "status-pedning";
+                                    }?>
+                                    <span class="status-badge <?= $statusClass ?>">
+                                        <?= htmlspecialchars(ucwords(str_replace("_"," ",$status)))?>
+                                    </span></article>
                         <?php endforeach; ?>
                         <?php endif; ?>
                 </div>

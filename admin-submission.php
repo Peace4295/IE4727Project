@@ -20,6 +20,7 @@ require_once __DIR__ . "/includes/database.php";
 
 $sql="
 SELECT
+ submission_id,
  reference_number,
  film_title,
  genre,
@@ -61,12 +62,18 @@ SELECT
 
     <main class="container admin-submissions-page">
         <div class="admin-page-heading">
+            
             <div>
                 <p class="eyebrows">ADMINSTRATION</p>
                 <h1>Film Submissions</h1>
                 <p>Review films submitted by students.</p>
             </div>
         </div>
+        <?php if (isset($_GET["updated"]) && $_GET["updated"]==="1"): ?>
+            <!-- role="status" allows screen readers to annouce the confirmation -->
+                <div class="admin-feedback success-feedback" role="status">
+                Submission status updated successfully.</div>
+                <?php endif; ?>
         <?php if ($result->num_rows === 0): ?>
             <p class="empty-message">No film submissions were found.</p>
 
@@ -111,12 +118,21 @@ SELECT
                                     <?= htmlspecialchars($submission["submitter_email"])?>
                                 </td>
                                 <td>
-                                    <span class="status-badge">
-                                        <?= htmlspecialchars(ucwords(str_replace("_"," ",$submission["status"])))?>
+                                    <?php
+                                    $status = strtolower($submission["status"]);
+                                    if($status === "approved"){
+                                        $statusClass = " status-approved";
+                                    }elseif ($status === "rejected") {
+                                        $statusClass = "status-rejected";
+                                    }else{
+                                        $statusClass = "status-pedning";
+                                    }?>
+                                    <span class="status-badge <?= $statusClass ?>">
+                                        <?= htmlspecialchars(ucwords(str_replace("_"," ",$status)))?>
                                     </span>
                                 </td>
                                 <td>
-                                    <?php if ($submission["status"] === "pending_review"): ?>
+                                    <?php if ($submission["status"] === "pending review"): ?>
                                     <form action="process-submission-status.php" method="post" class="submission-actions">
                                         <input type="hidden" name="submission_id" value="<?= (int)$submission["submission_id"] ?>">
                                         <button type="submit" name="action" value="approved" class="approved-button">Approve</button>
