@@ -1,3 +1,26 @@
+<?php
+ session_start();
+
+ $feedbackMessage = "";
+ $feedbackClass = "";
+
+ if(isset($_GET["logout"]) && $_GET["logout"]==="1"){
+    $feedbackMessage = "You have been signed out successfully.";
+    $feedbackClass = "login-success";
+ }
+if(isset($_GET["error"])){
+    if($_GET["error"] === "missing"){
+        $feedbackMessage = "Please enter both your email and password.";
+    } elseif ($_GET["error"]==="invalid"){
+        $feedbackMessage = "The email or password is incorrect.";
+    } elseif ($_GET["error"] === "database"){
+        $feedbackMessage = "Login is temporarily unavailable. Please try again later.";
+    }
+    $feedbackClass = "login-error";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,10 +43,11 @@
 
         <h1>Welcome Back</h1>
 
-        <!-- <p class="login-description">
-            Sign in with your NTU account to book tickets,
-            view your bookings and submit student films.
-        </p> -->
+        <?php if ($feedbackMessage !== ""): ?>
+            <div class="login-feedback <?= $feedbackClass ?>" role="alert">
+                <?= htmlspecialchars($feedbackMessage)?>
+            </div>
+            <?php endif; ?>
 
         <form class="login-form" action="process-login.php" method="post" id="login-form">
             <div class="login-field">

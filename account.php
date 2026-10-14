@@ -312,7 +312,8 @@ $db->close();
                     <h2>Sign Out</h2>
                     <p>You will need to sign in again to view and manage your bookings.</p>
                 </div>
-                <button type="button" class="btn sign-out-button" id="sign-out-button">Sign Out</button>
+                <!-- <button type="button" class="btn sign-out-button" id="sign-out-button">Sign Out</button> -->
+                <a href="logout.php" class="btn sign-out-button">Sign Out</a>
             </section>
     </main>
     <!-- cancellation modal -->

@@ -15,6 +15,8 @@
     /* Status colours */
     --red: #C65A46;
     --green: #5F7D62;
+    --green-dark: #293B2D;
+    --red-dark: #4A2926;
 
 
     /* ========================= DARK THEME - DEFAULT ========================= */
@@ -303,7 +305,11 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 
 .login-submit-btn{width:100%; margin-top:4px}
 .login-error{padding: 12px 14px; background-color: rgba(198,90,70,0.12); color: var(--danger); border: 1px solid var(--border); border-radius:6px; font-size:0.82rem;line-height:1.5;}
-.login-error [hidden] {display:none}
+.login-error[hidden] {display:none}
+
+.login-feedback {margin-top:10px;margin-bottom:18px; padding:12px 14px; color: var(--burning-flame);text-align:center;}
+.login-success { color: var(--green); background-color: var(--green-dark); border: 1px solid var(--green); }
+.login-error { color: var(--red); background-color: var(--red-dark); border: 1px solid var()--red; }
 
 /* ========================= ACCOUNT ========================= */
 .account-page {padding: 52px 0 70px 0}
