@@ -83,10 +83,45 @@ if (selectedMovie) {
     `;
 }
 
-/* ========================= SHOWTIME SELECTION ========================= */
+// SHOWTIME SELECTION
 
 /* Finds the location dropdown */
 const locationSelect = document.getElementById("location-select");
+
+//create showtime dates for today and the next two days
+const showtimeDateGroups = document.querySelectorAll(".showtime-date-group");
+showtimeDateGroups.forEach(function (group,index){
+    const screeningDate = new Date();
+
+    //index 0 = today, 1=tmr, 2=two days later
+
+    screeningDate.setDate(screeningDate.getDate() + index);
+
+    const year = screeningDate.getFullYear();
+    const month = String(screeningDate.getMonth()+1).padStart(2,"0");
+    const day = String(screeningDate.getDate()).padStart(2,"0");
+
+    //database-friendly format:YYYYMMDD
+    const dateValue = `${year}-${month}-${day}`;
+
+    const dateHeading = group.querySelector("h3");
+    const dateButtons = group.querySelectorAll(".showtime-option");
+
+    let dateLabel = screeningDate.toLocaleDateString("en-SG",{
+        day: "numeric",
+        month: "short"
+    });
+
+    if(index === 0){
+        dateLabel = `Today, ${dateLabel}`;
+    } else if (index === 1){
+        dateLabel = `Tomorrow, ${dateLabel}`;
+    }
+    dateHeading.textContent = dateLabel;
+    dateButtons.forEach(function(button){
+        button.dataset.date = dateValue;
+    });
+});
 
 /* Finds every showtime button across all displayed dates */
 const showtimeButtons = document.querySelectorAll(".showtime-option");
