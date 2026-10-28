@@ -46,56 +46,132 @@ $studentId = trim($_POST["studentId"] ?? "");
 
 
 //validated the submitted values
+
+ // Validate the submitted values
 $errors = array();
 
-if($filmTitle === ""){
+// Film Title
+if ($filmTitle === "") {
     $errors[] = "Film title is required.";
+} elseif (strlen($filmTitle) > 100) {
+    $errors[] = "Film title cannot exceed 100 characters.";
 }
-if($genre === ""){
+
+// Genre
+if ($genre === "") {
     $errors[] = "Genre is required.";
 }
-if($runtime === ""){
-    $errors[] = "Run Time is required.";
-} elseif (!is_numeric($runtime) || $runtime <= 0) {
-    $errors[] = "Runtime must be a positive number.";
+
+// Runtime
+if ($runtime === "") {
+    $errors[] = "Running time is required.";
+} elseif (!ctype_digit($runtime) ||
+          (int)$runtime < 1 || (int)$runtime > 300) {
+    $errors[] = "Running time must be between 1 and 300 minutes.";
 }
-if($synopsis === ""){
+
+// Synopsis
+if ($synopsis === "") {
     $errors[] = "Synopsis is required.";
+} elseif (strlen($synopsis) > 1000) {
+    $errors[] = "Synopsis cannot exceed 1000 characters.";
 }
-if($language === ""){
-    $errors[] = "Primary langauge is required.";
+
+// Primary Language
+if ($language === "") {
+    $errors[] = "Primary language is required.";
+} elseif (!preg_match("/^[A-Za-z ]+$/", $language)) {
+    $errors[] = "Primary language must contain only letters and spaces.";
 }
-if($completionYear === ""){
+
+// Subtitle Language (optional)
+if ($subtitles !== "" &&
+    !preg_match("/^[A-Za-z ]+$/", $subtitles)) {
+    $errors[] = "Subtitle language must contain only letters and spaces.";
+}
+
+// Completion Year
+if ($completionYear === "") {
     $errors[] = "Completion year is required.";
-} elseif (!is_numeric($completionYear) || $completionYear <= 0) {
-    $errors[] = "Completion year must be a number.";
+} elseif (!ctype_digit($completionYear) ||
+          (int)$completionYear < 1900 ||
+          (int)$completionYear > (int)date("Y")) {
+    $errors[] = "Please enter a valid completion year.";
 }
 
-if($director === ""){
+// Director
+if ($director === "") {
     $errors[] = "Director is required.";
+} elseif (!preg_match("/^[A-Za-z ]+$/", $director)) {
+    $errors[] = "Director's name must contain only letters and spaces.";
 }
-if($filmLink === ""){
+
+// Cast (optional)
+if ($cast !== "" &&
+    !preg_match("/^[A-Za-z ,]+$/", $cast)) {
+    $errors[] = "Cast names may contain only letters, spaces and commas.";
+}
+
+// Validate HTTP(S) links with domain extensions
+function isValidFilmUrl($url) {
+    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        return false;
+    }
+
+    $parts = parse_url($url);
+    $scheme = strtolower($parts["scheme"] ?? "");
+    $host = $parts["host"] ?? "";
+
+    return in_array($scheme, ["http", "https"], true) &&
+           preg_match("/^([A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/", $host) === 1;
+}
+
+// Private Film Link
+if ($filmLink === "") {
     $errors[] = "Film link is required.";
-} elseif (!filter_var($filmLink, FILTER_VALIDATE_URL)) {
-    $errors[] = "Please enter a valid film link.";
-}
-if( $trailerLink !== "" && !filter_var($trailerLink, FILTER_VALIDATE_URL)
-    ){$errors[] = "Please enter a valid trailer link.";
+} elseif (!isValidFilmUrl($filmLink)) {
+    $errors[] = "Please enter a valid film link, e.g. https://example.com/film.";
 }
 
-
-if($submitterName === ""){
-    $errors[] = "SubmitterName is required.";
+// Trailer Link (optional)
+if ($trailerLink !== "" && !isValidFilmUrl($trailerLink)) {
+    $errors[] = "Please enter a valid trailer link.";
 }
-if($submitterEmail === ""){
+
+// Submitter details
+if ($submitterName === "") {
+    $errors[] = "Submitter name is required.";
+}
+
+if ($submitterEmail === "") {
     $errors[] = "Submitter email is required.";
-} elseif(!filter_var($submitterEmail, FILTER_VALIDATE_EMAIL)){
+} elseif (!filter_var($submitterEmail, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Please enter a valid email address.";
 }
 
-if($school === ""){
-    $errors[] = "School is required.";
+// School or Faculty
+if ($school === "") {
+    $errors[] = "School or faculty is required.";
+} elseif (!preg_match("/^[A-Za-z ]+$/", $school)) {
+    $errors[] = "School or faculty must contain only letters and spaces.";
 }
+
+// Matriculation Number
+if ($studentId === "") {
+    $errors[] = "Matriculation number is required.";
+} elseif (!preg_match("/^[A-Za-z0-9]+$/", $studentId)) {
+    $errors[] = "Matriculation number must contain only letters and numbers.";
+}
+
+// Declaration Checkboxes
+if (!isset($_POST["rightsConfirmation"])) {
+    $errors[] = "Please confirm that you have permission to submit this film.";
+}
+
+if (!isset($_POST["informationConfirmation"])) {
+    $errors[] = "Please confirm that the information provided is accurate.";
+}
+
 if($studentId === ""){
     $errors[] = "Student ID is required.";
 }
@@ -121,6 +197,57 @@ $referenceNumber = "NFH-"
 . "-"
 . rand(1000,9999);
 
+
+// Handle film poster upload
+$posterPath = null;
+
+if (!isset($_FILES["filmPoster"]) ||
+    $_FILES["filmPoster"]["error"] !== UPLOAD_ERR_OK) {
+    exit("Please upload a valid film poster.");
+}
+
+$poster = $_FILES["filmPoster"];
+
+// Limit poster to 5MB
+if ($poster["size"] > 5 * 1024 * 1024) {
+    exit("Film poster must be smaller than 5MB.");
+}
+
+// Check actual image type
+$imageInfo = getimagesize($poster["tmp_name"]);
+
+$allowedTypes = [
+    IMAGETYPE_JPEG => "jpg",
+    IMAGETYPE_PNG => "png",
+    IMAGETYPE_WEBP => "webp"
+];
+
+if ($imageInfo === false ||
+    !isset($allowedTypes[$imageInfo[2]])) {
+    exit("Only JPG, PNG and WebP images are allowed.");
+}
+
+$extension = $allowedTypes[$imageInfo[2]];
+
+// Folder already exists in your project
+$uploadDirectory = __DIR__ . "/uploads/posters/";
+
+// Generate unique filename
+$posterFilename = $referenceNumber . "-" .
+                  bin2hex(random_bytes(4)) . "." .
+                  $extension;
+
+// Save uploaded file
+$destination = $uploadDirectory . $posterFilename;
+
+if (!move_uploaded_file($poster["tmp_name"], $destination)) {
+    exit("Film poster could not be saved.");
+}
+
+// Store relative path for MySQL
+$posterPath = "uploads/posters/" . $posterFilename;
+
+
 //create the sql insert statement
 
 $query = "
@@ -139,13 +266,14 @@ $query = "
         film_link,
         film_password,
         trailer_link,
+        poster_path,
         submitter_name,
         submitter_email,
         school,
         student_id
         )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                ?, ?, ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
         ";
 
@@ -162,7 +290,7 @@ if(!$statement) {
 
 //bind the php values to the placeholders
 $statement->bind_param(
-    "sssisssissssssssss",
+    "sssisssisssssssssss",
     $referenceNumber,
     $filmTitle,
     $genre,
@@ -177,6 +305,7 @@ $statement->bind_param(
     $filmLink,
     $filmPassword,
     $trailerLink,
+    $posterPath,
     $submitterName,
     $submitterEmail,
     $school,
@@ -184,9 +313,9 @@ $statement->bind_param(
 );
 
 //execute the sql statement
-if ($statement->execute()) {
-    $statement->close();
-    $db->close();
+if ($statement -> execute()) {
+    $statement -> close();
+    $db -> close();
 
     header(
         "Location: submit.php?success=1&reference=" .
@@ -196,3 +325,13 @@ if ($statement->execute()) {
     }
     
 
+
+
+    // notes 
+    // trim() remove spaces from the beginning and end
+    // ctype_digit() check if the string contains only digits
+    // preg_match() check if the string matches a pattern
+    // filter_var() validate email and url
+    // parse_url() extract url components such as the domain name
+    // isset() check if a variable is set and not null
+    // date("Y") returns the current year

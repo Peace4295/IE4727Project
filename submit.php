@@ -45,7 +45,7 @@ $accountEmail = $_SESSION["email"];
             <p>NTU STUDENT FILMS</p>
             <h1>Submit a Film</h1>
             <p class="submission-eyebrow-text">
-                Share your film with the NTU community. Complete the form below and our team will contact you after reviewing your submission.
+                Share your film with the NTU community.<br> Complete the form below and our team will contact you after reviewing your submission.
             </p>
         </section>
         <form class="film-submission-form" id="film-submission-form" enctype="multipart/form-data" action="process-submission.php" method="post">
@@ -57,7 +57,7 @@ $accountEmail = $_SESSION["email"];
                 <div class="form-field">
                     <label for="film-title">Film Title*</label>
                     <input type="text" id="film-title" name="filmTitle" placeholder="Enter the title of your film" maxlength="100" required>
-
+                    <small class="field-error" id="film-title-error"></small>
                 </div>
                 <div class="submission-form-row">
                     <div class="form-field">
@@ -91,7 +91,7 @@ $accountEmail = $_SESSION["email"];
                         <input type="text" id="language" name="language" placeholder="Example: English" required>
                     </div>
                     <div class="form-field">
-                        <label for="subtitiles">Subtitle language</label>
+                        <label for="subtitles">Subtitle language</label>
                         <input type="text" id="subtitles" name="subtitles" placeholder="Example: English or None">
 
                     </div>
@@ -99,7 +99,8 @@ $accountEmail = $_SESSION["email"];
                 <div class="submission-form-row">
                     <div class="form-field">
                         <label for="completion-year">Year Completed</label>
-                        <input type="number" id="completion-year" name="completionYear" min="1900" max="2100" placeholder="2026" required>
+                        <input type="number" id="completion-year" name="completionYear" min="1900" max="2026" placeholder="2026" required>
+                        <small class="field-error" id="completion-year-error"></small>
                     </div>
                     <div class="submission-form-row">
                         <div class="form-field">
@@ -147,7 +148,7 @@ $accountEmail = $_SESSION["email"];
                 <div class="submission-form-row">
                     <div class="form-field">
                         <label for="film-password">Video password</label>
-                        <input type="text" id="filmpassword" name="filmPassword" placeholder="Only if the video is protected">
+                        <input type="text" id="film-password" name="filmPassword" placeholder="Only if the video is protected">
                     </div>
                 </div>
                 <div class="submission-form-row">
@@ -194,22 +195,34 @@ $accountEmail = $_SESSION["email"];
                 </div>
              </fieldset>
              <!-- declaration -->
-              <fieldset class="declaration-section">
-                
-                <label class="checkbox-field">
-                    <input type="checkbox" id="rights-confirmation" name="rightsConfirmation" required>
-                    <span>
-                        I confirm that I have permission to submit this film and its media for review and possible screening
-                    </span>
-                </label>
-                <label class="checkbox-field">
-                    <input type="checkbox" id="information-confirmation" name="informationConfirmation" required >
-                    <span>
-                        I confirm that the information provided is accurate.
-                    </span>
-                </label>
-                
-              </fieldset>
+              
+                <fieldset class="declaration-section">
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-field">
+                            <input type="checkbox" id="rights-confirmation"
+                                name="rightsConfirmation" required>
+                            <span>
+                                I confirm that I have permission to submit this film
+                                and its media for review and possible screening
+                            </span>
+                        </label>
+                        <small class="field-error" id="rights-confirmation-error"></small>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-field">
+                            <input type="checkbox" id="information-confirmation"
+                                name="informationConfirmation" required>
+                            <span>
+                                I confirm that the information provided is accurate.
+                            </span>
+                        </label>
+                        <small class="field-error" id="information-confirmation-error"></small>
+                    </div>
+
+                </fieldset>
+
               <div class="submission-actions">
                 <a href="index.html" class="btn btn-secondary"> Cancel </a>
 

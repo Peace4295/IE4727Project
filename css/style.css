@@ -263,9 +263,17 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .file-upload p { margin-bottom: 4px; color: var(--text-primary); font-weight: 600; }
 
 .declaration-section { display: flex; flex-direction: column; gap: 18px; border:none;}
+.checkbox-group {display:flex; flex-direction: column; gap: 4px;}
+.checkbox-group .field-error { margin-left: 30px; color: var(--red); font-size: 0.85rem; }
 .checkbox-field { display: flex; align-items: flex-start; gap: 12px; color: var(--text-secondary); line-height: 1.6; cursor: pointer; }
 .film-submission-form .checkbox-field input { flex-shrink: 0; width: 18px; min-height: 18px; margin-top: 3px; accent-color: var(--primary); }
 .submission-actions { display: flex; justify-content: flex-end; gap: 12px; }
+.field-error {display:block; min-height:18px; margin-top:6px;color:var(--red); font-size:0.85rem;}
+.film-submission-form .field-error { display: block; min-height: 18px; margin-top: 6px; color: var(--red); font-size: 0.85rem; }
+.film-submission-form [aria-invalid="true"]:not([type="checkbox"]) { border-color: var(--red); }
+.film-submission-form .field-error { display: block; color: var(--red); font-size: 0.85rem; line-height: 1.5; }
+.film-submission-form .field-error:empty { display: none; }
+
 
 .modal-overlay{position:fixed; inset:0; z-index: 1000; display:flex; justify-content:center; align-items:center; padding:24px;background-color:rgba(0,0,0,0.7) ;}
 .modal-overlay[hidden]{display:none}
