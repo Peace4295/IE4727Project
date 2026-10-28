@@ -6,23 +6,19 @@
 
     <title>NTU Films</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="images/favicon-2.png" >
+    <link rel="icon" type="image/png" href="images/favicon-light.png" >
 </head>
 
 <body>
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">
-            <!-- <img src="images/logo/logo-dark.png" alt="Nanyang Film House"> -->
-            </a>
+            <a href="index.html" class="logo"> <img src="images/logo/logo-navbar.png" alt="Nanyang Film House"> </a>
             <div class="nav-links">
                 <a href="index.html" class="active">Home</a>
                 <a href="moviecatalog.html">Movies</a>
                 <a href="submit.php">Submit a Film</a>
             </div>
-            <a href="account.php">
-                My Account
-            </a>
+            <a href="account.php"> My Account </a>
         </nav>
     </header>
 
@@ -31,10 +27,24 @@
         <section class="hero-carousel">
             <button class="carousel-btn prev-btn" aria-label="Previous Slide">&lt;</button>
             <div class="carousel-content">
-                <h1>Welcome to Nanyang Film House</h1>
-                <p>Discover and book outdoor film screenings across NTU.</p>
+                <img src="images/ad/ad avengers.png"
+                    class="carousel-image active"
+                    alt="Advertisement 1">
+
+                <img src="images/ad/ad joker.png"
+                    class="carousel-image"
+                    alt="Advertisement 2">
+
+                <img src="images/ad/ad zootopia.png"
+                    class="carousel-image"
+                    alt="Advertisement 3">
             </div>
-            <button class="carousel-btn next btn" aria-label="Next Slide">&gt; </button>
+            <button class="carousel-btn next-btn" aria-label="Next Slide">&gt;</button>
+            <div class="carousel-dots">
+                <button class="carousel-dot active" type="button" aria-label="Show advertisement 1"></button>
+                <button class="carousel-dot" type="button" aria-label="Show advertisement 2"></button>
+                <button class="carousel-dot" type="button" aria-label="Show advertisement 3"></button>
+            </div>
         </section>
 
         <!-- Horizontal search bar -->
@@ -72,19 +82,20 @@
                     <h2 class ="section-title">Now Showing</h2>
                     <div class="movie-grid-3">
                         <article class="movie-card">
-                            <div class ="poster-placeholder">
-                                <img src="images/movie/minionposter.jpg" alt="Minions Screening Poster">
-                            </div>
+                            <a href="moviedetails.html?id=3" class="movie-poster-link">
+                                <div class="poster-placeholder"> <img src="images/movie/minionposter.jpg" alt="Minions Screening Poster"> </div>
+                            </a>
                         </article>
                         <article class="movie-card">
-                            <div class ="poster-placeholder">
-                                <img src="images/movie/avengers.png" alt="Jumanji Screening Poster">
-                            </div>
+                            <a href="moviedetails.html?id=4" class="movie-poster-link">
+                                <div class="poster-placeholder"> <img src="images/movie/avengers.png" alt="Avengers Screening Poster"> </div>
+                            </a>
+                        </article>
                         </article>
                         <article class="movie-card">
-                            <div class ="poster-placeholder">
-                                <img src="images/movie/joker.png" alt="Jumanji Screening Poster">
-                            </div>
+                            <a href="moviedetails.html?id=2" class="movie-poster-link">
+                                <div class="poster-placeholder"> <img src="images/movie/joker.png" alt="Joker Screening Poster"> </div>
+                            </a>
                         </article>
                     </div>
                  </section>
@@ -94,19 +105,28 @@
                     <h2 class ="section-title">Coming Soon</h2>
                     <div class="movie-grid-3">
                         <article class="movie-card">
-                            <div class ="poster-placeholder">
-                                <img src="images/coming soon/batman.png" alt="Batman Poster">
-                            </div>
+                            <a href="moviedetails.html?id=14" class="movie-poster-link">
+                                <div class="poster-placeholder">
+                                    <img src="images/coming soon/batman.png"
+                                        alt="Batman Poster">
+                                </div>
+                            </a>
                         </article>
                         <article class="movie-card">
-                            <div class ="poster-placeholder">
-                                <img src="images/coming soon/frozen.png" alt="Frozen Poster">
-                            </div>
+                            <a href="moviedetails.html?id=13" class="movie-poster-link">
+                                <div class="poster-placeholder">
+                                    <img src="images/coming soon/frozen.png"
+                                        alt="Frozen Poster">
+                                </div>
+                            </a>
                         </article>
                         <article class="movie-card">
-                           <div class ="poster-placeholder">
-                                <img src="images/coming soon/greatestshowman.png" alt="Greatest Showman Poster">
-                            </div>
+                           <a href="moviedetails.html?id=12" class="movie-poster-link">
+                                <div class="poster-placeholder">
+                                    <img src="images/coming soon/greatestshowman.png"
+                                        alt="Greatest Showman Poster">
+                                </div>
+                            </a>
                         </article>
                     </div>
                  </section>

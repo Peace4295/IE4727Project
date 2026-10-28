@@ -48,15 +48,17 @@ SELECT
             content="width=device-width, initial-scale=1.0">
             <title>Film Submissions | Nayang Film House</title>
             <link rel="stylesheet" href="css/style.css">
+            <link rel="icon" type="image/png" href="images/favicon-dark.ico" >
     </head>
 
 <body>
     <header>
-        <nav class="navbar">
-            <div class="nav-links">
-                <a href="admin-submission.php">Film Submissions</a>
-            </div>
-            <a href="logout.php">Sign Out</a>
+        <nav class="navbar">                
+            <a href="index.html" class="logo"> <img src="images/logo/logo-navbar.png" alt="Nanyang Film House"> </a>
+            <div class="nav-links"> </div>
+            <a href="logout.php" class="logout-icon" aria-label="Sign Out" title="Sign out">
+                <img src="images/logout-icon.png" alt="Sign Out">
+            </a>
         </nav>
     </header>
 
@@ -68,12 +70,25 @@ SELECT
                 <h1>Film Submissions</h1>
                 <p>Review films submitted by students.</p>
             </div>
+            <a href="admin-submission.php" class="refresh-button" aria-label="Refresh Submissions" title="Refresh submissions">↻</a>
         </div>
-        <?php if (isset($_GET["updated"]) && $_GET["updated"]==="1"): ?>
-            <!-- role="status" allows screen readers to annouce the confirmation -->
+        
+        <?php if (isset($_GET["updated"])): ?>
+
+            <?php if ($_GET["updated"] === "1"): ?>
                 <div class="admin-feedback success-feedback" role="status">
-                Submission status updated successfully.</div>
-                <?php endif; ?>
+                    Submission status updated successfully.
+                </div>
+
+            <?php elseif ($_GET["updated"] === "0"): ?>
+                <div class="admin-feedback" role="alert">
+                    No submission was updated. It may have already been reviewed.
+                </div>
+            <?php endif; ?>
+
+        <?php endif; ?>
+
+
         <?php if ($result->num_rows === 0): ?>
             <p class="empty-message">No film submissions were found.</p>
 
@@ -125,7 +140,7 @@ SELECT
                                     }elseif ($status === "rejected") {
                                         $statusClass = "status-rejected";
                                     }else{
-                                        $statusClass = "status-pedning";
+                                        $statusClass = "status-pending";
                                     }?>
                                     <span class="status-badge <?= $statusClass ?>">
                                         <?= htmlspecialchars(ucwords(str_replace("_"," ",$status)))?>

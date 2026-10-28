@@ -74,13 +74,13 @@
     <!-- Global Navigation Bar -->
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">NTU Films</a>
+            <a href="index.html" class="logo"> <img src="images/logo/logo-navbar.png" alt="Nanyang Film House"> </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="moviecatalog.html" >Movies</a>
+                <a href="moviecatalog.html"  class="active">Movies</a>
                 <a href="submit.php">Submit a Film</a>
             </div>
-            <a href="account.php">My Account</a>
+            <a href="account.php">My Account </a>
         </nav>
     </header>
     
@@ -156,7 +156,6 @@
                         Continue to payment
                     </button>
                 </div>
-                </section>
          </section>
          <!-- PAYMENT -->
          <section
@@ -247,12 +246,12 @@
                 &#10003
             </div>
             <p class="confirmation-label">
-                Payment Sucessful
+                Booking Sucessful
             </p>
             <h2>Booking Confirmed!</h2>
             <p class="confirmation-message">
-                Your booking details have been recorded.<br>
-                A confrimation will be sent to your registered Outlook email
+                Your booking has been confirmed and recorded successfully.<br>
+                You can view your booking details under My account.
             </p>
 
             <div class="confirmation-details">

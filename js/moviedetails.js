@@ -14,6 +14,12 @@ const selectedMovie = allMovies.find(function (movie) {
     return movie.id === selectedMovieId;
 });
 
+const showtimesSection = document.getElementById("showtimes");
+
+if (selectedMovie && selectedMovie.status === "coming-soon") {
+    showtimesSection.hidden = true;
+}
+
 // Find the details container in moviedetails.html
 const detailsContainer = document.getElementById("movie-details");
 
@@ -54,12 +60,9 @@ if (selectedMovie) {
                     ${
                         selectedMovie.status === "coming-soon"
                             ? `
-                                <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                >
-                                    Notify Me
-                                </button>
+                                <p class="coming-soon-notice">
+                                    Screening dates will be announced soon.
+                                </p>
                             `
                             : `
                                 <a href="#showtimes" class="btn btn-primary">
@@ -156,16 +159,26 @@ function clearSelectedSession() {
     /* Remove the previously stored session */
     selectedSession = null;
 
-    /* Hide the selected-session summary */
+    //Hide the selected-session summary 
     selectedSessionBox.hidden = true;
 
     /* Prevent the user from continuing without a session */
     continueBookingButton.disabled = true;
 }
 
-/*
-    Adds click behaviour to every showtime button.
-*/
+// Disable screening times that have already passed
+showtimeButtons.forEach(function(button) {
+    const screeningDateTime = new Date(
+        `${button.dataset.date}T${button.dataset.time}:00`
+    );
+
+    if (screeningDateTime <= new Date()) {
+        button.disabled = true;
+        button.classList.add("unavailable");
+    }
+});
+
+/* Adds click behaviour to every showtime button.*/
 showtimeButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         /* Remove the selected style from all time buttons */

@@ -28,18 +28,13 @@ if(isset($_GET["error"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - NTU Films</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/favicon-light.png" >
 </head>
-
-
-
 <body>
     <main class="login-page">
     <div class="login-overlay"></div>
         <section class="login-card">
-
-        <a href="index.html" class="login-logo">
-            <img src="images/logo/logo-dark.png" alt="Nanyang Film House" >
-        </a>
+        <a href="index.html" class="login-logo"> <img src="images/logo/logo-navbar.png" alt="Nanyang Film House" > </a>
 
         <h1>Welcome Back</h1>
 

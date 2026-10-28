@@ -8,9 +8,9 @@ function createMovieCard(movie) {
 
     const actionButton = isComingSoon
         ? `
-            <button type="button" class="btn btn-secondary btn-block">
-                Notify Me
-            </button>
+            <a href="${detailsUrl}" class="btn btn-secondary btn-block">
+                View Details
+            </a>
         `
         : `
             <a href="${detailsUrl}#showtimes" class="btn btn-primary btn-block">
@@ -23,18 +23,13 @@ function createMovieCard(movie) {
 
             <a href="${detailsUrl}" class="movie-poster-link">
                 <div class="poster-placeholder">
-                    <img
-                        src="${movie.poster}"
-                        alt="${movie.title} poster"
-                    >
+                    <img src="${movie.poster}" alt="${movie.title} poster" >
                 </div>
             </a>
 
             <div class="movie-meta">
                 <h3 class="movie-title">
-                    <a href="${detailsUrl}" class="movie-title-link">
-                        ${movie.title}
-                    </a>
+                    <a href="${detailsUrl}" class="movie-title-link"> ${movie.title} </a>
                 </h3>
 
                 <p class="movie-info">

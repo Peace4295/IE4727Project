@@ -45,12 +45,21 @@ $statement = $db->prepare($sql);
 if(!$statement) {exit("Unable to prepare update: ". $db->error);}
 $statement->bind_param("si", $action, $submissionId);
 
-if(!$statement->execute()){
-    exit("Unable to update submission: ". $statement->error);
+
+if (!$statement->execute()) {
+    error_log("Submission status update failed: " . $statement->error);
+    exit("Unable to update submission. Please try again.");
 }
+
+// Check whether a submission was actually updated
+$updatedRows = $statement->affected_rows;
 
 $statement->close();
 $db->close();
 
-header("Location: admin-submission.php?updated=1");
+if ($updatedRows === 1) {
+    header("Location: admin-submission.php?updated=1");
+} else {
+    header("Location: admin-submission.php?updated=0");
+}
 exit;

@@ -172,10 +172,6 @@ if (!isset($_POST["informationConfirmation"])) {
     $errors[] = "Please confirm that the information provided is accurate.";
 }
 
-if($studentId === ""){
-    $errors[] = "Student ID is required.";
-}
-
 //stop if validation failed
 if (count($errors)> 0){
     echo "<h1>Submission could not be processed</h1>";
@@ -280,13 +276,23 @@ $query = "
  //prepare the sql statement
 $statement = $db->prepare($query);
 
-if(!$statement) {
+
+if (!$statement) {
+    // Remove uploaded poster if SQL preparation fails
+    if (file_exists($destination)) {
+        unlink($destination);
+    }
+
+    error_log("SQL preparation failed: " . $db->error);
+
     echo "<h1>Submission Failed</h1>";
-    echo "<p>The database statement could not be prepared.</p>";
+    echo "<p>Something went wrong while processing your submission.</p>";
+    echo '<p><a href="submit.php">Return to the form</a></p>';
 
     $db->close();
     exit;
-    }
+}
+
 
 //bind the php values to the placeholders
 $statement->bind_param(
@@ -313,16 +319,39 @@ $statement->bind_param(
 );
 
 //execute the sql statement
-if ($statement -> execute()) {
-    $statement -> close();
-    $db -> close();
+
+// Execute the SQL statement
+if ($statement->execute()) {
+
+    // Successful submission
+    $statement->close();
+    $db->close();
 
     header(
         "Location: submit.php?success=1&reference=" .
         urlencode($referenceNumber)
     );
     exit;
+
+} else {
+
+    // Log the database error
+    error_log("Film submission failed: " . $statement->error);
+
+    // Remove poster if database insertion fails
+    if (file_exists($destination)) {
+        unlink($destination);
     }
+
+    $statement->close();
+    $db->close();
+
+    echo "<h1>Submission Failed</h1>";
+    echo "<p>We couldn't save your film submission. Please try again.</p>";
+    echo '<p><a href="submit.php">Return to the form</a></p>';
+    exit;
+}
+
     
 
 

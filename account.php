@@ -122,7 +122,7 @@ $pendingReviewCount = 0;
 while ($submission = $submissionResult->fetch_assoc()) {
     $filmSubmissions[] = $submission;
 
-    if (strtolower($submission["status"]) === "pending_review") {
+    if (strtolower($submission["status"]) === "pending review") {
         $pendingReviewCount++;
     }
 }
@@ -140,13 +140,13 @@ $db->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account - NTU Films</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/favicon-light.png" >
 </head>
 <body>
-
     <!-- Global Navigation Bar -->
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">NTU Films</a>
+            <a href="index.html" class="logo"> <img src="images/logo/logo-navbar.png" alt="Nanyang Film House"> </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="moviecatalog.html">Movies</a>
