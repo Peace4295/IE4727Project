@@ -368,26 +368,115 @@ const confirmationReference =
 //     confirmationModal.showModal();
 // });
 
-paymentForm.addEventListener("submit", function (event){
-    //prevent submission if no seat was selected
-    if (selectedSeats.length === 0) {
+
+// MOCK PAYMENT VALIDATION
+const cardholderInput = document.getElementById("cardholder-name");
+const cardNumberInput = document.getElementById("card-number");
+const expiryInput = document.getElementById("card-expiry");
+const cvvInput = document.getElementById("card-cvv");
+
+const paymentFields = [
+    cardholderInput,
+    cardNumberInput,
+    expiryInput,
+    cvvInput
+];
+
+// Allow custom error messages instead of browser popups
+paymentForm.noValidate = true;
+
+function validatePaymentField(field) {
+    const value = field.value.trim();
+    let message = "";
+
+    if (field.id === "cardholder-name") {
+        if (!/^[A-Za-z ]+$/.test(value)) {
+            message = "Please enter a valid cardholder name.";
+        }
+    }
+
+    if (field.id === "card-number") {
+        if (!/^[0-9]{16}$/.test(value)) {
+            message = "Card number must contain exactly 16 digits.";
+        }
+    }
+
+    if (field.id === "card-expiry") {
+        const match = value.match(/^(\d{2})\/(\d{2})$/);
+
+        if (!match) {
+            message = "Please use MM/YY format.";
+        } else {
+            const month = Number(match[1]);
+            const year = 2000 + Number(match[2]);
+            const today = new Date();
+
+            if (month < 1 || month > 12) {
+                message = "Please enter a valid expiry month.";
+            } else if (
+                year < today.getFullYear() ||
+                (year === today.getFullYear() &&
+                 month < today.getMonth() + 1)
+            ) {
+                message = "This card has expired.";
+            }
+        }
+    }
+
+    if (field.id === "card-cvv") {
+        if (!/^[0-9]{3}$/.test(value)) {
+            message = "CVV must contain exactly 3 digits.";
+        }
+    }
+
+    const errorElement = document.getElementById(field.id + "-error")
+        || document.getElementById("cardholder-error");
+
+    errorElement.textContent = message;
+    field.setAttribute("aria-invalid", message ? "true" : "false");
+
+    return message === "";
+}
+
+// Validate each field when edited
+paymentFields.forEach(function(field) {
+    field.addEventListener("input", function() {
+        validatePaymentField(field);
+    });
+});
+
+// Validate before sending booking to PHP
+paymentForm.addEventListener("submit", function(event) {
+    let firstInvalidField = null;
+
+    paymentFields.forEach(function(field) {
+        if (!validatePaymentField(field) && !firstInvalidField) {
+            firstInvalidField = field;
+        }
+    });
+
+    if (selectedSeats.length === 0 || firstInvalidField) {
         event.preventDefault();
-        alert ("Please select at least one seat.");
+
+        if (firstInvalidField) {
+            firstInvalidField.focus();
+        } else {
+            alert("Please select at least one seat.");
+        }
         return;
     }
+
     const finalTotal = selectedSeats.length * seatPrice;
 
-    //copy the current booking info into hidden inputs
     formMovieId.value = bookingMovieId;
     formMovieTitle.value = bookingMovie.title;
     formLocation.value = bookingLocation;
     formDate.value = bookingDate;
     formTime.value = bookingTime;
-
-    formSeats.value = selectedSeats.join(",");      //convert ("C4","C5" into "c4,c5")
+    formSeats.value = selectedSeats.join(",");
     formTotal.value = finalTotal.toFixed(2);
-
 });
+
 
 //check whether php redirected back after a sucessful booking
 if(bookingUrlParameters.get("success")==="1"){

@@ -215,7 +215,7 @@ $db->close();
                                 $posterPath = $moviePosters[$movieId] ?? "images/favicon-2.png";
                                 $displayLocation = $booking["cinema_location"];
                                 if ($displayLocation === "north-spine") {$displayLocation = "North Spine Cinema";}
-                                elseif ($displayLocation ==="southspine") {$displayLocation = "South Spine Cinema";}
+                                elseif ($displayLocation ==="south-spine") {$displayLocation = "South Spine Cinema";}
                                 $displayDate = date( "j F Y", strtotime($booking["screening_date"]) );
                                 $displayTime = date( "g:i A", strtotime($booking["screening_time"]) );
                                 $sessionDetails = $displayLocation . " · " . $displayDate . " · " . $displayTime;

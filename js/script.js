@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Automatically change advertisements every 5 seconds
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 3000);
 
     // Show first advertisement
     showSlide(currentSlide);

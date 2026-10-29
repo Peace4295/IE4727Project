@@ -201,23 +201,25 @@
                 <div class="form-field">
                     <label for="booker-email">NTU Email</label>
                     <input type="email" id="booker-email" name="bookerEmail" value="<?php echo htmlspecialchars($accountEmail); ?>" readonly required>
-                    <label for="cardholder-name"> Name on card </label>
+                    <label for="cardholder-name">Name on card</label>
                     <input type="text" id="cardholder-name" required>
+                    <small class="payment-error" id="cardholder-error"></small>
                 </div>
                 <div class="form-field">
-                    <label for="card-number"> Card number </label>
-                    <input type="text" id="card-number" inputmode="numeric" maxlength="19" required >
+                    <label for="card-number">Card number </label>
+                    <input type="text" id="card-number" inputmode="numeric" maxlength="16" placeholder="1234 5678 9012 3456" required>
+                    <small class="payment-error" id="card-number-error"></small>
                 </div>
                 <div class="payment-form-row">
                     <div class="form-field">
-                      <label for="card-expiry">Expiry</label>
-                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
-                      
+                      <label for="card-expiry">Expiry Date</label>
+                      <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
+                      <small class="payment-error" id="card-expiry-error"></small>
                     </div>
                     <div class="form-field">
                       <label for="card-cvv">CVV</label>
-                    <input type="password" id="card-cvv" inputmode="numeric" maxlength="3" required>
-                  
+                      <input type="password" id="card-cvv" inputmode="numeric" maxlength="3" required>
+                      <small class="payment-error" id="card-cvv-error"></small>
                     </div>
                     
                 </div>
