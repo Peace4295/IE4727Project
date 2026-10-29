@@ -77,18 +77,23 @@ if ($synopsis === "") {
     $errors[] = "Synopsis cannot exceed 1000 characters.";
 }
 
+$allowedLanguages = [
+    "English", "Mandarin", "Malay", "Tamil", "Japanese", "Korean", "Hindi", "Other"
+];
+
 // Primary Language
 if ($language === "") {
     $errors[] = "Primary language is required.";
-} elseif (!preg_match("/^[A-Za-z ]+$/", $language)) {
-    $errors[] = "Primary language must contain only letters and spaces.";
+} elseif (!in_array($language, $allowedLanguages, true)) {
+    $errors[] = "Please select a valid primary language.";
 }
 
 // Subtitle Language (optional)
 if ($subtitles !== "" &&
-    !preg_match("/^[A-Za-z ]+$/", $subtitles)) {
-    $errors[] = "Subtitle language must contain only letters and spaces.";
+    !in_array($subtitles, $allowedLanguages, true)) {
+    $errors[] = "Please select a valid subtitle language.";
 }
+
 
 // Completion Year
 if ($completionYear === "") {

@@ -152,7 +152,11 @@ $db->close();
                 <a href="moviecatalog.html">Movies</a>
                 <a href="submit.php">Submit a Film</a>
             </div>
-            <a href="account.php" class="account-link active">My Account</a>
+            <a href="account.php" class="navbar-account">
+                <!-- &#128100 displays a person silhouette icon -->
+                <span class="navbar-avatar" aria-hidden="true"> &#128100; </span>
+                <span class="active">My Account</span>
+            </a>
         </nav>
     </header>
 

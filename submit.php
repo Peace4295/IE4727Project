@@ -34,7 +34,11 @@ $accountEmail = $_SESSION["email"];
                 <a href="moviecatalog.html">Movies</a>
                 <a href="submit.php" class="active">Submit a Film</a>
             </div>
-            <a href="account.php">My Account</a>
+            <a href="account.php" class="navbar-account">
+                <!-- &#128100 displays a person silhouette icon -->
+                <span class="navbar-avatar" aria-hidden="true"> &#128100; </span>
+                <span>My Account</span>
+            </a>
         </nav>
     </header>
     
@@ -75,7 +79,7 @@ $accountEmail = $_SESSION["email"];
                     </div>
                     <div class="form-field">
                         <label for="runtime">Running time (minutes)*</label>
-                        <input type="number" id="runtime" name="runtime" placeholder="Example: 15" min="1" max="300" required>
+                        <input type="text" id="runtime" name="runtime" placeholder="Example: 15" min="1" max="300" required>
                     </div>
                 </div>
                 <div class="form-field">
@@ -85,19 +89,38 @@ $accountEmail = $_SESSION["email"];
                 </div>
                 <div class="submission-form-row">
                     <div class="form-field">
-                        <label for="language">Primary Language</label>
-                        <input type="text" id="language" name="language" placeholder="Example: English" required>
-                    </div>
+                        <label for="language">Primary Language*</label>
+                        <select id="language" name="language" required>
+                            <option value="">Select a language</option>
+                            <option value="English">English</option>
+                            <option value="Mandarin">Mandarin</option>
+                            <option value="Malay">Malay</option>
+                            <option value="Tamil">Tamil</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        </div>
                     <div class="form-field">
-                        <label for="subtitles">Subtitle language</label>
-                        <input type="text" id="subtitles" name="subtitles" placeholder="Example: English or None">
-
+                        <label for="subtitles">Subtitle Language</label>
+                        <select id="subtitles" name="subtitles">
+                            <option value="">None</option>
+                            <option value="English">English</option>
+                            <option value="Mandarin">Mandarin</option>
+                            <option value="Malay">Malay</option>
+                            <option value="Tamil">Tamil</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                 </div>
                 <div class="submission-form-row">
                     <div class="form-field">
                         <label for="completion-year">Year Completed</label>
-                        <input type="number" id="completion-year" name="completionYear" min="1900" max="2026" placeholder="2026" required>
+                        <input type="text" id="completion-year" name="completionYear" maxlength="4" placeholder="2026" required>
                         <small class="field-error" id="completion-year-error"></small>
                     </div>
                     <div class="submission-form-row">

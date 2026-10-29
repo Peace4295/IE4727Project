@@ -18,8 +18,20 @@
                 <a href="moviecatalog.html">Movies</a>
                 <a href="submit.php">Submit a Film</a>
             </div>
-            <a href="account.php"> My Account </a>
+            <a href="account.php" class="navbar-account">
+                <!-- &#128100 displays a person silhouette icon -->
+                <span class="navbar-avatar" aria-hidden="true"> &#128100; </span>
+                <span>My Account</span>
+            </a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" type="button"> &#9776</button>
         </nav>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="moviecatalog.html">Movies</a>
+            <a href="submit.php">Submit a Film</a>
+            <a href="account.php">My Account</a>
+            <a href="logout.php" class="logout-btn">Log out</a>
+        </div>
     </header>
 
     <main class="container">
@@ -134,15 +146,39 @@
                  
 
             </div>
-                <aside class="announcement-card">
-                    <h2 class="section-title">Campus Announcements</h2>
-                    <div class="announcement-content">
-                        <p><strong>Wet Weather Notice: </strong>In the event of heavy rain, outdoor screenings at the Hive will be relocated to Lecture Theatre 1A.</p>
-                        <br>
-                        <p><strong>Seat Reservation: </strong>PLease bring your matric card for ticket validation at the enterance</p>
-                        
+                
+            <aside class="announcement-card">
+                <h2 class="section-title">Campus Announcements</h2>
+
+                <div class="announcement-content">
+
+                    <div class="announcement-item">
+                        <span class="announcement-icon">☔</span>
+                        <div>
+                            <h3>Wet Weather Notice</h3>
+                            <p> In the event of heavy rain, outdoor screenings at The Hive will be relocated to Lecture Theatre 1A. </p>
+                        </div>
                     </div>
-                 </aside>
+
+                    <div class="announcement-item">
+                        <span class="announcement-icon">🎟️</span>
+                        <div>
+                            <h3>Ticket Verification</h3>
+                            <p> Please bring your matriculation card for ticket verification at the entrance. </p>
+                        </div>
+                    </div>
+
+                    <div class="announcement-item">
+                        <span class="announcement-icon">⏰</span>
+                        <div>
+                            <h3>Screening Reminder</h3>
+                            <p> Please arrive 10 minutes before your scheduled screening. </p>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
          </div>
 
     </main>

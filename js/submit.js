@@ -91,24 +91,26 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (field.required && value === "") {
                 message = messages[field.id] || "This field is required.";
             } else if (value !== "") {
-                if (field.id === "runtime" &&
-                    (!Number.isInteger(Number(value)) ||
-                     Number(value) < 1 || Number(value) > 300)) {
-                    message = "Running time must be between 1 and 300 minutes.";
+                if (field.id === "runtime") {
+                    if (!/^\d+$/.test(value) ||
+                        Number(value) < 1 ||
+                        Number(value) > 300) {
+                        message = "Running time must be a whole number between 1 and 300 minutes.";
+                    }
                 }
 
                 if (field.id === "completion-year") {
                     const currentYear = new Date().getFullYear();
 
-                    if (!Number.isInteger(Number(value)) ||
+                    if (!/^\d{4}$/.test(value) ||
                         Number(value) < 1900 ||
                         Number(value) > currentYear) {
-                        message = `Please enter a year between 1900 and ${currentYear}.`;
+                        message = `Please enter a valid year between 1900 and ${currentYear}.`;
                     }
                 }
 
                 
-                if (["language", "subtitles", "director", "cast", "school"].includes(field.id)) {
+                if (["director", "cast", "school"].includes(field.id)) {
                     const namePattern = /^[A-Za-z ]+$/;
                     const castPattern = /^[A-Za-z ,]+$/;
 
