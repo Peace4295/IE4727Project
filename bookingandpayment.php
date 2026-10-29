@@ -68,6 +68,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Film Details - NTU Films</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/favicon-light.png" >
+
 </head>
 <body>
 
@@ -80,8 +82,20 @@
                 <a href="moviecatalog.html"  class="active">Movies</a>
                 <a href="submit.php">Submit a Film</a>
             </div>
-            <a href="account.php">My Account </a>
+            <a href="account.php" class="navbar-account">
+                <!-- &#128100 displays a person silhouette icon -->
+                <span class="navbar-avatar" aria-hidden="true"> &#128100; </span>
+                <span>My Account</span>
+            </a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" type="button"> &#9776</button>
         </nav>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a><hr>
+            <a href="moviecatalog.html">Movies</a><hr>
+            <a href="submit.php">Submit a Film</a><hr>
+            <a href="account.php">My Account</a>
+            <a href="logout.php" class="logout-btn">Log out</a>
+        </div>
     </header>
     
     <main class ="container booking-container">
@@ -306,5 +320,6 @@
    
         <!-- controls this booking page -->
     <script src="js/bookingandpayment.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

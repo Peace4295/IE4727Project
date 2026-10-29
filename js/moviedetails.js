@@ -14,7 +14,10 @@ const selectedMovie = allMovies.find(function (movie) {
     return movie.id === selectedMovieId;
 });
 
+
 const showtimesSection = document.getElementById("showtimes");
+
+if (showtimesSection) {showtimesSection.hidden = true;}
 
 if (selectedMovie && selectedMovie.status === "coming-soon") {
     showtimesSection.hidden = true;
@@ -65,9 +68,11 @@ if (selectedMovie) {
                                 </p>
                             `
                             : `
-                                <a href="#showtimes" class="btn btn-primary">
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        id="show-showtimes">
                                     Buy Tickets
-                                </a>
+                                </button>
                             `
                     }
                 </div>
@@ -85,6 +90,24 @@ if (selectedMovie) {
         </div>
     `;
 }
+
+// Find Buy Tickets after the movie details have been generated
+const showShowtimesButton = document.getElementById("show-showtimes");
+
+if (showShowtimesButton && showtimesSection) {
+    showShowtimesButton.addEventListener("click", function() {
+
+        // Show the hidden showtimes section
+        showtimesSection.hidden = false;
+
+        // Scroll smoothly to the showtimes
+        showtimesSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+}
+
 
 // SHOWTIME SELECTION
 
