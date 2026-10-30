@@ -1,5 +1,6 @@
 <?php
- ini_set("display_errors",1);
+ ini_set("display_errors",0);
+ ini_set("log_errors",0);
  error_reporting(E_ALL);
 
  session_start();
@@ -48,6 +49,26 @@ if ($movieTitle === "") { $errors[] = "The movie title is required."; }
 if ($location === "") { $errors[] = "The cinema location is required."; }
 if ($screeningDate === "") { $errors[] = "The screening date is required."; }
 if ($screeningTime === "") { $errors[] = "The screening time is required."; }
+// Validate screening date and time
+if ($screeningDate !== "" && $screeningTime !== "") {
+
+    date_default_timezone_set("Asia/Singapore");
+
+    $screening = DateTime::createFromFormat(
+        "!Y-m-d H:i",
+        $screeningDate . " " . $screeningTime
+    );
+
+    if (
+        !$screening ||
+        $screening->format("Y-m-d H:i") !==
+        $screeningDate . " " . $screeningTime
+    ) {
+        $errors[] = "Invalid screening date or time.";
+    } elseif ($screening <= new DateTime()) {
+        $errors[] = "You cannot book a screening that has already started.";
+    }
+}
 if ( $bookerEmail === "" || !filter_var($bookerEmail, FILTER_VALIDATE_EMAIL) ) { $errors[] = "A valid NTU email address is required."; }
 
 $ticketCount = count($selectedSeats);  //count how many seats were selected
@@ -148,8 +169,7 @@ if(count($unavailableSeats)>0){
 
 //this one is main booking
 
-$referenceNumber = "NTF-". date("Ymd"). "-" . random_int(1000,9999);
-
+$referenceNumber = "NTF-" . date("Ymd") . "-" . strtoupper(bin2hex(random_bytes(6)));
 //insert booking
 $query = "
    INSERT INTO bookings(
@@ -165,61 +185,129 @@ $query = "
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ";
 
-//prepare the SQL statement
-$statement = $db->prepare($query);
+    
+// Start transaction so booking and seats are saved together
+$db->begin_transaction();
 
-//stop if my sql could not prepare the statement
-if(!$statement) {
-   echo "<h1>Booking Failed</h1>";
-   echo "<p>The booking statement could not be prepared.</p>";
+try {
+    // Prepare and insert the main booking
+    $statement = $db->prepare($query);
 
-   $db->close();
-   exit;
-}
+    if (!$statement) {
+        throw new Exception("Could not prepare booking statement.");
+    }
 
-//bind php values to the sql placeholders (s=string,i=integer,d=decimal)
-$statement ->bind_param(
-   "sisssssid",
-    $referenceNumber,
-    $movieId,
-    $movieTitle,
-    $location,
-    $screeningDate,
-    $screeningTime,
-    $bookerEmail,
-    $ticketCount,
-    $totalAmount
-);
+    $statement->bind_param(
+        "sisssssid",
+        $referenceNumber,
+        $movieId,
+        $movieTitle,
+        $location,
+        $screeningDate,
+        $screeningTime,
+        $bookerEmail,
+        $ticketCount,
+        $totalAmount
+    );
 
-// Execute the main booking insett
-if ($statement->execute()) {
-    //get the auto generated booking-id
+    if (!$statement->execute()) {
+        throw new Exception("Could not save booking.");
+    }
+
     $bookingId = $db->insert_id;
 
-    //prepare the query for inserting each selected seat
-    $seatQuery = " INSERT INTO booking_seats (booking_id, seat_number) VALUES (?,?)";
+    // Prepare seat insertion
+    $seatQuery = "INSERT INTO booking_seats
+                  (booking_id, seat_number)
+                  VALUES (?, ?)";
+
     $seatStatement = $db->prepare($seatQuery);
 
-    if(!$seatStatement) {
-      echo "<h1>Booking Failed</h1>";
-      echo "<p>The seat statement could not be prepared.</p>";
-
-      $statement->close();
-      $db->close();
-      exit;
+    if (!$seatStatement) {
+        throw new Exception("Could not prepare seat statement.");
     }
-   //insert each selected seat
+
+    // Save all selected seats
     foreach ($selectedSeats as $seatNumber) {
-      $seatStatement->bind_param(
-         "is",
-         $bookingId, $seatNumber
-      );
-      $seatStatement->execute();
+        $seatStatement->bind_param(
+            "is",
+            $bookingId,
+            $seatNumber
+        );
+
+        if (!$seatStatement->execute()) {
+            throw new Exception("Could not save seat.");
+        }
     }
 
-// Close the prepared statement
-$seatStatement->close();
-$statement->close();
+    // All inserts succeeded
+    $db->commit();
+
+    $seatStatement->close();
+    $statement->close();
+
+      } catch (Throwable $error) {
+         // Undo all inserts if anything failed
+         $db->rollback();
+
+         error_log("Booking database error: " . $error->getMessage());
+         $db->close();
+
+         echo "<h1>Booking Failed</h1>";
+         echo "<p>Your booking could not be completed. Please try again.</p>";
+         echo '<p><a href="moviecatalog.html">Return to movies</a></p>';
+         exit;
+      }
+
+
+ // EMAIL ACKNOWLEDGEMENT
+ // Send only after the booking has been saved.
+
+ $emailSubject = "Nanyang Film House - Booking Confirmation";
+
+ $displayLocation = ucwords(str_replace("-", " ", $location));
+ $emailMessage =
+     "Dear Customer,\r\n\r\n" .
+     "Thank you for booking with Nanyang Film House!\r\n\r\n" .
+     "Your booking has been confirmed.\r\n\r\n" .
+     "BOOKING DETAILS\r\n" .
+     "----------------------------------------\r\n" .
+     "Booking Reference: " . $referenceNumber . "\r\n" .
+     "Movie: " . $movieTitle . "\r\n" .
+     "Cinema Location: " . $displayLocation . "\r\n" .
+     "Screening Date: " . $screeningDate . "\r\n" .
+     "Screening Time: " . $screeningTime . "\r\n" .
+     "Selected Seats: " . implode(", ", $selectedSeats) . "\r\n" .
+     "Number of Tickets: " . $ticketCount . "\r\n" .
+     "Total Amount: $" . number_format($totalAmount, 2) . "\r\n" .
+     "----------------------------------------\r\n\r\n" .
+     "Please keep your booking reference for your records.\r\n\r\n" .
+     "We look forward to seeing you!\r\n\r\n" .
+     "Nanyang Film House";
+
+ $emailHeaders =
+     "From: noreply@localhost\r\n" .
+     "Reply-To: noreply@localhost\r\n" .
+     "X-Mailer: PHP/" . phpversion();
+
+ ob_start();
+
+ try {
+     require_once "/Applications/XAMPP/xamppfiles/htdocs/IE4727Project/mail_patch.php";
+
+     \mail_patch\mail(
+         $bookerEmail,
+         $emailSubject,
+         $emailMessage,
+         $emailHeaders,
+         "-fnoreply@localhost"
+     );
+ } catch (Throwable $error) {
+     error_log("Booking email error: " . $error->getMessage());
+ }
+
+ ob_end_clean();
+
 $db->close();
 
 //send the user back too bookingandpayment.php
@@ -236,11 +324,4 @@ $redirectUrl =
 
 header("Location:" . $redirectUrl);
 exit;
-} else {
-   echo "<h1>Booking Failed</h1>";
-   echo "<p>The booking could not be saved</p>";
-
-   $statement->close();
-   $db->close();
-   exit;
-}
+ 

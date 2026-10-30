@@ -149,15 +149,23 @@ $db->close();
             <a href="index.html" class="logo"> <img src="images/logo/logo-navbar.png" alt="Nanyang Film House"> </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="moviecatalog.html">Movies</a>
+                <a href="moviecatalog.html" >Movies</a>
                 <a href="submit.php">Submit a Film</a>
             </div>
-            <a href="account.php" class="navbar-account">
+            <a href="account.php" class="navbar-account active">
                 <!-- &#128100 displays a person silhouette icon -->
                 <span class="navbar-avatar" aria-hidden="true"> &#128100; </span>
-                <span class="active">My Account</span>
+                <span>My Account</span>
             </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" type="button"> &#9776</button>
         </nav>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a><hr>
+            <a href="moviecatalog.html">Movies</a><hr>
+            <a href="submit.php">Submit a Film</a><hr>
+            <a href="account.php">My Account</a>
+            <a href="logout.php" class="logout-btn">Log out</a>
+        </div>
     </header>
 
     <main class="container account-page">
@@ -230,11 +238,7 @@ $db->close();
                         <?php if ($bookingStatus !== "upcoming"): ?> hidden
                         <?php endif; ?>
                         >
-                        <img 
-                        src="<?php echo htmlspecialchars($posterPath); ?>"
-                        alt="<?php echo htmlspecialchars($booking["movie_title"]
-                        );
-                        ?> poster" class="account-booking-poster">
+                        <img src="<?php echo htmlspecialchars($posterPath); ?>" alt="<?php echo htmlspecialchars($booking["movie_title"] ); ?> poster" class="account-booking-poster">
                         <div class="account-booking-info">
                             <h3><?php echo htmlspecialchars($booking["movie_title"]);?></h3>
                             <p><?php echo htmlspecialchars($sessionDetails);?></p>
@@ -243,14 +247,14 @@ $db->close();
                             <p>Total: $ <?php echo number_format( $booking["total_amount"], 2 ); ?> </p>
                         </div>
                         <div class="account-booking-actions">
-                            <span class="booking-status <?php echo htmlspecialchars($bookingStatus); ?>"> <?php echo ucfirst( htmlspecialchars($bookingStatus) ); ?> </span>
-                            <button type="button" class="btn btn-secondary view-booking-button" 
+                            <!-- <span class="booking-status <?php echo htmlspecialchars($bookingStatus); ?>"> <?php echo ucfirst( htmlspecialchars($bookingStatus) ); ?> </span> -->
+                            <!-- <button type="button" class="btn btn-secondary view-booking-button" 
                                 data-movie-title="<?php echo htmlspecialchars( $booking["movie_title"] ); ?>"
                                 data-session="<?php echo htmlspecialchars($sessionDetails); ?>"
                                 data-seats="<?php echo htmlspecialchars( $booking["seats"] ?? "" ); ?>"
                                 data-reference="<?php echo htmlspecialchars( $booking["reference_number"] ); ?>">
                                 View Details 
-                            </button>
+                            </button> -->
                             <?php if ($bookingStatus === "upcoming"): ?>
                             <button type="button" class="cancel-booking-button" 
                                 data-booking-id="<?php echo (int) $booking["booking_id"]; ?>"
@@ -265,7 +269,6 @@ $db->close();
                            <p class="empty-account-message" id="empty-booking-message" hidden > No bookings found. </p>
 
                         <?php endif; ?>             
-
                 </div>
             
           </section>
@@ -277,13 +280,32 @@ $db->close();
                         <p>Track your submitted student films.</p>
                     </div>
                 </div>
+
+                <!-- Film submission status tabs -->
+                <div class="submission-tabs" role="tablist"
+                    aria-label="Filter film submissions">
+                    <button type="button" class="submission-tab active" data-status="all" aria-selected="true"> All </button>
+                    <button type="button" class="submission-tab" data-status="pending review" aria-selected="false"> Pending </button>
+                    <button type="button" class="submission-tab" data-status="approved" aria-selected="false"> Approved </button>
+                    <button type="button" class="submission-tab" data-status="rejected" aria-selected="false"> Rejected </button>
+                </div>
+
                 <div class="film-submission-list" id="film-submission-list">
                     <?php if (count($filmSubmissions) === 0): ?>
                         <p class="empty-account-message">
                             You have not submitted any films.</p>
                     <?php else: ?>
                         <?php foreach($filmSubmissions as $submission): ?>
-                        <article class="account-film-submission">
+                        
+                        <article class="account-film-submission"
+                            data-submission-status="<?php
+                                echo htmlspecialchars(
+                                    strtolower(trim($submission["status"])),
+                                    ENT_QUOTES,
+                                    "UTF-8"
+                                );
+                            ?>">
+
                             <h3>
                                 <?php echo htmlspecialchars($submission["film_title"]);
                                 ?></h3>
@@ -300,7 +322,7 @@ $db->close();
                                     }elseif ($status === "rejected") {
                                         $statusClass = "status-rejected";
                                     }else{
-                                        $statusClass = "status-pedning";
+                                        $statusClass = "status-pending";
                                     }?>
                                     <span class="status-badge <?= $statusClass ?>">
                                         <?= htmlspecialchars(ucwords(str_replace("_"," ",$status)))?>
@@ -308,6 +330,10 @@ $db->close();
                         <?php endforeach; ?>
                         <?php endif; ?>
                 </div>
+
+            <!-- Show More / Show Less button -->
+            <button type="button" class="btn btn-secondary submission-show-more" id="submission-show-more" hidden> Show More </button>
+
             </section>
             
           </div>
@@ -340,5 +366,6 @@ $db->close();
 
      </dialog>
     <script src="js/account.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

@@ -26,12 +26,12 @@ $accountEmail = $_SESSION["email"];
     </head>
     <body>
     <!-- Global Navigation Bar -->
-    <header>
+   <header>
         <nav class="navbar">
             <a href="index.html" class="logo"> <img src="images/logo/logo-navbar.png" alt="Nanyang Film House"> </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="moviecatalog.html">Movies</a>
+                <a href="moviecatalog.html"  >Movies</a>
                 <a href="submit.php" class="active">Submit a Film</a>
             </div>
             <a href="account.php" class="navbar-account">
@@ -39,7 +39,15 @@ $accountEmail = $_SESSION["email"];
                 <span class="navbar-avatar" aria-hidden="true"> &#128100; </span>
                 <span>My Account</span>
             </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" type="button"> &#9776</button>
         </nav>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a><hr>
+            <a href="moviecatalog.html">Movies</a><hr>
+            <a href="submit.php">Submit a Film</a><hr>
+            <a href="account.php">My Account</a>
+            <a href="logout.php" class="logout-btn">Log out</a>
+        </div>
     </header>
     
     <main class="container submission-page">
@@ -273,5 +281,6 @@ $accountEmail = $_SESSION["email"];
         </div>
     </div>
     <script src="js/submit.js"></script>
+    <script src="js/script.js"></script>
  </body>
 </html>

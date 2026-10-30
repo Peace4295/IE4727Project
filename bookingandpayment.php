@@ -235,21 +235,11 @@
                       <input type="password" id="card-cvv" inputmode="numeric" maxlength="3" required>
                       <small class="payment-error" id="card-cvv-error"></small>
                     </div>
-                    
                 </div>
-                
 
                 <div class="booking-actions">
-                    <button
-                    type="button"
-                    class="btn btn-primary"
-                    id="back-to-seats"
-                    >Back To Seats</button>
-                
-                    <button
-                    type="submit"
-                    class="btn btn-primary"
-                    >Pay Now</button>
+                    <button type="button" class="btn btn-secondary" id="back-to-seats" >Back To Seats</button>
+                    <button type="submit" class="btn btn-primary" >Pay Now</button>
                 </div>
              </form>
          </section>
@@ -258,35 +248,16 @@
     <!-- BOOKING CONFIRMATION MODAL -->
      <dialog class="confirmation-modal" id="confirmation-modal">
         <div class="confirmation-content">
-            <div class="confirmation-icon" aria-hidden="true">
-                &#10003
-            </div>
-            <p class="confirmation-label">
-                Booking Sucessful
-            </p>
+            <div class="confirmation-icon" aria-hidden="true"> &#10003 </div>
+            <p class="confirmation-label"> Booking Sucessful </p>
             <h2>Booking Confirmed!</h2>
             <p class="confirmation-message">
-                Your booking has been confirmed and recorded successfully.<br>
+                Thank you for booking with Nanyang Film House!<br>
+                A confirmation email has been sent to you<br>
                 You can view your booking details under My account.
             </p>
 
             <div class="confirmation-details">
-                <!-- <div>
-                    <span>Movie</span>
-                    <strong id="confirmation-movie"></strong>
-                </div>
-                <div>
-                    <span>Session</span>
-                    <strong id="confirmation-session"></strong>
-                </div>
-                 <div>
-                    <span>Seats</span>
-                    <strong id="confirmation-seats"></strong>
-                </div>
-                 <div>
-                    <span>Total Paid</span>
-                    <strong id="confirmation-total"></strong>
-                </div> -->
                  <div>
                     <span>Booking reference</span>
                     <strong id="confirmation-ref"></strong>
@@ -294,13 +265,8 @@
                 
             </div>
          <div class="confirmation-actions">
-             <a href="account.php" class="btn btn-primary">
-                 View My Bookings
-             </a>
-
-             <a href="moviecatalog.html" class="btn btn-secondary">
-                   Back to Movies
-             </a>
+             <a href="account.php" class="btn btn-primary"> View My Bookings </a>
+             <a href="moviecatalog.html" class="btn btn-secondary"> Back to Movies </a>
         </div>
 
         </div>

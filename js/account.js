@@ -126,15 +126,102 @@ editProfileButton.addEventListener("click", function () {
 });
 
 
-//signout button
-signOutButton.addEventListener("click",function(){
-    const shouldSignOut = confirm(
-        "Are you shure you want to sign out?"
-    );
-    if(shouldSignOut){
-        window.location.href = "login.php";
-    }
-});
-
 //initial display
 displaySelectedBookings();
+
+
+// FILM SUBMISSION STATUS TABS
+
+
+// FILM SUBMISSION STATUS TABS + SHOW MORE / SHOW LESS
+
+const submissionTabs = document.querySelectorAll(".submission-tab");
+
+const filmSubmissionCards = document.querySelectorAll(
+    ".account-film-submission"
+);
+
+const showMoreButton = document.getElementById("submission-show-more");
+
+let selectedSubmissionStatus = "all";
+let showAllSubmissions = false;
+
+// Filter submissions and limit results to three initially
+function displaySelectedSubmissions() {
+    let matchingCount = 0;
+    let visibleCards = [];
+
+    filmSubmissionCards.forEach(function(card) {
+        const filmStatus = card.dataset.submissionStatus;
+
+        const matchesStatus =
+            selectedSubmissionStatus === "all" ||
+            filmStatus === selectedSubmissionStatus;
+
+        if (matchesStatus) {
+            matchingCount++;
+        }
+
+        const shouldShow =
+            matchesStatus && (showAllSubmissions || matchingCount <= 3);
+
+        card.hidden = !shouldShow;
+
+        // reset helper class first
+        card.classList.remove("is-last-visible");
+
+        if (shouldShow) {
+            visibleCards.push(card);
+        }
+    });
+
+    // mark the last visible card
+    if (visibleCards.length > 0) {
+        visibleCards[visibleCards.length - 1].classList.add("is-last-visible");
+    }
+
+    if (showMoreButton) {
+        showMoreButton.hidden = matchingCount <= 3;
+        showMoreButton.textContent = showAllSubmissions
+            ? "Show Less"
+            : "Show More";
+    }
+}
+
+
+
+
+// Handle tab selection
+submissionTabs.forEach(function(tab) {
+
+    tab.addEventListener("click", function() {
+
+        selectedSubmissionStatus = tab.dataset.status;
+
+        // Reset expansion when switching tabs
+        showAllSubmissions = false;
+
+        submissionTabs.forEach(function(otherTab) {
+            const isActive = otherTab === tab;
+
+            otherTab.classList.toggle("active", isActive);
+            otherTab.setAttribute(
+                "aria-selected",
+                isActive ? "true" : "false"
+            );
+        });
+
+        displaySelectedSubmissions();
+    });
+});
+
+// Handle Show More / Show Less
+if (showMoreButton) {
+    showMoreButton.addEventListener("click", function() {
+        showAllSubmissions = !showAllSubmissions;
+        displaySelectedSubmissions();
+    });
+}
+
+// Initially display only three submissions
+displaySelectedSubmissions();

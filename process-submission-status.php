@@ -42,7 +42,10 @@ WHERE submission_id = ?
 
 $statement = $db->prepare($sql);
 
-if(!$statement) {exit("Unable to prepare update: ". $db->error);}
+if (!$statement) {
+    error_log("Submission status preparation failed: " . $db->error);
+    exit("Unable to process the submission. Please try again.");
+}
 $statement->bind_param("si", $action, $submissionId);
 
 
