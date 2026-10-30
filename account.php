@@ -85,7 +85,7 @@ while ($booking = $bookingResult->fetch_assoc()){
         $booking["display_status"] = "cancelled";
     } else{
         $screeningTimestamp = strtotime(
-            $booking["screening_date"]. "".
+            $booking["screening_date"]. " " .
             $booking["screening_time"]
             );
         if($screeningTimestamp<time()){
@@ -171,13 +171,12 @@ $db->close();
     <main class="container account-page">
         <!-- profile -->
         <section class="account-profile">
-            <div class="profile-avatar" id="profile-avatar">PC</div>
+            
             <div class="profile-information">
                 <p class="account-eyebrow">MY ACCOUNT</p>
                 <h1 id="profile-name"><?php echo htmlspecialchars($accountName);?></h1>
                 <p id="profile-email"><?php echo htmlspecialchars($accountEmail);?></p>
             </div>
-            <button type="button" class="btn btn-secondary" id="edit-profile-button">Edit Profile</button>
          </section>
          <!-- account -->
          <section class="account-statistics" aria-label="Account overview">

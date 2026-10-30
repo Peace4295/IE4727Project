@@ -46,7 +46,7 @@ if(isset($_GET["error"])){
 
         <form class="login-form" action="process-login.php" method="post" id="login-form">
             <div class="login-field">
-                <label for="email"> NTU Email </label>
+                <label for="login-email"> NTU Email </label>
                 <input type="email" id="login-email" name="email" placeholder="username@e.ntu.edu.sg" autocomplete="username" required >
             </div>
             <div class="login-field">
@@ -59,9 +59,6 @@ if(isset($_GET["error"])){
                 </div>
                 
             </div>
-                <div class="login-options">
-                    <a href="#" class="forget-pw-link">Forgot Password?</a>
-                </div>
 
             <p class="login-error" id="login-error" hidden></p>
             <button type="submit" class="btn btn-primary login-submit-btn">

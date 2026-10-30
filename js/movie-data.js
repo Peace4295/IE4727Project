@@ -177,10 +177,10 @@ const comingSoon =[
         poster: "images/coming soon/batman.png",
         status: "coming-soon",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Renee Ong",
-        cast: "Zi Yang, Priscilla, Arden",
-        releaseDate: "15 March 2025"
+        synopsis: "Eight years after Batman disappeared from Gotham City, Bruce Wayne is forced out of retirement when the ruthless terrorist Bane threatens to destroy the city. Facing his greatest challenge yet, Batman must overcome his past and rise again to save Gotham.",
+        director: "Christopher Nolan",
+        cast: "Christian Bale, Tom Hardy, Anne Hathaway, Michael Caine, Gary Oldman, Joseph Gordon-Levitt, Morgan Freeman",
+        
     },
     {
         id: 12,
@@ -193,10 +193,10 @@ const comingSoon =[
         poster: "images/coming soon/greatestshowman.png",
         status: "coming-soon",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Renee Ong",
-        cast: "Zi Yang, Priscilla, Arden",
-        releaseDate: "15 March 2025"
+        synopsis: "Inspired by the life of P.T. Barnum, this musical follows an ambitious showman who rises from poverty to create an extraordinary spectacle celebrating talent, individuality, and imagination. Along the way, he discovers the importance of family, friendship, and acceptance.",
+        director: "Michael Gracey",
+        cast: "Hugh Jackman, Zac Efron, Zendaya, Michelle Williams, Rebecca Ferguson, Keala Settle",
+       
     },
     {
         id: 13,
@@ -209,9 +209,10 @@ const comingSoon =[
         poster: "images/coming soon/frozen.png",
         status: "coming-soon",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Steven Caple Jr.",
-        cast: "Anthony Ramos, Dominique Fishback, Luna Lauren Velez",
+        synopsis: "When Queen Elsa's magical powers trap the kingdom of Arendelle in an eternal winter, her fearless sister Anna sets out to find her. Joined by Kristoff, his reindeer Sven, and a cheerful snowman named Olaf, Anna discovers that true love may be the key to saving her family and kingdom.",
+        director: "Chris Buck, Jennifer Lee",
+        cast: "Kristen Bell, Idina Menzel, Jonathan Groff, Josh Gad, Santino Fontana, Alan Tudyk",
+        
     },
     {
         id: 14,
@@ -224,10 +225,10 @@ const comingSoon =[
         poster: "images/coming soon/transformers.png",
         status: "coming-soon",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Renee Ong",
-        cast: "Zi Yang, Priscilla, Arden",
-        releaseDate: "15 March 2025"
+        synopsis: "When Queen Elsa's magical powers trap the kingdom of Arendelle in an eternal winter, her fearless sister Anna sets out to find her. Joined by Kristoff, his reindeer Sven, and a cheerful snowman named Olaf, Anna discovers that true love may be the key to saving her family and kingdom.",
+        director: "Chris Buck, Jennifer Lee",
+        cast: "Kristen Bell, Idina Menzel, Jonathan Groff, Josh Gad, Santino Fontana, Alan Tudyk",
+        
     },
     {
         id: 15,
@@ -240,9 +241,9 @@ const comingSoon =[
         poster: "images/coming soon/spiderman.png",
         status: "coming-soon",
         
-        synopsis: "A thrilling action-packed film with stunning visuals and an engaging storyline.",
-        director: "Renee Ong",
-        cast: "Zi Yang, Priscilla, Arden",
-        releaseDate: "15 March 2025"
+        synopsis: "After the world forgets Peter Parker's identity, he dedicates himself to protecting New York City as Spider-Man. As his former friends move on without him, Peter faces a mysterious new threat and a dangerous transformation that could change his life forever.",
+        director: "Destin Daniel Cretton",
+        cast: "Tom Holland, Zendaya, Sadie Sink, Jacob Batalon, Jon Bernthal, Mark Ruffalo, Michael Mando",
+        releaseDate: "31 July 2026"
     },
 ]

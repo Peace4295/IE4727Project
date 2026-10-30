@@ -87,7 +87,7 @@ $accountEmail = $_SESSION["email"];
                     </div>
                     <div class="form-field">
                         <label for="runtime">Running time (minutes)*</label>
-                        <input type="text" id="runtime" name="runtime" placeholder="Example: 15" min="1" max="300" required>
+                        <input type="text" id="runtime" name="runtime" input="numeric" placeholder="Example: 15" required>
                     </div>
                 </div>
                 <div class="form-field">
@@ -191,7 +191,7 @@ $accountEmail = $_SESSION["email"];
                     <div class="file-upload">
                         <input type="file" id="film-poster" name="filmPoster" accept=".jpg,.jpeg,.png, .webp" required >
                         <p>Upload your film poster</p>
-                        <small>Accepted formats: JPG or PNG</small>
+                        <small>Accepted formats: JPG or PNG or WebP (max5MB)</small>
                     </div>
                 </div>
             </fieldset>

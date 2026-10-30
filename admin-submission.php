@@ -46,7 +46,7 @@ SELECT
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0">
-            <title>Film Submissions | Nayang Film House</title>
+            <title>Film Submissions | Nanyang Film House</title>
             <link rel="stylesheet" href="css/style.css">
             <link rel="icon" type="image/png" href="images/favicon-dark.ico" >
     </head>
@@ -67,7 +67,7 @@ SELECT
             
             <div>
                 <p class="eyebrows">ADMINSTRATION</p>
-                <h1>Film Submissions</h1>
+                <h1 class="admin-header">Film Submissions</h1>
                 <p>Review films submitted by students.</p>
             </div>
             <a href="admin-submission.php" class="refresh-button" aria-label="Refresh Submissions" title="Refresh submissions">↻</a>
