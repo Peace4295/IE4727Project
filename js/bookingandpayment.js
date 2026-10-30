@@ -200,7 +200,7 @@ function toggleSeat(seatButton) {
         
          //Stop users from selecting more than six seats.
         if (selectedSeats.length >= maximumSeats) {
-            alert(`You may select up to ${maximumSeats} seats.`);
+            document.getElementById("seat-limit-modal").showModal();
             return;
         }
 
@@ -211,6 +211,13 @@ function toggleSeat(seatButton) {
 
     updateSeatSummary();
 }
+// Close the seat limit modal
+const seatLimitModal = document.getElementById("seat-limit-modal");
+const closeSeatLimitButton = document.getElementById("close-seat-limit");
+
+closeSeatLimitButton.addEventListener("click", function () {
+    seatLimitModal.close();
+});
 
 //update the seat names, ticket quantiy, total price and cont button after every selection
 function updateSeatSummary() {
@@ -308,65 +315,16 @@ backToSeatsButton.addEventListener(
     }
 );
 
-//sucessful form submission visual
-/* ========================= BOOKING CONFIRMATION ========================= */
+
 
 /* Finds the confirmation modal */
 const confirmationModal =
     document.getElementById("confirmation-modal");
 
-/* Finds the areas that will display confirmed booking details */
-// const confirmationMovie =
-//     document.getElementById("confirmation-movie");
 
-// const confirmationSession =
-//     document.getElementById("confirmation-session");
-
-// const confirmationSeats =
-//     document.getElementById("confirmation-seats");
-
-// const confirmationTotal =
-//     document.getElementById("confirmation-total");
 
 const confirmationReference =
     document.getElementById("confirmation-ref");
-
-/*
-    Creates a simple prototype booking reference.
-
-    Date.now() returns the current timestamp.
-    Converting it to base 36 produces a shorter combination
-    of numbers and letters.
-*/
-// function createBookingReference() {
-//     const uniquePart = Date.now()
-//         .toString(36)
-//         .toUpperCase();
-
-//     return `NTF-${uniquePart}`;
-// }
-
-/*
-    Runs when the payment form passes HTML validation
-    and the user clicks Pay Now.
-*/
-// paymentForm.addEventListener("submit", function (event) {
-//     /* Prevents the form from refreshing the page */
-//     event.preventDefault();
-
-//     /* Calculates the final amount */
-//     const finalTotal =
-//         selectedSeats.length * seatPrice;
-
-//     confirmationReference.textContent =
-//         createBookingReference();
-
-//     /*
-//         Opens the dialog as a modal.
-//         The rest of the page becomes temporarily inactive.
-//     */
-//     confirmationModal.showModal();
-// });
 
 
 // MOCK PAYMENT VALIDATION

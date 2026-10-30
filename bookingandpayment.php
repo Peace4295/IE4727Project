@@ -244,6 +244,15 @@
              </form>
          </section>
     </main>
+    <!-- ERROR MSG WHEN USER CLICK MORE THAN 7 SEATS MODAL -->
+     <dialog class="seat-limit-modal" id="seat-limit-modal">
+        <div class="seat-limit-content">
+            <div class="seat-limit-icon">!</div>
+            <h2>Seat Limit Reached</h2>
+            <p>You may select a maximum of 6 seats per booking.</p>
+            <button type="button" class="btn btn-primary" id="close-seat-limit">Got it!</button>
+        </div>    
+    </dialog>
 
     <!-- BOOKING CONFIRMATION MODAL -->
      <dialog class="confirmation-modal" id="confirmation-modal">

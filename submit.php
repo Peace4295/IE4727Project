@@ -186,14 +186,25 @@ $accountEmail = $_SESSION["email"];
                         <input type="url" id="trailer-link" name="trailerLink" placeholder="Optional">
                     </div>
                 </div>
+                
                 <div class="form-field">
                     <label for="film-poster">Film Poster*</label>
+
                     <div class="file-upload">
-                        <input type="file" id="film-poster" name="filmPoster" accept=".jpg,.jpeg,.png, .webp" required >
+                        <input type="file" id="film-poster" name="filmPoster" accept=".jpg,.jpeg,.png,.webp" class="poster-hidden-input" required >
+                        <label for="film-poster" class="btn btn-secondary poster-choose-button" id="poster-choose-button"> Choose File </label>
+
+                        <div class="poster-selected-row" id="poster-selected-row" hidden>
+                            <span id="poster-filename"></span>
+                            <button type="button" id="remove-film-poster" class="remove-film-poster" aria-label="Remove selected poster"> &times; </button>
+                        </div>
                         <p>Upload your film poster</p>
-                        <small>Accepted formats: JPG or PNG or WebP (max5MB)</small>
+                        <small>Accepted formats: JPG, PNG or WebP (max 5MB)</small>
                     </div>
+
+                    <small class="field-error" id="film-poster-error"></small>
                 </div>
+
             </fieldset>
 
             <!-- submitter details -->

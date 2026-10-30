@@ -1,41 +1,36 @@
-// //find the form, modal and ref number element.
-// const submissionForm = document.getElementById("film-submission-form");
-// const successModal = document.getElementById("submission-success-modal");
-// const referenceText = document.getElementById("submission-ref");
-
-// //check that javascript successfully found all 3 html elemeents
-// if(submissionForm && successModal && referenceText) {
-//     //when form is submitted
-//     submissionForm.addEventListener("submit", function(event){
-//         //stop browser from refreshing
-//         event.preventDefault();
-
-//         //generate an display the temporary
-//         referenceText.textContent = createSubmissionReference();
-
-//         //remove the hidden state and display the modal
-//         successModal.hidden = false;
-//     });
-// }
-//     else{
-//         console.error("submission form, modal or ref element was not found.");
-//     }
-
-
-// //generate a temporary reference such as NFH-A3K92P
-// function createSubmissionReference() {
-//     const randomCode = Math.random()
-//     .toString(36) .substring(2, 8) .toUpperCase();
-
-//     return `NFH-${randomCode}`
-// }
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("film-submission-form");
+
+const form = document.getElementById("film-submission-form");
+const posterInput = document.getElementById("film-poster");
+const choosePosterButton = document.getElementById("poster-choose-button");
+const selectedPosterRow = document.getElementById("poster-selected-row");
+const posterFilename = document.getElementById("poster-filename");
+const removePosterButton = document.getElementById("remove-film-poster");
+
+posterInput.addEventListener("change", function () {
+    if (posterInput.files.length > 0) {
+        posterFilename.textContent = posterInput.files[0].name;
+
+        choosePosterButton.hidden = true;
+        selectedPosterRow.hidden = false;
+    } else {
+        choosePosterButton.hidden = false;
+        selectedPosterRow.hidden = true;
+    }
+});
+
+removePosterButton.addEventListener("click", function () {
+    posterInput.value = "";
+    posterFilename.textContent = "";
+
+    choosePosterButton.hidden = false;
+    selectedPosterRow.hidden = true;
+
+    const posterError = document.getElementById("film-poster-error");
+    posterError.textContent = "";
+    posterInput.removeAttribute("aria-invalid");
+});
+
 
     if (form) {
         // Disable browser popups so we can show our own messages.
@@ -91,6 +86,15 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (field.required && value === "") {
                 message = messages[field.id] || "This field is required.";
             } else if (value !== "") {
+                // Validate film poster file size
+                if (field.id === "film-poster" && field.files.length > 0) {
+                    const poster = field.files[0];
+                    const maximumSize = 5 * 1024 * 1024;
+
+                    if (poster.size > maximumSize) {
+                        message = "Film poster must be smaller than 5MB.";
+                    }
+                }
                 if (field.id === "runtime") {
                     if (!/^\d+$/.test(value) ||
                         Number(value) < 1 ||
@@ -149,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (field.validity.tooLong) {
                     message = "Your input exceeds the maximum character limit.";
                 }
+                
             }
 
             error.textContent = message;

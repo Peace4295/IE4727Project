@@ -67,8 +67,8 @@ $bookingQuery = "
         bookings.total_amount,
         bookings.status
     ORDER BY
-        bookings.screening_date DESC,
-        bookings.screening_time DESC
+        bookings.screening_date ASC,
+        bookings.screening_time ASC
 ";
 
 $bookingStatement = $db->prepare($bookingQuery);

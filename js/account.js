@@ -1,36 +1,14 @@
-//temp account data
-/*
-    This information is temporary frontend data.
 
-    Later:
-    - PHP will identify the signed-in user.
-    - MySQL will store and return their bookings.
-*/
 const accountUser = {
     name: "Priscilla Chong",
     email: "pris0038@e.ntu.edu.sg",
     initials: "PC"
 };
 
-/*
-    Temporary booking records.
-
-    Each booking contains:
-    - A unique ID
-    - Movie information
-    - Session information
-    - Booking status
-
-
-*/
 
 
 
 //get html elements
-
-// const profileName = document.querySelector("#profile-name");
-// const profileEmail = document.querySelector("#profile-email");
-// const profileAvatar = document.querySelector("#profile-avatar");
 
 const bookingTabs = document.querySelectorAll(".booking-tab");
 const bookingCards = document.querySelectorAll(".account-booking-card");
@@ -41,7 +19,6 @@ const cancelMovieTitle = document.querySelector("#cancel-movie-title");
 const cancelSessionDetails = document.querySelector("#cancel-session-details");
 const keepBookingButton = document.querySelector("#keep-booking-button");
 const confirmCancellationButton = document.querySelector("#confirm-cancellation-button");
-const editProfileButton = document.querySelector("#edit-profile-button");
 const signOutButton = document.querySelector("#sign-out-button");
 const cancelBookingIdInput = document.querySelector("#cancel-booking-id");
 
@@ -115,15 +92,7 @@ keepBookingButton.addEventListener("click", function(){
     cancelBookingModal.close();
 });
 
-    
 
-
-
-//edit profile
-editProfileButton.addEventListener("click", function () {
-    //Temporary prototype behaviour.A proper edit form can be added later.
-    alert("Profile editing will be connected to the backend later.");
-});
 
 
 //initial display

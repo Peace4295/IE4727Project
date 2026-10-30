@@ -245,7 +245,7 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .payment-summary > div {display:flex; flex-direction:column; gap:6px}
 .payment-summary span {color: var(--text-secondary);font-size:0.75rem;text-transform:uppercase;}
 .payment-summary strong {color: var(--text-primary);}
-.payment-summary >div:last-child strong {color: var(--primary);font: size 1.2rem;}
+.payment-summary > div:last-child strong {color: var(--primary);font: size 1.2rem;}
 
 .payment-form {display:flex; flex-direction: column; gap:20px;}
 .payment-form-row {display:grid; grid-template-columns: 1fr 1fr; gap:20px;}
@@ -260,9 +260,19 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .payment-notice { padding: 12px 14px; background-color: rgba(255, 177, 98, 0.08); color: var(--text-secondary); border-left: 3px solid var(--primary); border-radius: 4px; font-size: 0.8rem; line-height: 1.5; }
 .payment-actions { justify-content: space-between; }
 
+/* ========================= SEAT LIMIT MODAL ========================= */
+
+.seat-limit-modal {position:fixed;inset:0; margin:auto; width: min(90%, 390px); max-width: 390px; padding: 0; border: 1px solid #465A70; border-radius: 20px; background-color: #2C3B4D; color: #F8F4EF; text-align: center; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4); }
+.seat-limit-modal::backdrop {background-color: rgba(10,17,25,0.78);}
+.seat-limit-content { padding: 36px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.seat-limit-icon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background-color: #FFAE60; color: #1C2734; font-size: 28px; font-weight: bold; }
+.seat-limit-content h2 { margin: 0; color: #F8F4EF; font-size: 1.5rem; }
+.seat-limit-content p { margin: 0; color: #D8DFE6; line-height: 1.6; }
+.seat-limit-content button { width: 100%; margin-top: 8px; }
+
 /* ========================= CONFIRMATION MODAL ========================= */
 .confirmation-modal {position:fixed; inset:0; margin:auto;width:min(80%, 520px); padding:0; background-color: var(--surface); color: var(--text-primary); border:1px solid var(--border); border-radius:12px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);}
-.confirmation-modal::backdrop {background-color: rgba(10,17,25,0.78); backdrop-filter: blur(3px);}
+.confirmation-modal::backdrop {background-color: rgba(10,17,25,0.78);}
 .confirmation-content { padding: 40px; text-align: center;}
 .confirmation-icon {display: flex; align-items: center;justify-content: center;width:64px;height:64px; margin: 0 auto 20px; background-color: var(--primary); color: var(--abyssal-blue); border-radius: 50%;font-size: 2rem;font-weight: 700;}
 .confirmation-label {margin-bottom:8px; color:var(--primary); color:var(--primary);font-size:0.75rem;font-weight:600; letter-spacing: 0.1rem;text-transform: uppercase; text-align: center;}
@@ -311,6 +321,21 @@ transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
 .film-submission-form [aria-invalid="true"]:not([type="checkbox"]) { border-color: var(--red); }
 .film-submission-form .field-error { display: block; color: var(--red); font-size: 0.85rem; line-height: 1.5; }
 .film-submission-form .field-error:empty { display: none; }
+
+
+
+
+/* CUSTOM POSTER UPLOAD */
+.film-submission-form input.poster-hidden-input { position: absolute; width: 1px; height: 1px; min-height: 0; padding: 0; margin: 0; opacity: 0; overflow: hidden; }
+.film-submission-form .poster-choose-button { display: inline-flex; align-items: center; justify-content: center; width: auto; margin: 0 auto 14px; padding: 10px 24px; cursor: pointer; }
+.film-submission-form .poster-choose-button[hidden] { display: none; }
+.film-submission-form .poster-selected-row { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-bottom: 14px; }
+.film-submission-form .poster-selected-row[hidden] { display: none; }
+.film-submission-form .poster-selected-row #poster-filename { display: block; width: auto; height: auto; min-width: 0; max-width: 80%; background: transparent; border-radius: 0; color: var(--text-primary); font-size: 0.9rem; overflow-wrap: anywhere; }
+.film-submission-form .remove-film-poster { flex-shrink: 0; width: 30px; height: 30px; padding: 0; border: 1px solid var(--primary); border-radius: 50%; background: transparent; color: var(--primary); font-size: 22px; line-height: 1; cursor: pointer; }
+.film-submission-form .remove-film-poster:hover { background: var(--primary); color: var(--background); }
+
+
 
 
 .modal-overlay{position:fixed; inset:0; z-index: 1000; display:flex; justify-content:center; align-items:center; padding:24px;background-color:rgba(0,0,0,0.7) ;}
