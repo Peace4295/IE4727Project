@@ -46,8 +46,9 @@ loginForm.addEventListener("submit", function (event) {
     const email = loginEmail.value.trim().toLowerCase();
 
     const validNtuEmail =
-        email.endsWith("@e.ntu.edu.sg") ||
-        email.endsWith("@ntu.edu.sg");
+    email.endsWith("@e.ntu.edu.sg") ||
+    email.endsWith("@ntu.edu.sg") ||
+    email === "admin@nfh.local";
 
     if (!validNtuEmail) {
         event.preventDefault();

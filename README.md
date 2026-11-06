@@ -33,7 +33,8 @@ Nanyang Film House is a campus cinema ticketing web application developed using 
 ### Nicole Lim
 - Frontend development
 - UI/UX design and Figma wireframes
-- Movie Browsing and 
+- Movie Browsing and screening selection
+- Film submission tracking
 
 
 ## Note
